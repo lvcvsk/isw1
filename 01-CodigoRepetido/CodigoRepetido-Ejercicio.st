@@ -21,31 +21,45 @@ TestCase subclass: #CustomerBookTest
 	poolDictionaries: ''
 	category: 'CodigoRepetido-Ejercicio'!
 
-!CustomerBookTest methodsFor: 'testing' stamp: 'LK 9/4/2023 21:58:09'!
-assertQueClosureCorra: aClosure enMenosQue: unTiempo
+!CustomerBookTest methodsFor: 'testing' stamp: 'LK 9/12/2023 13:37:54'!
+assertCantidadEn: aCustomerBook activos: activeNumber suspendidos: suspendedNumber
+	
+	
+	self assert: activeNumber equals: aCustomerBook numberOfActiveCustomers.
+	self assert: suspendedNumber equals: aCustomerBook numberOfSuspendedCustomers.
+	self assert:(suspendedNumber  + activeNumber) equals: aCustomerBook numberOfCustomers.
 
-	| millisecondsBeforeRunning millisecondsAfterRunning|
+
 	
-	millisecondsBeforeRunning := Time millisecondClockValue * millisecond.
-	[aClosure] value.
-	millisecondsAfterRunning := Time millisecondClockValue * millisecond.
-	
-	^self assert: (millisecondsAfterRunning-millisecondsBeforeRunning	) < ( unTiempo * millisecond)
 ! !
 
-!CustomerBookTest methodsFor: 'testing' stamp: 'LK 9/4/2023 21:54:58'!
+!CustomerBookTest methodsFor: 'testing' stamp: 'LK 9/12/2023 13:11:51'!
+assertQueClosureCorra: aClosureToMeasure enMenosQueMs: aTimeLimitInMs
+	
+	self assert: (self tomarTiempoA: aClosureToMeasure ) < ( aTimeLimitInMs * millisecond)
+! !
+
+!CustomerBookTest methodsFor: 'testing' stamp: 'LK 9/12/2023 13:30:47'!
+shouldDo: aClosureQueFalla on: anError thenDo: aClosureCatch
+
+	[ aClosureQueFalla value
+	self fail ]
+		on: anError
+		do: aClosureCatch! !
+
+!CustomerBookTest methodsFor: 'testing' stamp: 'LK 9/7/2023 20:15:32'!
 test01AddingCustomerShouldNotTakeMoreThan50Milliseconds
 
 	| customerBook |
 	
 	customerBook := CustomerBook new.
 	
-	self assertQueClosureCorra: [customerBook addCustomerNamed: 'John Lennon'.] enMenosQue: 50.
+	self assertQueClosureCorra: [customerBook addCustomerNamed: 'John Lennon'.] enMenosQueMs: 50.
 	
 	
 ! !
 
-!CustomerBookTest methodsFor: 'testing' stamp: 'LK 9/4/2023 21:55:47'!
+!CustomerBookTest methodsFor: 'testing' stamp: 'LK 9/7/2023 20:15:32'!
 test02RemovingCustomerShouldNotTakeMoreThan100Milliseconds
 
 	| customerBook paulMcCartney |
@@ -56,25 +70,24 @@ test02RemovingCustomerShouldNotTakeMoreThan100Milliseconds
 	customerBook addCustomerNamed: paulMcCartney.
 	  
 	
-	self assertQueClosureCorra:[customerBook removeCustomerNamed: paulMcCartney.] enMenosQue: 100.
+	self assertQueClosureCorra:[customerBook removeCustomerNamed: paulMcCartney.] enMenosQueMs: 100.
 
 	
 ! !
 
-!CustomerBookTest methodsFor: 'testing' stamp: 'oa 9/7/2023 16:11:59'!
+!CustomerBookTest methodsFor: 'testing' stamp: 'LK 9/12/2023 13:30:48'!
 test03CanNotAddACustomerWithEmptyName 
 
 	| customerBook |
 			
 	customerBook := CustomerBook new.
-	self
-		verificarQue: [ customerBook addCustomerNamed: '']
-		fallaCon: Error
-		meFijoQue: [:anError | 
-			self assert: anError messageText = CustomerBook     customerCanNotBeEmptyErrorMessage.
-			self assert: customerBook isEmpty ]! !
+	
+	self shouldDo:[customerBook addCustomerNamed: ''.] on: Error thenDo: [ :anError | 
+			self assert: anError messageText = CustomerBook customerCanNotBeEmptyErrorMessage.
+			self assert: customerBook isEmpty ]
+! !
 
-!CustomerBookTest methodsFor: 'testing' stamp: 'oa 9/7/2023 15:59:42'!
+!CustomerBookTest methodsFor: 'testing' stamp: 'LK 9/12/2023 13:30:48'!
 test04CanNotRemoveAnInvalidCustomer
 	
 	| customerBook johnLennon |
@@ -82,13 +95,13 @@ test04CanNotRemoveAnInvalidCustomer
 	customerBook := CustomerBook new.
 	johnLennon := 'John Lennon'.
 	customerBook addCustomerNamed: johnLennon.
-	self
-		verificarQue: [customerBook removeCustomerNamed: 'Paul McCartney'.]
-		fallaCon: NotFound
-		meFijoQue: [self verificarQue: customerBook soloTieneAlCliente: johnLennon]
-	! !
+	
+	self shouldDo: [customerBook removeCustomerNamed: 'Paul McCartney'] on:NotFound thenDo:[ :anError | 
+			self assert: customerBook numberOfCustomers = 1.
+			self assert: (customerBook includesCustomerNamed: johnLennon)].
+! !
 
-!CustomerBookTest methodsFor: 'testing' stamp: 'oa 9/7/2023 16:26:00'!
+!CustomerBookTest methodsFor: 'testing' stamp: 'LK 9/12/2023 13:39:13'!
 test05SuspendingACustomerShouldNotRemoveItFromCustomerBook
 
 	| customerBook paulMcCartney|
@@ -98,15 +111,15 @@ test05SuspendingACustomerShouldNotRemoveItFromCustomerBook
 	
 	customerBook addCustomerNamed: paulMcCartney.
 	customerBook suspendCustomerNamed: paulMcCartney.
-	self verificarQue: customerBook cantidadClientesTotales: 1 
-		cantidadClientesActivos: 0 cantidadClientesSuspendidos: 1.
+	
+	self assertCantidadEn: customerBook activos:  0 suspendidos: 1.
 	self assert: (customerBook includesCustomerNamed: paulMcCartney).
 	
 
 	
 ! !
 
-!CustomerBookTest methodsFor: 'testing' stamp: 'oa 9/7/2023 16:24:32'!
+!CustomerBookTest methodsFor: 'testing' stamp: 'LK 9/12/2023 13:38:40'!
 test06RemovingASuspendedCustomerShouldRemoveItFromCustomerBook
 
 	| customerBook paulMcCartney|
@@ -118,16 +131,14 @@ test06RemovingASuspendedCustomerShouldRemoveItFromCustomerBook
 	customerBook suspendCustomerNamed: paulMcCartney.
 	customerBook removeCustomerNamed: paulMcCartney.
 	
-	self verificarQue: customerBook cantidadClientesTotales: 0 
-		cantidadClientesActivos: 0 cantidadClientesSuspendidos: 0.
-	
+	self assertCantidadEn: customerBook activos: 0 suspendidos: 0.
 	self deny: (customerBook includesCustomerNamed: paulMcCartney).
 
 
 	
 ! !
 
-!CustomerBookTest methodsFor: 'testing' stamp: 'oa 9/7/2023 16:14:17'!
+!CustomerBookTest methodsFor: 'testing' stamp: 'LK 9/12/2023 13:46:40'!
 test07CanNotSuspendAnInvalidCustomer
 	
 	| customerBook johnLennon |
@@ -135,13 +146,15 @@ test07CanNotSuspendAnInvalidCustomer
 	customerBook := CustomerBook new.
 	johnLennon := 'John Lennon'.
 	customerBook addCustomerNamed: johnLennon.
-	self
-		verificarQue: [customerBook suspendCustomerNamed: 'George Harrison']
-		fallaCon: CantSuspend
-		meFijoQue: [self verificarQue: customerBook soloTieneAlCliente: johnLennon]
-	! !
+	
+	self shouldDo: [ customerBook suspendCustomerNamed: 'George Harrison'] on:CantSuspend thenDo: 
+	[ :anError | 
+			self assert: customerBook numberOfCustomers = 1.
+			self assert: (customerBook includesCustomerNamed: johnLennon)].
 
-!CustomerBookTest methodsFor: 'testing' stamp: 'oa 9/7/2023 16:16:07'!
+! !
+
+!CustomerBookTest methodsFor: 'testing' stamp: 'LK 9/12/2023 13:46:44'!
 test08CanNotSuspendAnAlreadySuspendedCustomer
 	
 	| customerBook johnLennon |
@@ -150,37 +163,25 @@ test08CanNotSuspendAnAlreadySuspendedCustomer
 	johnLennon := 'John Lennon'.
 	customerBook addCustomerNamed: johnLennon.
 	customerBook suspendCustomerNamed: johnLennon.
-	self
-		verificarQue: [ customerBook suspendCustomerNamed: johnLennon]
-		fallaCon: CantSuspend
-		meFijoQue: [self verificarQue: customerBook soloTieneAlCliente: johnLennon]
+	
+	self shouldDo: [ customerBook suspendCustomerNamed: johnLennon] on: CantSuspend thenDo: 
+	[ :anError | 
+			self assert: customerBook numberOfCustomers = 1.
+			self assert: (customerBook includesCustomerNamed: johnLennon)].
+	
 ! !
 
-!CustomerBookTest methodsFor: 'testing' stamp: 'oa 9/7/2023 16:22:07'!
-verificarQue: customerBook
-cantidadClientesTotales: clientesTotales
-cantidadClientesActivos: clientesActivos
-cantidadClientesSuspendidos: clientesSuspendidos
+!CustomerBookTest methodsFor: 'testing' stamp: 'LK 9/12/2023 13:27:41'!
+tomarTiempoA: aClosureToMeasure
+
+	| millisecondsBeforeRunning millisecondsAfterRunning|
 	
-	self assert: clientesActivos equals: customerBook numberOfActiveCustomers.
-	self assert: clientesSuspendidos equals: customerBook numberOfSuspendedCustomers.
-	self assert: clientesTotales equals: customerBook numberOfCustomers.
-
-	! !
-
-!CustomerBookTest methodsFor: 'testing' stamp: 'oa 9/7/2023 16:17:37'!
-verificarQue: aClosure fallaCon: error  meFijoQue:anotherClosure
-
-	[aClosure value.
-		self fail]
-	on: error
-	do: 
-		anotherClosure! !
-
-!CustomerBookTest methodsFor: 'testing' stamp: 'oa 9/7/2023 16:08:06'!
-verificarQue: customerBook soloTieneAlCliente: cliente
-	self assert: customerBook numberOfCustomers = 1.
-	self assert: (customerBook includesCustomerNamed: cliente)! !
+	millisecondsBeforeRunning := Time millisecondClockValue * millisecond.
+	aClosureToMeasure value.
+	millisecondsAfterRunning := Time millisecondClockValue * millisecond.
+	
+	^millisecondsAfterRunning-millisecondsBeforeRunning
+! !
 
 
 !classDefinition: #CustomerBook category: 'CodigoRepetido-Ejercicio'!
@@ -231,26 +232,30 @@ numberOfSuspendedCustomers
 	
 	^suspended size! !
 
-!CustomerBook methodsFor: 'customer management' stamp: 'oa 9/7/2023 16:06:26'!
-removeCustomerNamed: aName 
- 	1 to: active size do: 
+!CustomerBook methodsFor: 'customer management' stamp: 'LK 9/12/2023 13:46:06'!
+remove: elem from: aCollectionToRemove ifAbsent: aClosure
+ 
+	1 to: aCollectionToRemove size do: 
 	[ :index |
-		aName = (active at: index)
+		elem = (aCollectionToRemove at: index)
 			ifTrue: [
-				active removeAt: index.
-				^ aName 
+				aCollectionToRemove removeAt: index.
+				^ elem 
 			] 
 	].
 
-	1 to: suspended size do: 
-	[ :index |
-		aName = (suspended at: index)
-			ifTrue: [
-				suspended removeAt: index.
-				^ aName 
-			] 
-	].
-	^NotFound signal.! !
+	^ aClosure value.
+	
+! !
+
+!CustomerBook methodsFor: 'customer management' stamp: 'LK 9/12/2023 13:42:06'!
+removeCustomerNamed: aName 
+
+	^self remove: aName from: active ifAbsent: 
+		[self remove: aName from: suspended ifAbsent: 
+			[^NotFound signal.]]
+	
+! !
 
 !CustomerBook methodsFor: 'customer management' stamp: 'HernanWilkinson 7/6/2011 17:52'!
 signalCustomerAlreadyExists 
@@ -262,15 +267,12 @@ signalCustomerNameCannotBeEmpty
 
 	self error: self class customerCanNotBeEmptyErrorMessage ! !
 
-!CustomerBook methodsFor: 'customer management' stamp: 'NR 4/3/2019 10:14:26'!
+!CustomerBook methodsFor: 'customer management' stamp: 'LK 9/12/2023 13:26:40'!
 suspendCustomerNamed: aName 
 	
-	(active includes: aName) ifFalse: [^CantSuspend signal].
+	self remove: aName from: active ifAbsent: [^CantSuspend signal].
 	
-	active remove: aName.
-	
-	suspended add: aName
-! !
+	suspended add: aName.! !
 
 "-- -- -- -- -- -- -- -- -- -- -- -- -- -- -- -- -- -- "!
 
