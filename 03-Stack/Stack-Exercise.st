@@ -139,25 +139,14 @@ test10CanNotTopWhenThereAreNoObjectsInTheStack
 
 !classDefinition: #SentenceFinderByPrefixTest category: 'Stack-Exercise'!
 TestCase subclass: #SentenceFinderByPrefixTest
-	instanceVariableNames: ''
+	instanceVariableNames: 'stackTest finderTest'
 	classVariableNames: ''
 	poolDictionaries: ''
 	category: 'Stack-Exercise'!
 
-!SentenceFinderByPrefixTest methodsFor: 'as yet unclassified' stamp: 'LK 9/18/2023 14:14:11'!
-setup
-"
-	stackTest := OOStack new.
-	
-	stackTest push: 'hola'.
-	stackTest push: 'holanda'.
-	stackTest push: 'chau'.
-	stackTest push: 'Hola'."! !
+!SentenceFinderByPrefixTest methodsFor: 'as yet unclassified' stamp: 'LK 9/18/2023 16:02:29'!
+setUp
 
-!SentenceFinderByPrefixTest methodsFor: 'as yet unclassified' stamp: 'LK 9/18/2023 14:10:06'!
-test01findEncuentraEnElStack
-	|finder found stackTest|
-	
 	stackTest := OOStack new.
 	
 	stackTest push: 'hola'.
@@ -165,131 +154,96 @@ test01findEncuentraEnElStack
 	stackTest push: 'chau'.
 	stackTest push: 'Hola'.
 	
-	finder := SentenceFinderByPrefix new.
-	finder initializeWith: stackTest andPrefix: 'hola'.
-	
-	found := finder find.
-	
-	self assert: found size = 2.
-	self assert: (found first) = 'holanda'.
-	self assert: (found last) = 'hola'
+	finderTest := SentenceFinderByPrefix new.
 ! !
 
-!SentenceFinderByPrefixTest methodsFor: 'as yet unclassified' stamp: 'LK 9/18/2023 14:10:42'!
+!SentenceFinderByPrefixTest methodsFor: 'as yet unclassified' stamp: 'LK 9/18/2023 16:02:44'!
+test01findEncuentraEnElStack
+
+	| matchingPrefix|
+
+	finderTest initializeWith: stackTest andPrefix: 'hola'.
+	
+	matchingPrefix := finderTest find.
+	
+	self assert: matchingPrefix size = 2.
+	self assert: (matchingPrefix first) = 'holanda'.
+	self assert: (matchingPrefix last) = 'hola'
+! !
+
+!SentenceFinderByPrefixTest methodsFor: 'as yet unclassified' stamp: 'LK 9/18/2023 16:02:56'!
 test02findNoEncuentraEnElStack
-	|finder found stackTest|
-	
-	stackTest := OOStack new.
-	
-	stackTest push: 'hola'.
-	stackTest push: 'holanda'.
-	stackTest push: 'chau'.
-	stackTest push: 'Hola'.
-	
-	finder := SentenceFinderByPrefix new.
-	finder initializeWith: stackTest andPrefix: 'wint'.
-	
-	found := finder find.
-	
-	self assert: found size = 0.! !
 
-!SentenceFinderByPrefixTest methodsFor: 'as yet unclassified' stamp: 'LK 9/18/2023 14:08:20'!
+	| matchingPrefix |
+
+	finderTest := SentenceFinderByPrefix new.
+	finderTest initializeWith: stackTest andPrefix: 'wint'.
+	
+	matchingPrefix := finderTest find.
+	
+	self assert: matchingPrefix isEmpty.! !
+
+!SentenceFinderByPrefixTest methodsFor: 'as yet unclassified' stamp: 'LK 9/18/2023 16:03:05'!
 test03findEsCaseSensitive
-	|finder found stackTest|
-	
 
-	stackTest := OOStack new.
+	| matchingPrefix |	
+
+	finderTest initializeWith: stackTest andPrefix: 'H'.
 	
-	stackTest push: 'hola'.
-	stackTest push: 'holanda'.
-	stackTest push: 'chau'.
-	stackTest push: 'Hola'.
-	finder := SentenceFinderByPrefix new.
-	finder initializeWith: stackTest andPrefix: 'H'.
-	
-	found := finder find.
-	self assert: (found first) = 'Hola'.
-	
-	
+	matchingPrefix := finderTest find.
+	self assert: matchingPrefix first = 'Hola'.
+	self assert: matchingPrefix size = 1.
 	! !
 
-!SentenceFinderByPrefixTest methodsFor: 'as yet unclassified' stamp: 'LK 9/18/2023 14:11:54'!
+!SentenceFinderByPrefixTest methodsFor: 'as yet unclassified' stamp: 'LK 9/18/2023 16:03:11'!
 test04findNoAceptaPrefijoVacio
-	|finder stackTest|
-	
-	stackTest := OOStack new.
-	
-	stackTest push: 'hola'.
-	stackTest push: 'holanda'.
-	stackTest push: 'chau'.
-	stackTest push: 'Hola'.
-	
-	finder := SentenceFinderByPrefix new.
-	
 	
 	self
-		should: [ finder initializeWith: stackTest andPrefix: ''.]
+		should: [ finderTest initializeWith: stackTest andPrefix: ''.]
 		raise: Error - MessageNotUnderstood 
 		withExceptionDo: [ :anError |
 			self assert: anError messageText = SentenceFinderByPrefix cannotUseEmptyPrefix ].
 	
 ! !
 
-!SentenceFinderByPrefixTest methodsFor: 'as yet unclassified' stamp: 'LK 9/18/2023 14:20:01'!
+!SentenceFinderByPrefixTest methodsFor: 'as yet unclassified' stamp: 'LK 9/18/2023 16:03:27'!
 test05findNoModificaElStack
-	|finder stackTest found stack2|
+
+	| matchingPrefix staticStack|
 	
-	stackTest := OOStack new.
+	staticStack := stackTest .
 	
-	stackTest push: 'hola'.
-	stackTest push: 'holanda'.
-	stackTest push: 'chau'.
-	stackTest push: 'Hola'.
-	stack2 := stackTest .
+	finderTest := SentenceFinderByPrefix new.
+	finderTest initializeWith: stackTest andPrefix: 'hola'.
+	matchingPrefix := finderTest find.
 	
-	finder := SentenceFinderByPrefix new.
-	finder initializeWith: stackTest andPrefix: 'h'.
-	found := finder find.
-	
-	self assert: stack2 = stackTest.
+	self assert: staticStack = stackTest .
 	
 
 	
 	
 ! !
 
-!SentenceFinderByPrefixTest methodsFor: 'as yet unclassified' stamp: 'LK 9/18/2023 14:20:18'!
+!SentenceFinderByPrefixTest methodsFor: 'as yet unclassified' stamp: 'LK 9/18/2023 16:03:35'!
 test06assertErrorNoAceptaEspaciosEnBlanco
-	|finder stackTest|
-	
-	stackTest := OOStack new.
-	
-	stackTest push: 'hola'.
-	stackTest push: 'holanda'.
-	stackTest push: 'chau'.
-	stackTest push: 'Hola'.
-	
-	finder := SentenceFinderByPrefix new.
 	
 	self
-		should: [ finder initializeWith: stackTest andPrefix: ' hola'.]
+		should: [ finderTest initializeWith: stackTest andPrefix: ' hola'.]
 		raise: Error - MessageNotUnderstood 
 		withExceptionDo: [ :anError |
 			self assert: anError messageText = SentenceFinderByPrefix cannotUseWhiteSpacesInPrefix].
 	
 ! !
 
-!SentenceFinderByPrefixTest methodsFor: 'as yet unclassified' stamp: 'LK 9/18/2023 14:24:00'!
+!SentenceFinderByPrefixTest methodsFor: 'as yet unclassified' stamp: 'LK 9/18/2023 16:03:53'!
 test07inicializarConStackVacio
 
-	|finder stackTest|
+	| emptyStack |
 	
-	stackTest := OOStack new.
-	
-	finder := SentenceFinderByPrefix new.
+	emptyStack := OOStack new.
 	
 	self
-		should: [ finder initializeWith: stackTest andPrefix: 'hola'.]
+		should: [ finderTest initializeWith: emptyStack andPrefix: 'hola'.]
 		raise: Error - MessageNotUnderstood 
 		withExceptionDo: [ :anError |
 			self assert: anError messageText = SentenceFinderByPrefix cannotInitializeWithEmptyStack ].
@@ -348,7 +302,7 @@ with: anElement onTopOf: aPreviousStack
 	nodo := anElement .
 	previous := aPreviousStack ! !
 
-!ContentNode methodsFor: 'as yet unclassified' stamp: 'LK 9/17/2023 21:15:57'!
+!ContentNode methodsFor: 'as yet unclassified' stamp: 'LK 9/18/2023 15:47:15'!
 withoutTop
 	^previous ! !
 
@@ -372,56 +326,57 @@ size
 top
 	^self error: OOStack stackEmptyErrorDescription! !
 
-!EmptyNode methodsFor: 'as yet unclassified' stamp: 'LK 9/17/2023 21:14:06'!
+!EmptyNode methodsFor: 'as yet unclassified' stamp: 'LK 9/18/2023 16:05:17'!
 withoutTop
+
 	^self error: OOStack stackEmptyErrorDescription! !
 
 
 !classDefinition: #OOStack category: 'Stack-Exercise'!
 Object subclass: #OOStack
-	instanceVariableNames: 'contenido'
+	instanceVariableNames: 'content'
 	classVariableNames: ''
 	poolDictionaries: ''
 	category: 'Stack-Exercise'!
 
-!OOStack methodsFor: 'as yet unclassified' stamp: 'LK 9/17/2023 21:22:02'!
+!OOStack methodsFor: 'as yet unclassified' stamp: 'LK 9/18/2023 15:45:50'!
 initialize
 
-	contenido := EmptyNode new.
+	content := EmptyNode new.
 	
 ! !
 
-!OOStack methodsFor: 'as yet unclassified' stamp: 'LK 9/17/2023 19:32:17'!
+!OOStack methodsFor: 'as yet unclassified' stamp: 'LK 9/18/2023 15:45:54'!
 isEmpty
 		
-	^contenido isEmpty
+	^content isEmpty
 ! !
 
-!OOStack methodsFor: 'as yet unclassified' stamp: 'LK 9/17/2023 21:25:23'!
+!OOStack methodsFor: 'as yet unclassified' stamp: 'LK 9/18/2023 15:46:02'!
 pop
 
 	|last|
 	
-	last := contenido top.
+	last := content top.
 	
-	contenido := contenido withoutTop.
+	content := content withoutTop.
 	
 	^last
 	! !
 
-!OOStack methodsFor: 'as yet unclassified' stamp: 'LK 9/17/2023 21:22:13'!
+!OOStack methodsFor: 'as yet unclassified' stamp: 'LK 9/18/2023 15:46:40'!
 push: somethingToPush
 
-	contenido := ContentNode new with: somethingToPush onTopOf: contenido.! !
+	content := ContentNode new with: somethingToPush onTopOf: content.! !
 
-!OOStack methodsFor: 'as yet unclassified' stamp: 'LK 9/18/2023 00:11:57'!
+!OOStack methodsFor: 'as yet unclassified' stamp: 'LK 9/18/2023 15:46:44'!
 size
-	^contenido size! !
+	^content size! !
 
-!OOStack methodsFor: 'as yet unclassified' stamp: 'LK 9/17/2023 19:39:23'!
+!OOStack methodsFor: 'as yet unclassified' stamp: 'LK 9/18/2023 15:46:48'!
 top
 
-	^contenido top! !
+	^content top! !
 
 "-- -- -- -- -- -- -- -- -- -- -- -- -- -- -- -- -- -- "!
 
@@ -442,33 +397,38 @@ Object subclass: #SentenceFinderByPrefix
 	poolDictionaries: ''
 	category: 'Stack-Exercise'!
 
-!SentenceFinderByPrefix methodsFor: 'as yet unclassified' stamp: 'oa 9/18/2023 13:42:24'!
-collectAllMatchingPrefixes
-
-	| currentString | 
-	currentString := originalStack pop.
-	
-	(self matchesPrefix: currentString ) ifTrue: [found add: currentString].
-	reversedStack push: currentString.! !
-
-!SentenceFinderByPrefix methodsFor: 'as yet unclassified' stamp: 'oa 9/18/2023 13:18:50'!
+!SentenceFinderByPrefix methodsFor: 'as yet unclassified' stamp: 'LK 9/18/2023 15:38:46'!
 filterPrefix: aPrefix
-	|hasWhitespace|.
+
+	|hasWhitespace|
 	
 	(aPrefix = '') ifTrue: [^self error: SentenceFinderByPrefix cannotUseEmptyPrefix].
 	
 	hasWhitespace := aPrefix includesAnyOf: ' '.
+	
 	(hasWhitespace) ifTrue:
-			 [^self error: SentenceFinderByPrefix cannotUseWhiteSpacesInPrefix ].
+			 [^self error: SentenceFinderByPrefix cannotUseWhiteSpacesInPrefix].
 	! !
 
-!SentenceFinderByPrefix methodsFor: 'as yet unclassified' stamp: 'LK 9/18/2023 14:03:24'!
+!SentenceFinderByPrefix methodsFor: 'as yet unclassified' stamp: 'LK 9/18/2023 15:29:14'!
 find
 	
-	[(originalStack isEmpty) not] whileTrue: [self collectAllMatchingPrefixes].
+	[(originalStack isEmpty) not] whileTrue: [self getIfTopMatchesPrefix].
+	
 	self recoverStack.
 	
 	^found.! !
+
+!SentenceFinderByPrefix methodsFor: 'as yet unclassified' stamp: 'LK 9/18/2023 15:29:14'!
+getIfTopMatchesPrefix
+
+	| currentString | 
+	
+	currentString := originalStack pop.
+	
+	(self matchesPrefix: currentString ) ifTrue: [found add: currentString].
+	
+	reversedStack push: currentString.! !
 
 !SentenceFinderByPrefix methodsFor: 'as yet unclassified' stamp: 'LK 9/18/2023 14:23:00'!
 initializeWith: aStack andPrefix: aPrefix
@@ -500,8 +460,9 @@ matchesPrefix: aStringToMatch
 	^(sameSize = prefixToFind).
 	! !
 
-!SentenceFinderByPrefix methodsFor: 'as yet unclassified' stamp: 'LK 9/18/2023 14:03:41'!
+!SentenceFinderByPrefix methodsFor: 'as yet unclassified' stamp: 'LK 9/18/2023 15:29:38'!
 recoverStack
+
 	[reversedStack isEmpty] whileFalse: 
 		[originalStack push: (reversedStack pop)].! !
 
