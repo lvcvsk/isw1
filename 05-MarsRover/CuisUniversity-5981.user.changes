@@ -24713,3 +24713,600 @@ PASSED!
 
 !testRun: #MarsRoverTest #test21shouldHandleCommandsUntilInvalidCommand stamp: 'LK 10/9/2023 14:11:47'!
 PASSED!
+
+Object subclass: #CommandHandler
+	instanceVariableNames: ''
+	classVariableNames: ''
+	poolDictionaries: ''
+	category: 'Mars Rover- Exercise'!
+
+!classDefinition: #CommandHandler category: 'Mars Rover- Exercise' stamp: 'LK 10/9/2023 15:13:16'!
+Object subclass: #CommandHandler
+	instanceVariableNames: ''
+	classVariableNames: ''
+	poolDictionaries: ''
+	category: 'Mars Rover- Exercise'!
+
+CommandHandler subclass: #Forward
+	instanceVariableNames: ''
+	classVariableNames: ''
+	poolDictionaries: ''
+	category: 'Mars Rover- Exercise'!
+
+!classDefinition: #Forward category: 'Mars Rover- Exercise' stamp: 'LK 10/9/2023 15:13:51'!
+CommandHandler subclass: #Forward
+	instanceVariableNames: ''
+	classVariableNames: ''
+	poolDictionaries: ''
+	category: 'Mars Rover- Exercise'!
+
+CommandHandler subclass: #Backward
+	instanceVariableNames: ''
+	classVariableNames: ''
+	poolDictionaries: ''
+	category: 'Mars Rover- Exercise'!
+
+!classDefinition: #Backward category: 'Mars Rover- Exercise' stamp: 'LK 10/9/2023 15:13:55'!
+CommandHandler subclass: #Backward
+	instanceVariableNames: ''
+	classVariableNames: ''
+	poolDictionaries: ''
+	category: 'Mars Rover- Exercise'!
+
+CommandHandler subclass: #RotateLeft
+	instanceVariableNames: ''
+	classVariableNames: ''
+	poolDictionaries: ''
+	category: 'Mars Rover- Exercise'!
+
+!classDefinition: #RotateLeft category: 'Mars Rover- Exercise' stamp: 'LK 10/9/2023 15:14:00'!
+CommandHandler subclass: #RotateLeft
+	instanceVariableNames: ''
+	classVariableNames: ''
+	poolDictionaries: ''
+	category: 'Mars Rover- Exercise'!
+
+CommandHandler subclass: #RotateRight
+	instanceVariableNames: ''
+	classVariableNames: ''
+	poolDictionaries: ''
+	category: 'Mars Rover- Exercise'!
+
+!classDefinition: #RotateRight category: 'Mars Rover- Exercise' stamp: 'LK 10/9/2023 15:14:05'!
+CommandHandler subclass: #RotateRight
+	instanceVariableNames: ''
+	classVariableNames: ''
+	poolDictionaries: ''
+	category: 'Mars Rover- Exercise'!
+!CommandHandler class methodsFor: 'nil' stamp: 'LK 10/9/2023 15:14:33'!
+canHandle: aChar
+! !
+!Forward class methodsFor: 'as yet unclassified' stamp: 'LK 10/9/2023 15:14:37' overrides: 50694751!
+canHandle: aChar
+! !
+!Backward class methodsFor: 'as yet unclassified' stamp: 'LK 10/9/2023 15:14:37' overrides: 50694751!
+canHandle: aChar
+! !
+!RotateLeft class methodsFor: 'as yet unclassified' stamp: 'LK 10/9/2023 15:14:37' overrides: 50694751!
+canHandle: aChar
+! !
+!RotateRight class methodsFor: 'as yet unclassified' stamp: 'LK 10/9/2023 15:14:37' overrides: 50694751!
+canHandle: aChar
+! !
+!CommandHandler class methodsFor: 'as yet unclassified' stamp: 'LK 10/9/2023 15:14:37' prior: 50694751!
+canHandle: aChar
+
+	self subclassResponsibility! !
+!Backward class methodsFor: 'as yet unclassified' stamp: 'LK 10/9/2023 15:14:49' prior: 50694759 overrides: 50694771!
+canHandle: aChar
+	^aChar = $b.! !
+!Forward class methodsFor: 'as yet unclassified' stamp: 'LK 10/9/2023 15:15:05' prior: 50694755 overrides: 50694771!
+canHandle: aChar
+	^aChar = $f.
+! !
+!RotateLeft class methodsFor: 'as yet unclassified' stamp: 'LK 10/9/2023 15:15:18' prior: 50694763 overrides: 50694771!
+canHandle: aChar
+	^aChar = $l.! !
+!RotateRight class methodsFor: 'as yet unclassified' stamp: 'LK 10/9/2023 15:15:27' prior: 50694767 overrides: 50694771!
+canHandle: aChar
+	^aChar = $r! !
+!CommandHandler class methodsFor: 'nil' stamp: 'LK 10/9/2023 15:19:23'!
+with: aChar
+
+	^(CommandHandler allSubclasses detect: [:aClass | aClass canHandle: aChar])! !
+!CommandHandler class methodsFor: 'as yet unclassified' stamp: 'LK 10/9/2023 15:19:48' prior: 50694796!
+with: aChar
+
+	^(CommandHandler allSubclasses detect: [:aClass | aClass canHandle: aChar]) new! !
+!MarsRover methodsFor: 'commands' stamp: 'LK 10/9/2023 15:25:27' prior: 50694449!
+executeChar: aSingleCommand
+	
+	
+	(aSingleCommand = $f) ifTrue: [	^self commandForward].
+	
+	(aSingleCommand = $b) ifTrue: [^self commandBackward].
+	
+	(aSingleCommand = $r) ifTrue: [^	self commandRotateRight].
+	
+	(aSingleCommand = $l) ifTrue: [^self commandRotateLeft].
+	
+	self error: MarsRover errorInvalidCommand.
+	
+! !
+!MarsRover methodsFor: 'commands' stamp: 'LK 10/9/2023 15:26:40' prior: 50694809!
+executeChar: aSingleCommand
+	
+	|handler|
+	
+	handler := (CommandHandler with: aSingleCommand).
+	
+	(handler execute: self).
+	
+	
+	(aSingleCommand = $f) ifTrue: [	^self commandForward].
+	
+	(aSingleCommand = $b) ifTrue: [^self commandBackward].
+	
+	(aSingleCommand = $r) ifTrue: [^	self commandRotateRight].
+	
+	(aSingleCommand = $l) ifTrue: [^self commandRotateLeft].
+	
+	self error: MarsRover errorInvalidCommand.
+	
+! !
+!CommandHandler methodsFor: 'nil' stamp: 'LK 10/9/2023 15:27:24'!
+excute: aMarsRover
+	! !
+!CommandHandler methodsFor: 'as yet unclassified' stamp: 'LK 10/9/2023 15:27:34'!
+execute: aMarsRover
+	! !
+
+!methodRemoval: CommandHandler #excute: stamp: 'LK 10/9/2023 15:27:35'!
+excute: aMarsRover
+	!
+!Forward methodsFor: 'as yet unclassified' stamp: 'LK 10/9/2023 15:27:40' overrides: 50694841!
+execute: aMarsRover
+	! !
+!Backward methodsFor: 'as yet unclassified' stamp: 'LK 10/9/2023 15:27:40' overrides: 50694841!
+execute: aMarsRover
+	! !
+!RotateLeft methodsFor: 'as yet unclassified' stamp: 'LK 10/9/2023 15:27:40' overrides: 50694841!
+execute: aMarsRover
+	! !
+!RotateRight methodsFor: 'as yet unclassified' stamp: 'LK 10/9/2023 15:27:41' overrides: 50694841!
+execute: aMarsRover
+	! !
+!CommandHandler methodsFor: 'as yet unclassified' stamp: 'LK 10/9/2023 15:27:41' prior: 50694841!
+execute: aMarsRover
+
+	self subclassResponsibility! !
+!Backward methodsFor: 'as yet unclassified' stamp: 'LK 10/9/2023 15:28:08' prior: 50694852 overrides: 50694864!
+execute: aMarsRover
+	aMarsRover commandBackward! !
+!Forward methodsFor: 'as yet unclassified' stamp: 'LK 10/9/2023 15:28:18' prior: 50694848 overrides: 50694864!
+execute: aMarsRover
+	aMarsRover commandForward
+	! !
+!RotateLeft methodsFor: 'as yet unclassified' stamp: 'LK 10/9/2023 15:28:35' prior: 50694856 overrides: 50694864!
+execute: aMarsRover
+	aMarsRover commandRotateLeft! !
+!RotateRight methodsFor: 'as yet unclassified' stamp: 'LK 10/9/2023 15:28:51' prior: 50694860 overrides: 50694864!
+execute: aMarsRover
+	aMarsRover commandRotateRight ! !
+!MarsRover methodsFor: 'commands' stamp: 'LK 10/9/2023 15:29:49' prior: 50694822!
+executeChar: aSingleCommand
+	
+	|handler|
+	
+	handler := (CommandHandler with: aSingleCommand).
+	
+	(handler execute: self).
+	"
+	(aSingleCommand = $f) ifTrue: [	^self commandForward].
+	
+	(aSingleCommand = $b) ifTrue: [^self commandBackward].
+	
+	(aSingleCommand = $r) ifTrue: [^	self commandRotateRight].
+	
+	(aSingleCommand = $l) ifTrue: [^self commandRotateLeft].
+	
+	self error: MarsRover errorInvalidCommand.
+	
+"! !
+
+!testRun: #MarsRoverTest #test01shouldInitializeInGivenCoordinateAndDirection stamp: 'LK 10/9/2023 15:29:52'!
+PASSED!
+
+!testRun: #MarsRoverTest #test02shouldDoNothingOnEmptyString stamp: 'LK 10/9/2023 15:29:54'!
+PASSED!
+
+!testRun: #MarsRoverTest #test03shouldMoveForwardsPointingNorthCorrectly stamp: 'LK 10/9/2023 15:29:55'!
+PASSED!
+
+!testRun: #MarsRoverTest #test04shouldMoveForwardsPointingSouthCorrectly stamp: 'LK 10/9/2023 15:29:57'!
+PASSED!
+
+!testRun: #MarsRoverTest #test05shouldMoveForwardsPointingWestCorrectly stamp: 'LK 10/9/2023 15:29:59'!
+PASSED!
+
+!testRun: #MarsRoverTest #test06shouldMoveForwardsPointingEastCorrectly stamp: 'LK 10/9/2023 15:30:00'!
+PASSED!
+
+!testRun: #MarsRoverTest #test07shouldMoveBackwardsPointingNorthCorrectly stamp: 'LK 10/9/2023 15:30:02'!
+PASSED!
+
+!testRun: #MarsRoverTest #test19shouldHandleMultipleCommands stamp: 'LK 10/9/2023 15:30:06'!
+PASSED!
+
+!testRun: #MarsRoverTest #test20shouldHandleInvalidCommand stamp: 'LK 10/9/2023 15:30:07'!
+FAILURE!
+
+!testRun: #MarsRoverTest #test20shouldHandleInvalidCommand stamp: 'LK 10/9/2023 15:30:07'!
+FAILURE!
+
+!testRun: #MarsRoverTest #test20shouldHandleInvalidCommand stamp: 'LK 10/9/2023 15:30:14'!
+FAILURE!
+
+!testRun: #MarsRoverTest #test20shouldHandleInvalidCommand stamp: 'LK 10/9/2023 15:30:14'!
+FAILURE!
+!CommandHandler class methodsFor: 'as yet unclassified' stamp: 'LK 10/9/2023 15:31:19' prior: 50694803!
+with: aChar
+
+	^(CommandHandler allSubclasses detect: [:aClass | aClass canHandle: aChar] ifNone:[^MarsRover errorInvalidCommand]) new! !
+
+!testRun: #MarsRoverTest #test20shouldHandleInvalidCommand stamp: 'LK 10/9/2023 15:31:23'!
+FAILURE!
+
+!testRun: #MarsRoverTest #test20shouldHandleInvalidCommand stamp: 'LK 10/9/2023 15:31:23'!
+FAILURE!
+!CommandHandler class methodsFor: 'as yet unclassified' stamp: 'LK 10/9/2023 15:32:03' prior: 50694950!
+with: aChar
+
+	^(CommandHandler allSubclasses detect: [:aClass | aClass canHandle: aChar] ifNone:[^(MarsRover new) errorInvalidCommand]) new! !
+
+!testRun: #MarsRoverTest #test20shouldHandleInvalidCommand stamp: 'LK 10/9/2023 15:32:08'!
+FAILURE!
+
+!testRun: #MarsRoverTest #test20shouldHandleInvalidCommand stamp: 'LK 10/9/2023 15:32:08'!
+FAILURE!
+
+!testRun: #MarsRoverTest #test21shouldHandleCommandsUntilInvalidCommand stamp: 'LK 10/9/2023 15:32:28'!
+FAILURE!
+!CommandHandler class methodsFor: 'as yet unclassified' stamp: 'LK 10/9/2023 15:33:12' prior: 50694964!
+with: aChar
+
+	^(CommandHandler allSubclasses detect: [:aClass | aClass canHandle: aChar] ifNone:[self error: 'comando invalido']) new! !
+!MarsRoverTest methodsFor: 'testing' stamp: 'LK 10/9/2023 15:33:26' prior: 50694473!
+test20shouldHandleInvalidCommand
+
+	|marsRover coordinate direction commands|
+	
+	coordinate := 0@0.
+	direction := North new.
+	marsRover  := MarsRover withCoord: coordinate pointingTo: direction.
+	commands := 'ds'. 
+	
+	self 
+		should: [marsRover execute: commands]
+		raise: Error
+		withExceptionDo: [ :anError | 
+			self assert: anError messageText = 'comando invalido'].
+	! !
+!MarsRoverTest methodsFor: 'testing' stamp: 'LK 10/9/2023 15:33:39' prior: 50694488!
+test21shouldHandleCommandsUntilInvalidCommand
+
+	|marsRover coordinate direction commands finalCoordinate |
+	
+	coordinate := 0@0.
+	direction := North new.
+	marsRover  := MarsRover withCoord: coordinate pointingTo: direction.
+	commands := 'fffpppf'. 
+	finalCoordinate := 0@3.
+	
+	self 
+		should: [marsRover execute: commands]
+		raise: Error
+		withExceptionDo: [ :anError | 
+			self assert: anError messageText = 'comando invalido'].
+	
+	self assertMarsRover: marsRover shouldBeIn: finalCoordinate pointingTo: direction.
+	
+
+	! !
+
+!testRun: #MarsRoverTest #test01shouldInitializeInGivenCoordinateAndDirection stamp: 'LK 10/9/2023 15:33:40'!
+PASSED!
+
+!testRun: #MarsRoverTest #test02shouldDoNothingOnEmptyString stamp: 'LK 10/9/2023 15:33:40'!
+PASSED!
+
+!testRun: #MarsRoverTest #test03shouldMoveForwardsPointingNorthCorrectly stamp: 'LK 10/9/2023 15:33:40'!
+PASSED!
+
+!testRun: #MarsRoverTest #test04shouldMoveForwardsPointingSouthCorrectly stamp: 'LK 10/9/2023 15:33:40'!
+PASSED!
+
+!testRun: #MarsRoverTest #test05shouldMoveForwardsPointingWestCorrectly stamp: 'LK 10/9/2023 15:33:40'!
+PASSED!
+
+!testRun: #MarsRoverTest #test06shouldMoveForwardsPointingEastCorrectly stamp: 'LK 10/9/2023 15:33:40'!
+PASSED!
+
+!testRun: #MarsRoverTest #test07shouldMoveBackwardsPointingNorthCorrectly stamp: 'LK 10/9/2023 15:33:40'!
+PASSED!
+
+!testRun: #MarsRoverTest #test08shouldMoveBackwardsPointingSouthCorrectly stamp: 'LK 10/9/2023 15:33:40'!
+PASSED!
+
+!testRun: #MarsRoverTest #test09shouldMoveBackwardsPointingEastCorrectly stamp: 'LK 10/9/2023 15:33:40'!
+PASSED!
+
+!testRun: #MarsRoverTest #test10shouldMoveBackwardsPointingWestCorrectly stamp: 'LK 10/9/2023 15:33:40'!
+PASSED!
+
+!testRun: #MarsRoverTest #test11shouldRotateRightPointingNorthCorrectly stamp: 'LK 10/9/2023 15:33:40'!
+PASSED!
+
+!testRun: #MarsRoverTest #test12shouldRotateRightPointingEastCorrectly stamp: 'LK 10/9/2023 15:33:40'!
+PASSED!
+
+!testRun: #MarsRoverTest #test13shouldRotateRightPointingSouthCorrectly stamp: 'LK 10/9/2023 15:33:40'!
+PASSED!
+
+!testRun: #MarsRoverTest #test14shouldRotateRightPointingWestCorrectly stamp: 'LK 10/9/2023 15:33:40'!
+PASSED!
+
+!testRun: #MarsRoverTest #test15shouldRotateLeftPointingNorthCorrectly stamp: 'LK 10/9/2023 15:33:40'!
+PASSED!
+
+!testRun: #MarsRoverTest #test16shouldRotateLeftPointingSouthCorrectly stamp: 'LK 10/9/2023 15:33:40'!
+PASSED!
+
+!testRun: #MarsRoverTest #test17shouldRotateLeftPointingEastCorrectly stamp: 'LK 10/9/2023 15:33:40'!
+PASSED!
+
+!testRun: #MarsRoverTest #test18shouldRotateLeftPointingWestCorrectly stamp: 'LK 10/9/2023 15:33:40'!
+PASSED!
+
+!testRun: #MarsRoverTest #test19shouldHandleMultipleCommands stamp: 'LK 10/9/2023 15:33:40'!
+PASSED!
+
+!testRun: #MarsRoverTest #test20shouldHandleInvalidCommand stamp: 'LK 10/9/2023 15:33:40'!
+PASSED!
+
+!testRun: #MarsRoverTest #test21shouldHandleCommandsUntilInvalidCommand stamp: 'LK 10/9/2023 15:33:40'!
+PASSED!
+!MarsRover methodsFor: 'commands' stamp: 'LK 10/9/2023 15:33:55' prior: 50694893!
+executeChar: aSingleCommand
+	
+	|handler|
+	
+	handler := (CommandHandler with: aSingleCommand).
+	
+	(handler execute: self).
+	
+	"
+	(aSingleCommand = $f) ifTrue: [	^self commandForward].
+	
+	(aSingleCommand = $b) ifTrue: [^self commandBackward].
+	
+	(aSingleCommand = $r) ifTrue: [^	self commandRotateRight].
+	
+	(aSingleCommand = $l) ifTrue: [^self commandRotateLeft].
+	
+	self error: MarsRover errorInvalidCommand.
+	
+"! !
+
+!testRun: #MarsRoverTest #test01shouldInitializeInGivenCoordinateAndDirection stamp: 'LK 10/9/2023 15:34:36'!
+PASSED!
+
+!testRun: #MarsRoverTest #test02shouldDoNothingOnEmptyString stamp: 'LK 10/9/2023 15:34:36'!
+PASSED!
+
+!testRun: #MarsRoverTest #test03shouldMoveForwardsPointingNorthCorrectly stamp: 'LK 10/9/2023 15:34:36'!
+PASSED!
+
+!testRun: #MarsRoverTest #test04shouldMoveForwardsPointingSouthCorrectly stamp: 'LK 10/9/2023 15:34:36'!
+PASSED!
+
+!testRun: #MarsRoverTest #test05shouldMoveForwardsPointingWestCorrectly stamp: 'LK 10/9/2023 15:34:36'!
+PASSED!
+
+!testRun: #MarsRoverTest #test06shouldMoveForwardsPointingEastCorrectly stamp: 'LK 10/9/2023 15:34:36'!
+PASSED!
+
+!testRun: #MarsRoverTest #test07shouldMoveBackwardsPointingNorthCorrectly stamp: 'LK 10/9/2023 15:34:36'!
+PASSED!
+
+!testRun: #MarsRoverTest #test08shouldMoveBackwardsPointingSouthCorrectly stamp: 'LK 10/9/2023 15:34:36'!
+PASSED!
+
+!testRun: #MarsRoverTest #test09shouldMoveBackwardsPointingEastCorrectly stamp: 'LK 10/9/2023 15:34:36'!
+PASSED!
+
+!testRun: #MarsRoverTest #test10shouldMoveBackwardsPointingWestCorrectly stamp: 'LK 10/9/2023 15:34:36'!
+PASSED!
+
+!testRun: #MarsRoverTest #test11shouldRotateRightPointingNorthCorrectly stamp: 'LK 10/9/2023 15:34:36'!
+PASSED!
+
+!testRun: #MarsRoverTest #test12shouldRotateRightPointingEastCorrectly stamp: 'LK 10/9/2023 15:34:36'!
+PASSED!
+
+!testRun: #MarsRoverTest #test13shouldRotateRightPointingSouthCorrectly stamp: 'LK 10/9/2023 15:34:36'!
+PASSED!
+
+!testRun: #MarsRoverTest #test14shouldRotateRightPointingWestCorrectly stamp: 'LK 10/9/2023 15:34:36'!
+PASSED!
+
+!testRun: #MarsRoverTest #test15shouldRotateLeftPointingNorthCorrectly stamp: 'LK 10/9/2023 15:34:36'!
+PASSED!
+
+!testRun: #MarsRoverTest #test16shouldRotateLeftPointingSouthCorrectly stamp: 'LK 10/9/2023 15:34:36'!
+PASSED!
+
+!testRun: #MarsRoverTest #test17shouldRotateLeftPointingEastCorrectly stamp: 'LK 10/9/2023 15:34:36'!
+PASSED!
+
+!testRun: #MarsRoverTest #test18shouldRotateLeftPointingWestCorrectly stamp: 'LK 10/9/2023 15:34:36'!
+PASSED!
+
+!testRun: #MarsRoverTest #test19shouldHandleMultipleCommands stamp: 'LK 10/9/2023 15:34:36'!
+PASSED!
+
+!testRun: #MarsRoverTest #test20shouldHandleInvalidCommand stamp: 'LK 10/9/2023 15:34:36'!
+PASSED!
+
+!testRun: #MarsRoverTest #test21shouldHandleCommandsUntilInvalidCommand stamp: 'LK 10/9/2023 15:34:36'!
+PASSED!
+!MarsRover methodsFor: 'private' stamp: 'LK 10/9/2023 15:39:56' prior: 50689510 overrides: 16901507!
+at: aPosition
+
+	^position = aPosition.! !
+!CommandHandler class methodsFor: 'as yet unclassified' stamp: 'LK 10/9/2023 15:41:40' prior: 50694982!
+with: aChar
+
+	^(CommandHandler allSubclasses detect: [:aClass | aClass canHandle: aChar] ifNone:[^MarsRover errorInvalidCommand]) new! !
+
+!testRun: #MarsRoverTest #test20shouldHandleInvalidCommand stamp: 'LK 10/9/2023 15:42:02'!
+FAILURE!
+
+!testRun: #MarsRoverTest #test20shouldHandleInvalidCommand stamp: 'LK 10/9/2023 15:42:02'!
+FAILURE!
+!CommandHandler class methodsFor: 'as yet unclassified' stamp: 'LK 10/9/2023 15:42:25' prior: 50695192!
+with: aChar
+
+	^(CommandHandler allSubclasses detect: [:aClass | aClass canHandle: aChar] ifNone:[^'comando invalido']) new! !
+
+!testRun: #MarsRoverTest #test01shouldInitializeInGivenCoordinateAndDirection stamp: 'LK 10/9/2023 15:42:29'!
+PASSED!
+
+!testRun: #MarsRoverTest #test02shouldDoNothingOnEmptyString stamp: 'LK 10/9/2023 15:42:29'!
+PASSED!
+
+!testRun: #MarsRoverTest #test03shouldMoveForwardsPointingNorthCorrectly stamp: 'LK 10/9/2023 15:42:29'!
+PASSED!
+
+!testRun: #MarsRoverTest #test04shouldMoveForwardsPointingSouthCorrectly stamp: 'LK 10/9/2023 15:42:29'!
+PASSED!
+
+!testRun: #MarsRoverTest #test05shouldMoveForwardsPointingWestCorrectly stamp: 'LK 10/9/2023 15:42:29'!
+PASSED!
+
+!testRun: #MarsRoverTest #test06shouldMoveForwardsPointingEastCorrectly stamp: 'LK 10/9/2023 15:42:29'!
+PASSED!
+
+!testRun: #MarsRoverTest #test07shouldMoveBackwardsPointingNorthCorrectly stamp: 'LK 10/9/2023 15:42:29'!
+PASSED!
+
+!testRun: #MarsRoverTest #test08shouldMoveBackwardsPointingSouthCorrectly stamp: 'LK 10/9/2023 15:42:29'!
+PASSED!
+
+!testRun: #MarsRoverTest #test09shouldMoveBackwardsPointingEastCorrectly stamp: 'LK 10/9/2023 15:42:29'!
+PASSED!
+
+!testRun: #MarsRoverTest #test10shouldMoveBackwardsPointingWestCorrectly stamp: 'LK 10/9/2023 15:42:29'!
+PASSED!
+
+!testRun: #MarsRoverTest #test11shouldRotateRightPointingNorthCorrectly stamp: 'LK 10/9/2023 15:42:29'!
+PASSED!
+
+!testRun: #MarsRoverTest #test12shouldRotateRightPointingEastCorrectly stamp: 'LK 10/9/2023 15:42:29'!
+PASSED!
+
+!testRun: #MarsRoverTest #test13shouldRotateRightPointingSouthCorrectly stamp: 'LK 10/9/2023 15:42:29'!
+PASSED!
+
+!testRun: #MarsRoverTest #test14shouldRotateRightPointingWestCorrectly stamp: 'LK 10/9/2023 15:42:29'!
+PASSED!
+
+!testRun: #MarsRoverTest #test15shouldRotateLeftPointingNorthCorrectly stamp: 'LK 10/9/2023 15:42:29'!
+PASSED!
+
+!testRun: #MarsRoverTest #test16shouldRotateLeftPointingSouthCorrectly stamp: 'LK 10/9/2023 15:42:29'!
+PASSED!
+
+!testRun: #MarsRoverTest #test17shouldRotateLeftPointingEastCorrectly stamp: 'LK 10/9/2023 15:42:29'!
+PASSED!
+
+!testRun: #MarsRoverTest #test18shouldRotateLeftPointingWestCorrectly stamp: 'LK 10/9/2023 15:42:29'!
+PASSED!
+
+!testRun: #MarsRoverTest #test19shouldHandleMultipleCommands stamp: 'LK 10/9/2023 15:42:29'!
+PASSED!
+
+!testRun: #MarsRoverTest #test20shouldHandleInvalidCommand stamp: 'LK 10/9/2023 15:42:29'!
+FAILURE!
+
+!testRun: #MarsRoverTest #test21shouldHandleCommandsUntilInvalidCommand stamp: 'LK 10/9/2023 15:42:29'!
+FAILURE!
+!CommandHandler class methodsFor: 'as yet unclassified' stamp: 'LK 10/9/2023 15:33:12' prior: 50695206!
+with: aChar
+
+	^(CommandHandler allSubclasses detect: [:aClass | aClass canHandle: aChar] ifNone:[self error: 'comando invalido']) new! !
+
+!testRun: #MarsRoverTest #test01shouldInitializeInGivenCoordinateAndDirection stamp: 'LK 10/9/2023 15:42:57'!
+PASSED!
+
+!testRun: #MarsRoverTest #test02shouldDoNothingOnEmptyString stamp: 'LK 10/9/2023 15:42:57'!
+PASSED!
+
+!testRun: #MarsRoverTest #test03shouldMoveForwardsPointingNorthCorrectly stamp: 'LK 10/9/2023 15:42:57'!
+PASSED!
+
+!testRun: #MarsRoverTest #test04shouldMoveForwardsPointingSouthCorrectly stamp: 'LK 10/9/2023 15:42:57'!
+PASSED!
+
+!testRun: #MarsRoverTest #test05shouldMoveForwardsPointingWestCorrectly stamp: 'LK 10/9/2023 15:42:57'!
+PASSED!
+
+!testRun: #MarsRoverTest #test06shouldMoveForwardsPointingEastCorrectly stamp: 'LK 10/9/2023 15:42:57'!
+PASSED!
+
+!testRun: #MarsRoverTest #test07shouldMoveBackwardsPointingNorthCorrectly stamp: 'LK 10/9/2023 15:42:57'!
+PASSED!
+
+!testRun: #MarsRoverTest #test08shouldMoveBackwardsPointingSouthCorrectly stamp: 'LK 10/9/2023 15:42:57'!
+PASSED!
+
+!testRun: #MarsRoverTest #test09shouldMoveBackwardsPointingEastCorrectly stamp: 'LK 10/9/2023 15:42:57'!
+PASSED!
+
+!testRun: #MarsRoverTest #test10shouldMoveBackwardsPointingWestCorrectly stamp: 'LK 10/9/2023 15:42:57'!
+PASSED!
+
+!testRun: #MarsRoverTest #test11shouldRotateRightPointingNorthCorrectly stamp: 'LK 10/9/2023 15:42:57'!
+PASSED!
+
+!testRun: #MarsRoverTest #test12shouldRotateRightPointingEastCorrectly stamp: 'LK 10/9/2023 15:42:57'!
+PASSED!
+
+!testRun: #MarsRoverTest #test13shouldRotateRightPointingSouthCorrectly stamp: 'LK 10/9/2023 15:42:57'!
+PASSED!
+
+!testRun: #MarsRoverTest #test14shouldRotateRightPointingWestCorrectly stamp: 'LK 10/9/2023 15:42:57'!
+PASSED!
+
+!testRun: #MarsRoverTest #test15shouldRotateLeftPointingNorthCorrectly stamp: 'LK 10/9/2023 15:42:57'!
+PASSED!
+
+!testRun: #MarsRoverTest #test16shouldRotateLeftPointingSouthCorrectly stamp: 'LK 10/9/2023 15:42:57'!
+PASSED!
+
+!testRun: #MarsRoverTest #test17shouldRotateLeftPointingEastCorrectly stamp: 'LK 10/9/2023 15:42:57'!
+PASSED!
+
+!testRun: #MarsRoverTest #test18shouldRotateLeftPointingWestCorrectly stamp: 'LK 10/9/2023 15:42:57'!
+PASSED!
+
+!testRun: #MarsRoverTest #test19shouldHandleMultipleCommands stamp: 'LK 10/9/2023 15:42:57'!
+PASSED!
+
+!testRun: #MarsRoverTest #test20shouldHandleInvalidCommand stamp: 'LK 10/9/2023 15:42:57'!
+PASSED!
+
+!testRun: #MarsRoverTest #test21shouldHandleCommandsUntilInvalidCommand stamp: 'LK 10/9/2023 15:42:57'!
+PASSED!
+
+----QUIT----(9 October 2023 15:43:38) CuisUniversity-5981.image priorSource: 11449020!

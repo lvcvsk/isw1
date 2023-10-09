@@ -324,7 +324,7 @@ test19shouldHandleMultipleCommands
 	self assertMarsRover: marsRover shouldBeIn: finalCoordinate pointingTo: direction.	
 	! !
 
-!MarsRoverTest methodsFor: 'testing' stamp: 'LK 10/9/2023 14:10:42'!
+!MarsRoverTest methodsFor: 'testing' stamp: 'LK 10/9/2023 15:33:26'!
 test20shouldHandleInvalidCommand
 
 	|marsRover coordinate direction commands|
@@ -338,10 +338,10 @@ test20shouldHandleInvalidCommand
 		should: [marsRover execute: commands]
 		raise: Error
 		withExceptionDo: [ :anError | 
-			self assert: anError messageText = MarsRover errorInvalidCommand].
+			self assert: anError messageText = 'comando invalido'].
 	! !
 
-!MarsRoverTest methodsFor: 'testing' stamp: 'LK 10/9/2023 14:10:55'!
+!MarsRoverTest methodsFor: 'testing' stamp: 'LK 10/9/2023 15:33:39'!
 test21shouldHandleCommandsUntilInvalidCommand
 
 	|marsRover coordinate direction commands finalCoordinate |
@@ -356,12 +356,131 @@ test21shouldHandleCommandsUntilInvalidCommand
 		should: [marsRover execute: commands]
 		raise: Error
 		withExceptionDo: [ :anError | 
-			self assert: anError messageText = MarsRover errorInvalidCommand].
+			self assert: anError messageText = 'comando invalido'].
 	
 	self assertMarsRover: marsRover shouldBeIn: finalCoordinate pointingTo: direction.
 	
 
 	! !
+
+
+!classDefinition: #CommandHandler category: 'Mars Rover- Exercise'!
+Object subclass: #CommandHandler
+	instanceVariableNames: ''
+	classVariableNames: ''
+	poolDictionaries: ''
+	category: 'Mars Rover- Exercise'!
+
+!CommandHandler methodsFor: 'as yet unclassified' stamp: 'LK 10/9/2023 15:27:41'!
+execute: aMarsRover
+
+	self subclassResponsibility! !
+
+"-- -- -- -- -- -- -- -- -- -- -- -- -- -- -- -- -- -- "!
+
+!classDefinition: 'CommandHandler class' category: 'Mars Rover- Exercise'!
+CommandHandler class
+	instanceVariableNames: ''!
+
+!CommandHandler class methodsFor: 'as yet unclassified' stamp: 'LK 10/9/2023 15:14:37'!
+canHandle: aChar
+
+	self subclassResponsibility! !
+
+!CommandHandler class methodsFor: 'as yet unclassified' stamp: 'LK 10/9/2023 15:33:12'!
+with: aChar
+
+	^(CommandHandler allSubclasses detect: [:aClass | aClass canHandle: aChar] ifNone:[self error: 'comando invalido']) new! !
+
+
+!classDefinition: #Backward category: 'Mars Rover- Exercise'!
+CommandHandler subclass: #Backward
+	instanceVariableNames: ''
+	classVariableNames: ''
+	poolDictionaries: ''
+	category: 'Mars Rover- Exercise'!
+
+!Backward methodsFor: 'as yet unclassified' stamp: 'LK 10/9/2023 15:28:08'!
+execute: aMarsRover
+	aMarsRover commandBackward! !
+
+"-- -- -- -- -- -- -- -- -- -- -- -- -- -- -- -- -- -- "!
+
+!classDefinition: 'Backward class' category: 'Mars Rover- Exercise'!
+Backward class
+	instanceVariableNames: ''!
+
+!Backward class methodsFor: 'as yet unclassified' stamp: 'LK 10/9/2023 15:14:49'!
+canHandle: aChar
+	^aChar = $b.! !
+
+
+!classDefinition: #Forward category: 'Mars Rover- Exercise'!
+CommandHandler subclass: #Forward
+	instanceVariableNames: ''
+	classVariableNames: ''
+	poolDictionaries: ''
+	category: 'Mars Rover- Exercise'!
+
+!Forward methodsFor: 'as yet unclassified' stamp: 'LK 10/9/2023 15:28:18'!
+execute: aMarsRover
+	aMarsRover commandForward
+	! !
+
+"-- -- -- -- -- -- -- -- -- -- -- -- -- -- -- -- -- -- "!
+
+!classDefinition: 'Forward class' category: 'Mars Rover- Exercise'!
+Forward class
+	instanceVariableNames: ''!
+
+!Forward class methodsFor: 'as yet unclassified' stamp: 'LK 10/9/2023 15:15:05'!
+canHandle: aChar
+	^aChar = $f.
+! !
+
+
+!classDefinition: #RotateLeft category: 'Mars Rover- Exercise'!
+CommandHandler subclass: #RotateLeft
+	instanceVariableNames: ''
+	classVariableNames: ''
+	poolDictionaries: ''
+	category: 'Mars Rover- Exercise'!
+
+!RotateLeft methodsFor: 'as yet unclassified' stamp: 'LK 10/9/2023 15:28:35'!
+execute: aMarsRover
+	aMarsRover commandRotateLeft! !
+
+"-- -- -- -- -- -- -- -- -- -- -- -- -- -- -- -- -- -- "!
+
+!classDefinition: 'RotateLeft class' category: 'Mars Rover- Exercise'!
+RotateLeft class
+	instanceVariableNames: ''!
+
+!RotateLeft class methodsFor: 'as yet unclassified' stamp: 'LK 10/9/2023 15:15:18'!
+canHandle: aChar
+	^aChar = $l.! !
+
+
+!classDefinition: #RotateRight category: 'Mars Rover- Exercise'!
+CommandHandler subclass: #RotateRight
+	instanceVariableNames: ''
+	classVariableNames: ''
+	poolDictionaries: ''
+	category: 'Mars Rover- Exercise'!
+
+!RotateRight methodsFor: 'as yet unclassified' stamp: 'LK 10/9/2023 15:28:51'!
+execute: aMarsRover
+	aMarsRover commandRotateRight ! !
+
+"-- -- -- -- -- -- -- -- -- -- -- -- -- -- -- -- -- -- "!
+
+!classDefinition: 'RotateRight class' category: 'Mars Rover- Exercise'!
+RotateRight class
+	instanceVariableNames: ''!
+
+!RotateRight class methodsFor: 'as yet unclassified' stamp: 'LK 10/9/2023 15:15:27'!
+canHandle: aChar
+	^aChar = $r! !
 
 
 !classDefinition: #Direction category: 'Mars Rover- Exercise'!
@@ -500,8 +619,9 @@ Object subclass: #MarsRover
 	poolDictionaries: ''
 	category: 'Mars Rover- Exercise'!
 
-!MarsRover methodsFor: 'private' stamp: 'LK 10/9/2023 11:44:41'!
+!MarsRover methodsFor: 'private' stamp: 'LK 10/9/2023 15:39:56'!
 at: aPosition
+
 	^position = aPosition.! !
 
 !MarsRover methodsFor: 'private' stamp: 'LK 10/9/2023 13:14:00'!
@@ -546,9 +666,16 @@ execute: commands
 	
 ! !
 
-!MarsRover methodsFor: 'commands' stamp: 'LK 10/9/2023 14:10:02'!
+!MarsRover methodsFor: 'commands' stamp: 'LK 10/9/2023 15:33:55'!
 executeChar: aSingleCommand
 	
+	|handler|
+	
+	handler := (CommandHandler with: aSingleCommand).
+	
+	(handler execute: self).
+	
+	"
 	(aSingleCommand = $f) ifTrue: [	^self commandForward].
 	
 	(aSingleCommand = $b) ifTrue: [^self commandBackward].
@@ -559,7 +686,7 @@ executeChar: aSingleCommand
 	
 	self error: MarsRover errorInvalidCommand.
 	
-! !
+"! !
 
 "-- -- -- -- -- -- -- -- -- -- -- -- -- -- -- -- -- -- "!
 
