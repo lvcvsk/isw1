@@ -32413,3 +32413,294 @@ PASSED!
 PASSED!
 
 ----QUIT----(26 October 2023 16:20:46) CuisUniversity-5981.image priorSource: 10717973!
+
+----STARTUP---- (26 October 2023 16:26:28) as /home/oscar/Downloads/linux64/linux64/CuisUniversity-5981.image!
+
+
+!testRun: #Portfolio2Test #test18transferAmountShouldBePositive stamp: 'OA 10/26/2023 16:26:41'!
+PASSED!
+
+!testRun: #Portfolio2Test #test19transferToYourselfIsNotAllowed stamp: 'OA 10/26/2023 16:26:42'!
+PASSED!
+
+!testRun: #Portfolio2Test #test01trasferringModifiesBalanceByCorrectAmount stamp: 'OA 10/26/2023 16:31:29'!
+PASSED!
+
+!testRun: #Portfolio2Test #test02transferringGetsRegisteredInBothAccounts stamp: 'OA 10/26/2023 16:31:29'!
+PASSED!
+
+!testRun: #Portfolio2Test #test03canNavigateBetweenTransferLegs stamp: 'OA 10/26/2023 16:31:29'!
+PASSED!
+
+!testRun: #Portfolio2Test #test04reportsAccountSummaryOfEmptyAccount stamp: 'OA 10/26/2023 16:31:29'!
+PASSED!
+
+!testRun: #Portfolio2Test #test05reportsAccountSummaryWithWithdrawal stamp: 'OA 10/26/2023 16:31:29'!
+PASSED!
+
+!testRun: #Portfolio2Test #test06reportsAccountSummaryWithDeposit stamp: 'OA 10/26/2023 16:31:29'!
+PASSED!
+
+!testRun: #Portfolio2Test #test07reportsAccountSummaryWithDepositTransferLeg stamp: 'OA 10/26/2023 16:31:29'!
+PASSED!
+
+!testRun: #Portfolio2Test #test08reportsAccountSummaryWithWithdrawTransferLeg stamp: 'OA 10/26/2023 16:31:29'!
+PASSED!
+
+!testRun: #Portfolio2Test #test09reportsPortfolioSummaryWithManyAccounts stamp: 'OA 10/26/2023 16:31:29'!
+PASSED!
+
+!testRun: #Portfolio2Test #test10reportsTransferNetForWithdrawLegs stamp: 'OA 10/26/2023 16:31:29'!
+PASSED!
+
+!testRun: #Portfolio2Test #test11reportsTransferNetForDepositLegs stamp: 'OA 10/26/2023 16:31:29'!
+PASSED!
+
+!testRun: #Portfolio2Test #test12reportsTransferNetForMultipleTransfers stamp: 'OA 10/26/2023 16:31:29'!
+PASSED!
+
+!testRun: #Portfolio2Test #test13reportsTransferNetForPortfoliosWithMultipleAccounts stamp: 'OA 10/26/2023 16:31:29'!
+PASSED!
+
+!testRun: #Portfolio2Test #test14reportsTransferNetForEmptyAccount stamp: 'OA 10/26/2023 16:31:29'!
+PASSED!
+
+!testRun: #Portfolio2Test #test15reportsPortfolioTreeWithEmptyPortfolio stamp: 'OA 10/26/2023 16:31:29'!
+PASSED!
+
+!testRun: #Portfolio2Test #test16reportPortfolioTreeWithOneChild stamp: 'OA 10/26/2023 16:31:29'!
+PASSED!
+
+!testRun: #Portfolio2Test #test17reportPortfolioTreeWithBigHierarchy stamp: 'OA 10/26/2023 16:31:29'!
+PASSED!
+
+!testRun: #Portfolio2Test #test18transferAmountShouldBePositive stamp: 'OA 10/26/2023 16:31:29'!
+PASSED!
+
+!testRun: #Portfolio2Test #test19transferToYourselfIsNotAllowed stamp: 'OA 10/26/2023 16:31:29'!
+PASSED!
+
+!testRun: #Portfolio2Test #test01trasferringModifiesBalanceByCorrectAmount stamp: 'OA 10/26/2023 16:32:14'!
+PASSED!
+
+!testRun: #Portfolio2Test #test02transferringGetsRegisteredInBothAccounts stamp: 'OA 10/26/2023 16:32:14'!
+PASSED!
+
+!testRun: #Portfolio2Test #test03canNavigateBetweenTransferLegs stamp: 'OA 10/26/2023 16:32:14'!
+PASSED!
+
+!testRun: #Portfolio2Test #test04reportsAccountSummaryOfEmptyAccount stamp: 'OA 10/26/2023 16:32:14'!
+PASSED!
+
+!testRun: #Portfolio2Test #test05reportsAccountSummaryWithWithdrawal stamp: 'OA 10/26/2023 16:32:14'!
+PASSED!
+
+!testRun: #Portfolio2Test #test06reportsAccountSummaryWithDeposit stamp: 'OA 10/26/2023 16:32:14'!
+PASSED!
+
+!testRun: #Portfolio2Test #test07reportsAccountSummaryWithDepositTransferLeg stamp: 'OA 10/26/2023 16:32:14'!
+PASSED!
+
+!testRun: #Portfolio2Test #test08reportsAccountSummaryWithWithdrawTransferLeg stamp: 'OA 10/26/2023 16:32:14'!
+PASSED!
+
+!testRun: #Portfolio2Test #test09reportsPortfolioSummaryWithManyAccounts stamp: 'OA 10/26/2023 16:32:14'!
+PASSED!
+
+!testRun: #Portfolio2Test #test10reportsTransferNetForWithdrawLegs stamp: 'OA 10/26/2023 16:32:14'!
+PASSED!
+
+!testRun: #Portfolio2Test #test11reportsTransferNetForDepositLegs stamp: 'OA 10/26/2023 16:32:14'!
+PASSED!
+
+!testRun: #Portfolio2Test #test12reportsTransferNetForMultipleTransfers stamp: 'OA 10/26/2023 16:32:14'!
+PASSED!
+
+!testRun: #Portfolio2Test #test13reportsTransferNetForPortfoliosWithMultipleAccounts stamp: 'OA 10/26/2023 16:32:14'!
+PASSED!
+
+!testRun: #Portfolio2Test #test14reportsTransferNetForEmptyAccount stamp: 'OA 10/26/2023 16:32:14'!
+PASSED!
+
+!testRun: #Portfolio2Test #test15reportsPortfolioTreeWithEmptyPortfolio stamp: 'OA 10/26/2023 16:32:14'!
+PASSED!
+
+!testRun: #Portfolio2Test #test16reportPortfolioTreeWithOneChild stamp: 'OA 10/26/2023 16:32:14'!
+PASSED!
+
+!testRun: #Portfolio2Test #test17reportPortfolioTreeWithBigHierarchy stamp: 'OA 10/26/2023 16:32:14'!
+PASSED!
+
+!testRun: #Portfolio2Test #test18transferAmountShouldBePositive stamp: 'OA 10/26/2023 16:32:14'!
+PASSED!
+
+!testRun: #Portfolio2Test #test19transferToYourselfIsNotAllowed stamp: 'OA 10/26/2023 16:32:14'!
+PASSED!
+
+!testRun: #PortfolioTest #test01BalanceOfPortfolioWithoutAccountsIsZero stamp: 'OA 10/26/2023 16:32:16'!
+PASSED!
+
+!testRun: #PortfolioTest #test02BalanceOfPortfolioWithAccountsIsSumOfAccountsBalance stamp: 'OA 10/26/2023 16:32:16'!
+PASSED!
+
+!testRun: #PortfolioTest #test03BalanceOfPortfolioIsCalculatedRecursivelyOnPortfolios stamp: 'OA 10/26/2023 16:32:16'!
+PASSED!
+
+!testRun: #PortfolioTest #test04PortfolioWithoutAccountsHasNoRegisteredTransaction stamp: 'OA 10/26/2023 16:32:16'!
+PASSED!
+
+!testRun: #PortfolioTest #test05PortfolioHasRegisteredItsAccountsTransactions stamp: 'OA 10/26/2023 16:32:16'!
+PASSED!
+
+!testRun: #PortfolioTest #test06PortfolioLooksForRegisteredTransactionsRecursively stamp: 'OA 10/26/2023 16:32:16'!
+PASSED!
+
+!testRun: #PortfolioTest #test07PortfolioHasNoTransactionWhenHasNoAccounts stamp: 'OA 10/26/2023 16:32:17'!
+PASSED!
+
+!testRun: #PortfolioTest #test08PortfolioTransactionsIncludesAllItsAccountsTransactions stamp: 'OA 10/26/2023 16:32:17'!
+PASSED!
+
+!testRun: #PortfolioTest #test09PortfolioTransactionsAreCalculatedRecursively stamp: 'OA 10/26/2023 16:32:17'!
+PASSED!
+
+!testRun: #PortfolioTest #test10PortfolioCanNotIncludeTheSameAccountMoreThanOnce stamp: 'OA 10/26/2023 16:32:17'!
+PASSED!
+
+!testRun: #PortfolioTest #test11PortfolioCanNotIncludeAccountOfItsPortfolios stamp: 'OA 10/26/2023 16:32:17'!
+PASSED!
+
+!testRun: #PortfolioTest #test12PortfolioCanNotIncludeItself stamp: 'OA 10/26/2023 16:32:17'!
+PASSED!
+
+!testRun: #PortfolioTest #test13ComposedPortfolioCanNotHaveParentPortfolioAccount stamp: 'OA 10/26/2023 16:32:17'!
+PASSED!
+
+!testRun: #PortfolioTest #test14ComposedPortfolioCanNotHaveAccountOfAnyRootParentRecursively stamp: 'OA 10/26/2023 16:32:17'!
+PASSED!
+
+!testRun: #PortfolioTest #test15PortfolioCanNotIncludeAnyOfTheComposedAccountOfPortfolioToAdd stamp: 'OA 10/26/2023 16:32:17'!
+PASSED!
+
+!testRun: #Portfolio2Test #test01trasferringModifiesBalanceByCorrectAmount stamp: 'OA 10/26/2023 16:32:21'!
+PASSED!
+
+!testRun: #Portfolio2Test #test02transferringGetsRegisteredInBothAccounts stamp: 'OA 10/26/2023 16:32:21'!
+PASSED!
+
+!testRun: #Portfolio2Test #test03canNavigateBetweenTransferLegs stamp: 'OA 10/26/2023 16:32:21'!
+PASSED!
+
+!testRun: #Portfolio2Test #test04reportsAccountSummaryOfEmptyAccount stamp: 'OA 10/26/2023 16:32:21'!
+PASSED!
+
+!testRun: #Portfolio2Test #test05reportsAccountSummaryWithWithdrawal stamp: 'OA 10/26/2023 16:32:21'!
+PASSED!
+
+!testRun: #Portfolio2Test #test06reportsAccountSummaryWithDeposit stamp: 'OA 10/26/2023 16:32:21'!
+PASSED!
+
+!testRun: #Portfolio2Test #test07reportsAccountSummaryWithDepositTransferLeg stamp: 'OA 10/26/2023 16:32:21'!
+PASSED!
+
+!testRun: #Portfolio2Test #test08reportsAccountSummaryWithWithdrawTransferLeg stamp: 'OA 10/26/2023 16:32:21'!
+PASSED!
+
+!testRun: #Portfolio2Test #test09reportsPortfolioSummaryWithManyAccounts stamp: 'OA 10/26/2023 16:32:21'!
+PASSED!
+
+!testRun: #Portfolio2Test #test10reportsTransferNetForWithdrawLegs stamp: 'OA 10/26/2023 16:32:21'!
+PASSED!
+
+!testRun: #Portfolio2Test #test11reportsTransferNetForDepositLegs stamp: 'OA 10/26/2023 16:32:21'!
+PASSED!
+
+!testRun: #Portfolio2Test #test12reportsTransferNetForMultipleTransfers stamp: 'OA 10/26/2023 16:32:21'!
+PASSED!
+
+!testRun: #Portfolio2Test #test13reportsTransferNetForPortfoliosWithMultipleAccounts stamp: 'OA 10/26/2023 16:32:21'!
+PASSED!
+
+!testRun: #Portfolio2Test #test14reportsTransferNetForEmptyAccount stamp: 'OA 10/26/2023 16:32:21'!
+PASSED!
+
+!testRun: #Portfolio2Test #test15reportsPortfolioTreeWithEmptyPortfolio stamp: 'OA 10/26/2023 16:32:21'!
+PASSED!
+
+!testRun: #Portfolio2Test #test16reportPortfolioTreeWithOneChild stamp: 'OA 10/26/2023 16:32:21'!
+PASSED!
+
+!testRun: #Portfolio2Test #test17reportPortfolioTreeWithBigHierarchy stamp: 'OA 10/26/2023 16:32:21'!
+PASSED!
+
+!testRun: #Portfolio2Test #test18transferAmountShouldBePositive stamp: 'OA 10/26/2023 16:32:21'!
+PASSED!
+
+!testRun: #Portfolio2Test #test19transferToYourselfIsNotAllowed stamp: 'OA 10/26/2023 16:32:21'!
+PASSED!
+
+!testRun: #PortfolioTest #test01BalanceOfPortfolioWithoutAccountsIsZero stamp: 'OA 10/26/2023 16:32:23'!
+PASSED!
+
+!testRun: #PortfolioTest #test02BalanceOfPortfolioWithAccountsIsSumOfAccountsBalance stamp: 'OA 10/26/2023 16:32:23'!
+PASSED!
+
+!testRun: #PortfolioTest #test03BalanceOfPortfolioIsCalculatedRecursivelyOnPortfolios stamp: 'OA 10/26/2023 16:32:23'!
+PASSED!
+
+!testRun: #PortfolioTest #test04PortfolioWithoutAccountsHasNoRegisteredTransaction stamp: 'OA 10/26/2023 16:32:23'!
+PASSED!
+
+!testRun: #PortfolioTest #test05PortfolioHasRegisteredItsAccountsTransactions stamp: 'OA 10/26/2023 16:32:23'!
+PASSED!
+
+!testRun: #PortfolioTest #test06PortfolioLooksForRegisteredTransactionsRecursively stamp: 'OA 10/26/2023 16:32:23'!
+PASSED!
+
+!testRun: #PortfolioTest #test07PortfolioHasNoTransactionWhenHasNoAccounts stamp: 'OA 10/26/2023 16:32:23'!
+PASSED!
+
+!testRun: #PortfolioTest #test08PortfolioTransactionsIncludesAllItsAccountsTransactions stamp: 'OA 10/26/2023 16:32:23'!
+PASSED!
+
+!testRun: #PortfolioTest #test09PortfolioTransactionsAreCalculatedRecursively stamp: 'OA 10/26/2023 16:32:23'!
+PASSED!
+
+!testRun: #PortfolioTest #test10PortfolioCanNotIncludeTheSameAccountMoreThanOnce stamp: 'OA 10/26/2023 16:32:23'!
+PASSED!
+
+!testRun: #PortfolioTest #test11PortfolioCanNotIncludeAccountOfItsPortfolios stamp: 'OA 10/26/2023 16:32:23'!
+PASSED!
+
+!testRun: #PortfolioTest #test12PortfolioCanNotIncludeItself stamp: 'OA 10/26/2023 16:32:23'!
+PASSED!
+
+!testRun: #PortfolioTest #test13ComposedPortfolioCanNotHaveParentPortfolioAccount stamp: 'OA 10/26/2023 16:32:23'!
+PASSED!
+
+!testRun: #PortfolioTest #test14ComposedPortfolioCanNotHaveAccountOfAnyRootParentRecursively stamp: 'OA 10/26/2023 16:32:23'!
+PASSED!
+
+!testRun: #PortfolioTest #test15PortfolioCanNotIncludeAnyOfTheComposedAccountOfPortfolioToAdd stamp: 'OA 10/26/2023 16:32:23'!
+PASSED!
+
+!testRun: #ReceptiveAccountTest #test01ReceptiveAccountHaveZeroAsBalanceWhenCreated stamp: 'OA 10/26/2023 16:32:24'!
+PASSED!
+
+!testRun: #ReceptiveAccountTest #test02DepositIncreasesBalanceOnTransactionValue stamp: 'OA 10/26/2023 16:32:24'!
+PASSED!
+
+!testRun: #ReceptiveAccountTest #test03WithdrawDecreasesBalanceOnTransactionValue stamp: 'OA 10/26/2023 16:32:24'!
+PASSED!
+
+!testRun: #ReceptiveAccountTest #test04WithdrawValueMustBePositive stamp: 'OA 10/26/2023 16:32:24'!
+PASSED!
+
+!testRun: #ReceptiveAccountTest #test05ReceptiveAccountKnowsRegisteredTransactions stamp: 'OA 10/26/2023 16:32:24'!
+PASSED!
+
+!testRun: #ReceptiveAccountTest #test06ReceptiveAccountDoNotKnowNotRegisteredTransactions stamp: 'OA 10/26/2023 16:32:24'!
+PASSED!
+
+!testRun: #ReceptiveAccountTest #test07AccountKnowsItsTransactions stamp: 'OA 10/26/2023 16:32:24'!
+PASSED!

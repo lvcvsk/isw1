@@ -277,6 +277,31 @@ test17reportPortfolioTreeWithBigHierarchy
 	self assert: report process = expectedString
 	! !
 
+!Portfolio2Test methodsFor: 'tests' stamp: 'OA 10/26/2023 16:14:06'!
+test18transferAmountShouldBePositive
+	
+	|withdrawingAcc depositAcc |
+	
+	withdrawingAcc := ReceptiveAccount new.
+	depositAcc := ReceptiveAccount new.
+	
+	self should: [Transfer for: -30 from: withdrawingAcc to: depositAcc]
+		raise: Error
+		withExceptionDo: [:anError |
+				self assert: anError messageText = 'CannotTransferNonPositiveAmount']! !
+
+!Portfolio2Test methodsFor: 'tests' stamp: 'OA 10/26/2023 16:16:57'!
+test19transferToYourselfIsNotAllowed
+	
+	|account |
+	
+	account := ReceptiveAccount new.
+	
+	self should: [Transfer for: 50 from: account to: account]
+		raise: Error
+		withExceptionDo: [:anError |
+				self assert: anError messageText = 'CannotTransferToYourself']! !
+
 
 !classDefinition: #PortfolioTest category: 'Portfolio-Solucion'!
 TestCase subclass: #PortfolioTest
@@ -1041,7 +1066,6 @@ processForReport: aVisitor
 	aVisitor processForDepositLeg: self.! !
 
 
-
 !DepositLeg methodsFor: 'balance' stamp: 'LK 10/25/2023 00:32:54'!
 affectBalance: aBalance
 
@@ -1069,7 +1093,6 @@ TransferLegs subclass: #WithdrawLeg
 processForReport: aVisitor
 
 	aVisitor processForWithdrawLeg: self.! !
-
 
 
 !WithdrawLeg methodsFor: 'balance' stamp: 'LK 10/25/2023 00:33:03'!
@@ -1400,10 +1423,12 @@ initializeWith: aValue from: aWithdrawLeg to: aDepositLeg
 Transfer class
 	instanceVariableNames: ''!
 
-!Transfer class methodsFor: 'as yet unclassified' stamp: 'LK 10/25/2023 00:32:03'!
+!Transfer class methodsFor: 'as yet unclassified' stamp: 'OA 10/26/2023 16:12:14'!
 for: aValue from: aWithdrawAccount to: aDepositAccount
 
 	|transfer withdrawingAccLeg depositingAccLeg|
+	self requiresPositiveValue: aValue.
+	self requiresAccount: aWithdrawAccount isNotTheSameAs: aDepositAccount .
 	
 	transfer := self new.
 	
@@ -1418,3 +1443,12 @@ for: aValue from: aWithdrawAccount to: aDepositAccount
 	^transfer.
 	
 	! !
+
+!Transfer class methodsFor: 'as yet unclassified' stamp: 'OA 10/26/2023 16:17:58'!
+requiresAccount: aWithdrawAccount isNotTheSameAs: aDepositAccount .
+	(aWithdrawAccount = aDepositAccount ) ifTrue: 
+				[self error: 'CannotTransferToYourself']! !
+
+!Transfer class methodsFor: 'as yet unclassified' stamp: 'OA 10/26/2023 16:13:20'!
+requiresPositiveValue: aValue
+	aValue > 0 ifFalse: [self error: 'CannotTransferNonPositiveAmount']! !
