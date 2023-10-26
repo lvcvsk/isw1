@@ -31403,3 +31403,380 @@ test17reportPortfolioTreeWithBigHierarchy
 	
 	self assert: report process = expectedString
 	! !
+
+NodeVisitor subclass: #PortfolioTreeReport
+	instanceVariableNames: 'tree depth'
+	classVariableNames: ''
+	poolDictionaries: ''
+	category: 'Portfolio-Solucion'!
+
+!classDefinition: #PortfolioTreeReport category: 'Portfolio-Solucion' stamp: 'LK 10/26/2023 15:30:06'!
+NodeVisitor subclass: #PortfolioTreeReport
+	instanceVariableNames: 'tree depth'
+	classVariableNames: ''
+	poolDictionaries: ''
+	category: 'Portfolio-Solucion'!
+!PortfolioTreeReport methodsFor: 'initialization' stamp: 'LK 10/26/2023 15:30:15' prior: 50704519 overrides: 16920235!
+initialize
+
+	tree := OrderedCollection new.
+	depth := 0.! !
+!PortfolioTreeReport methodsFor: 'processing' stamp: 'LK 10/26/2023 15:31:59' prior: 50704770 overrides: 50704568!
+processPortfolio: anAccount
+
+	|string tabs|
+	tabs := ''.
+	depth timesRepeat: [tabs := tabs, String tab].
+	string := tabs, anAccount name.
+	tree addLast: string.
+	depth := depth + 1.! !
+!PortfolioTreeReport methodsFor: 'processing' stamp: 'LK 10/26/2023 15:32:37' prior: 50705597 overrides: 50704542!
+processReceptiveAccount: anAccount
+
+	|string tabs|
+	tabs := ''.
+	depth timesRepeat: [tabs := tabs, String tab].
+	string := tabs, anAccount name.
+	tree addLast: string.! !
+!Portfolio methodsFor: 'processing' stamp: 'LK 10/26/2023 15:32:56' prior: 50704755 overrides: 50704335!
+processForReport: aVisitor
+	
+	aVisitor processPortfolio: self.
+	accounts do: [:anAccount | anAccount processForReport: aVisitor].
+	aVisitor processEndPortfolio.! !
+!PortfolioTreeReport methodsFor: 'processing' stamp: 'LK 10/26/2023 15:33:19'!
+processEndPortfolio
+	depth := depth - 1.! !
+
+!testRun: #Portfolio2Test #test16reportPortfolioTreeWithOneChild stamp: 'LK 10/26/2023 15:33:22'!
+PASSED!
+
+!testRun: #Portfolio2Test #test17reportPortfolioTreeWithBigHierarchy stamp: 'LK 10/26/2023 15:33:24'!
+PASSED!
+!PortfolioTreeReport methodsFor: 'processing' stamp: 'LK 10/26/2023 15:34:27' prior: 50705696 overrides: 50704568!
+processPortfolio: anAccount
+
+	|string tabs|
+	tabs := ''.
+	depth timesRepeat: [tabs := tabs, String tab].
+	string := tabs, anAccount name.
+	tree addLast: string.
+	depth := depth + 1.! !
+!PortfolioTreeReport methodsFor: 'processing' stamp: 'LK 10/26/2023 15:39:08'!
+getNameWithTabs: anAccount
+
+	|string tabs|
+	
+	tabs := ''.
+	depth timesRepeat: [tabs := tabs, String tab].
+	string := tabs, anAccount name.
+	^string.! !
+!PortfolioTreeReport methodsFor: 'processing' stamp: 'LK 10/26/2023 15:39:46' prior: 50705735 overrides: 50704568!
+processPortfolio: anAccount
+
+	tree addLast: (self getNameWithTabs: anAccount name).
+	depth := depth + 1.! !
+!PortfolioTreeReport methodsFor: 'processing' stamp: 'LK 10/26/2023 15:39:58' prior: 50705744!
+getNameWithTabs: aName
+
+	|string tabs|
+	
+	tabs := ''.
+	depth timesRepeat: [tabs := tabs, String tab].
+	string := tabs, aName.
+	
+	^string.! !
+!PortfolioTreeReport methodsFor: 'processing' stamp: 'LK 10/26/2023 15:40:35' prior: 50705706 overrides: 50704542!
+processReceptiveAccount: anAccount
+
+	tree addLast: (self getNameWithTabs: anAccount name).! !
+
+!testRun: #Portfolio2Test #test01trasferringModifiesBalanceByCorrectAmount stamp: 'LK 10/26/2023 15:40:39'!
+PASSED!
+
+!testRun: #Portfolio2Test #test02transferringGetsRegisteredInBothAccounts stamp: 'LK 10/26/2023 15:40:39'!
+PASSED!
+
+!testRun: #Portfolio2Test #test03canNavigateBetweenTransferLegs stamp: 'LK 10/26/2023 15:40:39'!
+PASSED!
+
+!testRun: #Portfolio2Test #test04reportsAccountSummaryOfEmptyAccount stamp: 'LK 10/26/2023 15:40:39'!
+PASSED!
+
+!testRun: #Portfolio2Test #test05reportsAccountSummaryWithWithdrawal stamp: 'LK 10/26/2023 15:40:39'!
+PASSED!
+
+!testRun: #Portfolio2Test #test06reportsAccountSummaryWithDeposit stamp: 'LK 10/26/2023 15:40:39'!
+PASSED!
+
+!testRun: #Portfolio2Test #test07reportsAccountSummaryWithDepositTransferLeg stamp: 'LK 10/26/2023 15:40:39'!
+PASSED!
+
+!testRun: #Portfolio2Test #test08reportsAccountSummaryWithWithdrawTransferLeg stamp: 'LK 10/26/2023 15:40:39'!
+PASSED!
+
+!testRun: #Portfolio2Test #test09reportsPortfolioSummaryWithManyAccounts stamp: 'LK 10/26/2023 15:40:39'!
+ERROR!
+
+!testRun: #Portfolio2Test #test10reportsTransferNetForWithdrawLegs stamp: 'LK 10/26/2023 15:40:39'!
+PASSED!
+
+!testRun: #Portfolio2Test #test11reportsTransferNetForDepositLegs stamp: 'LK 10/26/2023 15:40:39'!
+PASSED!
+
+!testRun: #Portfolio2Test #test12reportsTransferNetForMultipleTransfers stamp: 'LK 10/26/2023 15:40:39'!
+PASSED!
+
+!testRun: #Portfolio2Test #test13reportsTransferNetForPortfoliosWithMultipleAccounts stamp: 'LK 10/26/2023 15:40:39'!
+ERROR!
+
+!testRun: #Portfolio2Test #test14reportsTransferNetForEmptyAccount stamp: 'LK 10/26/2023 15:40:39'!
+PASSED!
+
+!testRun: #Portfolio2Test #test15reportsPortfolioTreeWithEmptyPortfolio stamp: 'LK 10/26/2023 15:40:39'!
+PASSED!
+
+!testRun: #Portfolio2Test #test16reportPortfolioTreeWithOneChild stamp: 'LK 10/26/2023 15:40:39'!
+PASSED!
+
+!testRun: #Portfolio2Test #test17reportPortfolioTreeWithBigHierarchy stamp: 'LK 10/26/2023 15:40:39'!
+PASSED!
+
+!testRun: #Portfolio2Test #test09reportsPortfolioSummaryWithManyAccounts stamp: 'LK 10/26/2023 15:40:45'!
+ERROR!
+
+!testRun: #Portfolio2Test #test09reportsPortfolioSummaryWithManyAccounts stamp: 'LK 10/26/2023 15:41:03'!
+ERROR!
+
+!testRun: #Portfolio2Test #test09reportsPortfolioSummaryWithManyAccounts stamp: 'LK 10/26/2023 15:41:03'!
+ERROR!
+!AccountSummaryReport methodsFor: 'processing' stamp: 'LK 10/26/2023 15:42:15'!
+processEndPortfolio! !
+!TransferNetReport methodsFor: 'processing' stamp: 'LK 10/26/2023 15:42:22'!
+processEndPortfolio
+	! !
+
+!testRun: #Portfolio2Test #test01trasferringModifiesBalanceByCorrectAmount stamp: 'LK 10/26/2023 15:42:25'!
+PASSED!
+
+!testRun: #Portfolio2Test #test02transferringGetsRegisteredInBothAccounts stamp: 'LK 10/26/2023 15:42:25'!
+PASSED!
+
+!testRun: #Portfolio2Test #test03canNavigateBetweenTransferLegs stamp: 'LK 10/26/2023 15:42:25'!
+PASSED!
+
+!testRun: #Portfolio2Test #test04reportsAccountSummaryOfEmptyAccount stamp: 'LK 10/26/2023 15:42:25'!
+PASSED!
+
+!testRun: #Portfolio2Test #test05reportsAccountSummaryWithWithdrawal stamp: 'LK 10/26/2023 15:42:25'!
+PASSED!
+
+!testRun: #Portfolio2Test #test06reportsAccountSummaryWithDeposit stamp: 'LK 10/26/2023 15:42:25'!
+PASSED!
+
+!testRun: #Portfolio2Test #test07reportsAccountSummaryWithDepositTransferLeg stamp: 'LK 10/26/2023 15:42:25'!
+PASSED!
+
+!testRun: #Portfolio2Test #test08reportsAccountSummaryWithWithdrawTransferLeg stamp: 'LK 10/26/2023 15:42:25'!
+PASSED!
+
+!testRun: #Portfolio2Test #test09reportsPortfolioSummaryWithManyAccounts stamp: 'LK 10/26/2023 15:42:25'!
+PASSED!
+
+!testRun: #Portfolio2Test #test10reportsTransferNetForWithdrawLegs stamp: 'LK 10/26/2023 15:42:25'!
+PASSED!
+
+!testRun: #Portfolio2Test #test11reportsTransferNetForDepositLegs stamp: 'LK 10/26/2023 15:42:25'!
+PASSED!
+
+!testRun: #Portfolio2Test #test12reportsTransferNetForMultipleTransfers stamp: 'LK 10/26/2023 15:42:25'!
+PASSED!
+
+!testRun: #Portfolio2Test #test13reportsTransferNetForPortfoliosWithMultipleAccounts stamp: 'LK 10/26/2023 15:42:25'!
+PASSED!
+
+!testRun: #Portfolio2Test #test14reportsTransferNetForEmptyAccount stamp: 'LK 10/26/2023 15:42:25'!
+PASSED!
+
+!testRun: #Portfolio2Test #test15reportsPortfolioTreeWithEmptyPortfolio stamp: 'LK 10/26/2023 15:42:25'!
+PASSED!
+
+!testRun: #Portfolio2Test #test16reportPortfolioTreeWithOneChild stamp: 'LK 10/26/2023 15:42:25'!
+PASSED!
+
+!testRun: #Portfolio2Test #test17reportPortfolioTreeWithBigHierarchy stamp: 'LK 10/26/2023 15:42:25'!
+PASSED!
+!Portfolio2Test methodsFor: 'tests' stamp: 'LK 10/26/2023 15:43:18' prior: 50701645!
+test03canNavigateBetweenTransferLegs
+	! !
+
+!classRenamed: #NodeVisitor as: #Reports stamp: 'LK 10/26/2023 15:44:00'!
+Smalltalk renameClassNamed: #NodeVisitor as: #Reports!
+!TransferLegs methodsFor: 'value' stamp: 'LK 10/26/2023 15:46:48'!
+navigateToOtherLeg! !
+!DepositLeg methodsFor: 'value' stamp: 'LK 10/26/2023 15:46:52' overrides: 50705921!
+navigateToOtherLeg! !
+!WithdrawLeg methodsFor: 'value' stamp: 'LK 10/26/2023 15:46:52' overrides: 50705921!
+navigateToOtherLeg! !
+!TransferLegs methodsFor: 'value' stamp: 'LK 10/26/2023 15:46:52' prior: 50705921!
+navigateToOtherLeg
+
+	self subclassResponsibility! !
+!DepositLeg methodsFor: 'navigate' stamp: 'LK 10/26/2023 15:47:39' prior: 50705925 overrides: 50705933!
+navigateToOtherLeg
+	^(transfer withdrawLeg)! !
+!WithdrawLeg methodsFor: 'navigate' stamp: 'LK 10/26/2023 15:47:53' prior: 50705929 overrides: 50705933!
+navigateToOtherLeg
+	^(transfer depositingLeg).! !
+!Portfolio2Test methodsFor: 'tests' stamp: 'LK 10/26/2023 15:49:33' prior: 50705913!
+test03canNavigateBetweenTransferLegs
+	
+	|withdrawingAcc depositAcc transfer withdrawLeg depositLeg|
+	
+	withdrawingAcc := ReceptiveAccount new.
+	depositAcc := ReceptiveAccount new.
+	
+	transfer := Transfer for: 50 from: withdrawingAcc to: depositAcc.
+	
+	withdrawLeg := transfer withdrawLeg.
+	depositLeg := transfer depositingLeg.
+	
+	self assert: (withdrawLeg = depositLeg navigateToOtherLeg).
+	self assert: (depositLeg = withdrawLeg navigateToOtherLeg).! !
+
+!testRun: #Portfolio2Test #test03canNavigateBetweenTransferLegs stamp: 'LK 10/26/2023 15:49:34'!
+PASSED!
+
+!testRun: #Portfolio2Test #test01trasferringModifiesBalanceByCorrectAmount stamp: 'LK 10/26/2023 15:49:34'!
+PASSED!
+
+!testRun: #Portfolio2Test #test02transferringGetsRegisteredInBothAccounts stamp: 'LK 10/26/2023 15:49:34'!
+PASSED!
+
+!testRun: #Portfolio2Test #test03canNavigateBetweenTransferLegs stamp: 'LK 10/26/2023 15:49:34'!
+PASSED!
+
+!testRun: #Portfolio2Test #test04reportsAccountSummaryOfEmptyAccount stamp: 'LK 10/26/2023 15:49:34'!
+PASSED!
+
+!testRun: #Portfolio2Test #test05reportsAccountSummaryWithWithdrawal stamp: 'LK 10/26/2023 15:49:35'!
+PASSED!
+
+!testRun: #Portfolio2Test #test06reportsAccountSummaryWithDeposit stamp: 'LK 10/26/2023 15:49:35'!
+PASSED!
+
+!testRun: #Portfolio2Test #test07reportsAccountSummaryWithDepositTransferLeg stamp: 'LK 10/26/2023 15:49:35'!
+PASSED!
+
+!testRun: #Portfolio2Test #test08reportsAccountSummaryWithWithdrawTransferLeg stamp: 'LK 10/26/2023 15:49:35'!
+PASSED!
+
+!testRun: #Portfolio2Test #test09reportsPortfolioSummaryWithManyAccounts stamp: 'LK 10/26/2023 15:49:35'!
+PASSED!
+
+!testRun: #Portfolio2Test #test10reportsTransferNetForWithdrawLegs stamp: 'LK 10/26/2023 15:49:35'!
+PASSED!
+
+!testRun: #Portfolio2Test #test11reportsTransferNetForDepositLegs stamp: 'LK 10/26/2023 15:49:35'!
+PASSED!
+
+!testRun: #Portfolio2Test #test12reportsTransferNetForMultipleTransfers stamp: 'LK 10/26/2023 15:49:35'!
+PASSED!
+
+!testRun: #Portfolio2Test #test13reportsTransferNetForPortfoliosWithMultipleAccounts stamp: 'LK 10/26/2023 15:49:35'!
+PASSED!
+
+!testRun: #Portfolio2Test #test14reportsTransferNetForEmptyAccount stamp: 'LK 10/26/2023 15:49:35'!
+PASSED!
+
+!testRun: #Portfolio2Test #test15reportsPortfolioTreeWithEmptyPortfolio stamp: 'LK 10/26/2023 15:49:35'!
+PASSED!
+
+!testRun: #Portfolio2Test #test16reportPortfolioTreeWithOneChild stamp: 'LK 10/26/2023 15:49:35'!
+PASSED!
+
+!testRun: #Portfolio2Test #test17reportPortfolioTreeWithBigHierarchy stamp: 'LK 10/26/2023 15:49:35'!
+PASSED!
+
+!testRun: #Portfolio2Test #test03canNavigateBetweenTransferLegs stamp: 'LK 10/26/2023 15:49:38'!
+PASSED!
+!TransferLegs methodsFor: 'initialization' stamp: 'LK 10/26/2023 15:52:30' prior: 50701402!
+initializeFor: aTransfer
+
+	transfer := aTransfer.! !
+
+!methodRemoval: WithdrawLeg #initializeFor: stamp: 'LK 10/26/2023 15:52:30'!
+initializeFor: aTransfer
+
+	transfer := aTransfer.!
+
+!methodRemoval: DepositLeg #initializeFor: stamp: 'LK 10/26/2023 15:52:30'!
+initializeFor: aTransfer
+
+	transfer := aTransfer.!
+
+!classDefinition: #PortfolioTreeReport category: 'Portfolio-Solucion' stamp: 'LK 10/26/2023 15:55:06'!
+Reports subclass: #PortfolioTreeReport
+	instanceVariableNames: 'tree cantidadTabs'
+	classVariableNames: ''
+	poolDictionaries: ''
+	category: 'Portfolio-Solucion'!
+!PortfolioTreeReport methodsFor: 'as yet unclassified' stamp: 'LK 10/26/2023 15:55:06' prior: 50705723!
+processEndPortfolio
+	cantidadTabs := cantidadTabs - 1.! !
+!PortfolioTreeReport methodsFor: 'as yet unclassified' stamp: 'LK 10/26/2023 15:55:06' prior: 50705690 overrides: 16920235!
+initialize
+
+	tree := OrderedCollection new.
+	cantidadTabs := 0.! !
+!PortfolioTreeReport methodsFor: 'as yet unclassified' stamp: 'LK 10/26/2023 15:55:06' prior: 50705760!
+getNameWithTabs: aName
+
+	|string tabs|
+	
+	tabs := ''.
+	cantidadTabs timesRepeat: [tabs := tabs, String tab].
+	string := tabs, aName.
+	
+	^string.! !
+!PortfolioTreeReport methodsFor: 'as yet unclassified' stamp: 'LK 10/26/2023 15:55:06' prior: 50705753 overrides: 50704568!
+processPortfolio: anAccount
+
+	tree addLast: (self getNameWithTabs: anAccount name).
+	cantidadTabs := cantidadTabs + 1.! !
+!PortfolioTreeReport methodsFor: 'processing' stamp: 'LK 10/26/2023 15:33:19' prior: 50706054!
+processEndPortfolio
+	depth := depth - 1.! !
+
+Reports subclass: #PortfolioTreeReport
+	instanceVariableNames: 'tree depth'
+	classVariableNames: ''
+	poolDictionaries: ''
+	category: 'Portfolio-Solucion'!
+
+!classDefinition: #PortfolioTreeReport category: 'Portfolio-Solucion' stamp: 'LK 10/26/2023 15:55:32'!
+Reports subclass: #PortfolioTreeReport
+	instanceVariableNames: 'tree depth'
+	classVariableNames: ''
+	poolDictionaries: ''
+	category: 'Portfolio-Solucion'!
+!PortfolioTreeReport methodsFor: 'initialization' stamp: 'LK 10/26/2023 15:55:41' prior: 50706060 overrides: 16920235!
+initialize
+
+	tree := OrderedCollection new.
+	depth := 0.! !
+!PortfolioTreeReport methodsFor: 'processing' stamp: 'LK 10/26/2023 15:55:48' prior: 50706066!
+getNameWithTabs: aName
+
+	|string tabs|
+	
+	tabs := ''.
+	depth timesRepeat: [tabs := tabs, String tab].
+	string := tabs, aName.
+	
+	^string.! !
+!PortfolioTreeReport methodsFor: 'processing' stamp: 'LK 10/26/2023 15:55:59' prior: 50706075 overrides: 50704568!
+processPortfolio: anAccount
+
+	tree addLast: (self getNameWithTabs: anAccount name).
+	depth := depth + 1.! !

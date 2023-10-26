@@ -31,18 +31,21 @@ test02transferringGetsRegisteredInBothAccounts
 	self assert: (depositAcc hasRegistered: transfer depositingLeg).
 	self assert: (withdrawingAcc hasRegistered: transfer withdrawLeg).! !
 
-!Portfolio2Test methodsFor: 'tests' stamp: 'LK 10/25/2023 00:43:16'!
+!Portfolio2Test methodsFor: 'tests' stamp: 'LK 10/26/2023 15:49:33'!
 test03canNavigateBetweenTransferLegs
 	
-	|withdrawingAcc depositAcc transfer|
+	|withdrawingAcc depositAcc transfer withdrawLeg depositLeg|
 	
 	withdrawingAcc := ReceptiveAccount new.
 	depositAcc := ReceptiveAccount new.
 	
 	transfer := Transfer for: 50 from: withdrawingAcc to: depositAcc.
 	
-	self assert: (depositAcc hasRegistered: transfer depositingLeg).
-	self assert: (withdrawingAcc hasRegistered: transfer withdrawLeg).! !
+	withdrawLeg := transfer withdrawLeg.
+	depositLeg := transfer depositingLeg.
+	
+	self assert: (withdrawLeg = depositLeg navigateToOtherLeg).
+	self assert: (depositLeg = withdrawLeg navigateToOtherLeg).! !
 
 !Portfolio2Test methodsFor: 'tests' stamp: 'LK 10/26/2023 14:56:23'!
 test04reportsAccountSummaryOfEmptyAccount
@@ -657,11 +660,12 @@ Account subclass: #Portfolio
 	poolDictionaries: ''
 	category: 'Portfolio-Solucion'!
 
-!Portfolio methodsFor: 'processing' stamp: 'LK 10/26/2023 14:14:30'!
+!Portfolio methodsFor: 'processing' stamp: 'LK 10/26/2023 15:32:56'!
 processForReport: aVisitor
 	
 	aVisitor processPortfolio: self.
-	accounts do: [:anAccount | anAccount processForReport: aVisitor].! !
+	accounts do: [:anAccount | anAccount processForReport: aVisitor].
+	aVisitor processEndPortfolio.! !
 
 
 !Portfolio methodsFor: 'accounts management' stamp: 'HAW 5/25/2019 11:49:20'!
@@ -993,11 +997,16 @@ affectBalance: aBalance
 	self subclassResponsibility! !
 
 
-!TransferLegs methodsFor: 'initialization' stamp: 'LK 10/25/2023 00:29:06'!
+!TransferLegs methodsFor: 'initialization' stamp: 'LK 10/26/2023 15:52:30'!
 initializeFor: aTransfer
 
-	self subclassResponsibility! !
+	transfer := aTransfer.! !
 
+
+!TransferLegs methodsFor: 'value' stamp: 'LK 10/26/2023 15:46:52'!
+navigateToOtherLeg
+
+	self subclassResponsibility! !
 
 !TransferLegs methodsFor: 'value' stamp: 'LK 10/25/2023 00:29:24'!
 value
@@ -1032,16 +1041,16 @@ processForReport: aVisitor
 	aVisitor processForDepositLeg: self.! !
 
 
-!DepositLeg methodsFor: 'initialization' stamp: 'LK 10/25/2023 00:29:06'!
-initializeFor: aTransfer
-
-	transfer := aTransfer.! !
-
 
 !DepositLeg methodsFor: 'balance' stamp: 'LK 10/25/2023 00:32:54'!
 affectBalance: aBalance
 
 	^aBalance + transfer value.! !
+
+
+!DepositLeg methodsFor: 'navigate' stamp: 'LK 10/26/2023 15:47:39'!
+navigateToOtherLeg
+	^(transfer withdrawLeg)! !
 
 
 !DepositLeg methodsFor: 'value' stamp: 'LK 10/25/2023 00:34:19'!
@@ -1062,16 +1071,16 @@ processForReport: aVisitor
 	aVisitor processForWithdrawLeg: self.! !
 
 
-!WithdrawLeg methodsFor: 'initialization' stamp: 'LK 10/25/2023 00:29:06'!
-initializeFor: aTransfer
-
-	transfer := aTransfer.! !
-
 
 !WithdrawLeg methodsFor: 'balance' stamp: 'LK 10/25/2023 00:33:03'!
 affectBalance: aBalance
 
 	^aBalance - transfer value.! !
+
+
+!WithdrawLeg methodsFor: 'navigate' stamp: 'LK 10/26/2023 15:47:53'!
+navigateToOtherLeg
+	^(transfer depositingLeg).! !
 
 
 !WithdrawLeg methodsFor: 'value' stamp: 'LK 10/25/2023 00:34:38'!
@@ -1125,74 +1134,74 @@ for: aValue
 	^ self new initializeFor: aValue ! !
 
 
-!classDefinition: #NodeVisitor category: 'Portfolio-Solucion'!
-Object subclass: #NodeVisitor
+!classDefinition: #Reports category: 'Portfolio-Solucion'!
+Object subclass: #Reports
 	instanceVariableNames: 'account'
 	classVariableNames: ''
 	poolDictionaries: ''
 	category: 'Portfolio-Solucion'!
 
-!NodeVisitor methodsFor: 'processing' stamp: 'LK 10/26/2023 14:12:29'!
+!Reports methodsFor: 'processing' stamp: 'LK 10/26/2023 14:12:29'!
 endProcess
 
 	self subclassResponsibility! !
 
-!NodeVisitor methodsFor: 'processing' stamp: 'LK 10/26/2023 13:22:05'!
+!Reports methodsFor: 'processing' stamp: 'LK 10/26/2023 13:22:05'!
 process
 
 	account processForReport: self.
 	^self endProcess.! !
 
-!NodeVisitor methodsFor: 'processing' stamp: 'LK 10/26/2023 13:52:43'!
+!Reports methodsFor: 'processing' stamp: 'LK 10/26/2023 13:52:43'!
 processForDeposit: aTransaction
 
 	self subclassResponsibility! !
 
-!NodeVisitor methodsFor: 'processing' stamp: 'LK 10/26/2023 13:52:51'!
+!Reports methodsFor: 'processing' stamp: 'LK 10/26/2023 13:52:51'!
 processForDepositLeg: aTransaction
 
 	self subclassResponsibility! !
 
-!NodeVisitor methodsFor: 'processing' stamp: 'LK 10/26/2023 13:52:56'!
+!Reports methodsFor: 'processing' stamp: 'LK 10/26/2023 13:52:56'!
 processForWithdraw: aTransaction
 
 	self subclassResponsibility! !
 
-!NodeVisitor methodsFor: 'processing' stamp: 'LK 10/26/2023 13:53:01'!
+!Reports methodsFor: 'processing' stamp: 'LK 10/26/2023 13:53:01'!
 processForWithdrawLeg: aTransaction
 
 	self subclassResponsibility! !
 
-!NodeVisitor methodsFor: 'processing' stamp: 'LK 10/26/2023 13:51:45'!
+!Reports methodsFor: 'processing' stamp: 'LK 10/26/2023 13:51:45'!
 processPortfolio: anAccount
 
 	self subclassResponsibility! !
 
-!NodeVisitor methodsFor: 'processing' stamp: 'LK 10/26/2023 13:51:33'!
+!Reports methodsFor: 'processing' stamp: 'LK 10/26/2023 13:51:33'!
 processReceptiveAccount: anAccount
 
 	self subclassResponsibility! !
 
 
-!NodeVisitor methodsFor: 'initialization' stamp: 'LK 10/26/2023 12:08:01'!
+!Reports methodsFor: 'initialization' stamp: 'LK 10/26/2023 12:08:01'!
 initializeFor: anAccount
 	
 	account := anAccount.! !
 
 "-- -- -- -- -- -- -- -- -- -- -- -- -- -- -- -- -- -- "!
 
-!classDefinition: 'NodeVisitor class' category: 'Portfolio-Solucion'!
-NodeVisitor class
+!classDefinition: 'Reports class' category: 'Portfolio-Solucion'!
+Reports class
 	instanceVariableNames: ''!
 
-!NodeVisitor class methodsFor: 'as yet unclassified' stamp: 'LK 10/26/2023 14:19:18'!
+!Reports class methodsFor: 'as yet unclassified' stamp: 'LK 10/26/2023 14:19:18'!
 for: anAccount
 	
 	^self new initializeFor: anAccount.! !
 
 
 !classDefinition: #AccountSummaryReport category: 'Portfolio-Solucion'!
-NodeVisitor subclass: #AccountSummaryReport
+Reports subclass: #AccountSummaryReport
 	instanceVariableNames: 'summary'
 	classVariableNames: ''
 	poolDictionaries: ''
@@ -1203,6 +1212,9 @@ endProcess
 
 	summary addLast: ('Balance = ', account balance asString).
 	^summary.! !
+
+!AccountSummaryReport methodsFor: 'processing' stamp: 'LK 10/26/2023 15:42:15'!
+processEndPortfolio! !
 
 !AccountSummaryReport methodsFor: 'processing' stamp: 'LK 10/26/2023 13:49:41'!
 processForDeposit: aTransaction
@@ -1240,8 +1252,8 @@ initialize
 
 
 !classDefinition: #PortfolioTreeReport category: 'Portfolio-Solucion'!
-NodeVisitor subclass: #PortfolioTreeReport
-	instanceVariableNames: 'tree'
+Reports subclass: #PortfolioTreeReport
+	instanceVariableNames: 'tree depth'
 	classVariableNames: ''
 	poolDictionaries: ''
 	category: 'Portfolio-Solucion'!
@@ -1250,6 +1262,21 @@ NodeVisitor subclass: #PortfolioTreeReport
 endProcess
 
 	^tree! !
+
+!PortfolioTreeReport methodsFor: 'processing' stamp: 'LK 10/26/2023 15:55:48'!
+getNameWithTabs: aName
+
+	|string tabs|
+	
+	tabs := ''.
+	depth timesRepeat: [tabs := tabs, String tab].
+	string := tabs, aName.
+	
+	^string.! !
+
+!PortfolioTreeReport methodsFor: 'processing' stamp: 'LK 10/26/2023 15:33:19'!
+processEndPortfolio
+	depth := depth - 1.! !
 
 !PortfolioTreeReport methodsFor: 'processing' stamp: 'LK 10/26/2023 14:13:26'!
 processForDeposit: aTransaction
@@ -1271,24 +1298,27 @@ processForWithdrawLeg: aTransaction
 
 	! !
 
-!PortfolioTreeReport methodsFor: 'processing' stamp: 'LK 10/26/2023 14:15:09'!
+!PortfolioTreeReport methodsFor: 'processing' stamp: 'LK 10/26/2023 15:55:59'!
 processPortfolio: anAccount
 
-	tree addLast: anAccount name! !
+	tree addLast: (self getNameWithTabs: anAccount name).
+	depth := depth + 1.! !
 
-!PortfolioTreeReport methodsFor: 'processing' stamp: 'LK 10/26/2023 15:01:24'!
+!PortfolioTreeReport methodsFor: 'processing' stamp: 'LK 10/26/2023 15:40:35'!
 processReceptiveAccount: anAccount
 
-	tree addLast: String tab, anAccount name.! !
+	tree addLast: (self getNameWithTabs: anAccount name).! !
 
 
-!PortfolioTreeReport methodsFor: 'initialization' stamp: 'LK 10/26/2023 13:50:03'!
+!PortfolioTreeReport methodsFor: 'initialization' stamp: 'LK 10/26/2023 15:55:41'!
 initialize
-	tree := OrderedCollection new.! !
+
+	tree := OrderedCollection new.
+	depth := 0.! !
 
 
 !classDefinition: #TransferNetReport category: 'Portfolio-Solucion'!
-NodeVisitor subclass: #TransferNetReport
+Reports subclass: #TransferNetReport
 	instanceVariableNames: 'netValue'
 	classVariableNames: ''
 	poolDictionaries: ''
@@ -1298,6 +1328,10 @@ NodeVisitor subclass: #TransferNetReport
 endProcess
 	
 	^netValue! !
+
+!TransferNetReport methodsFor: 'processing' stamp: 'LK 10/26/2023 15:42:22'!
+processEndPortfolio
+	! !
 
 !TransferNetReport methodsFor: 'processing' stamp: 'LK 10/26/2023 13:20:42'!
 processForDeposit: aTransaction
