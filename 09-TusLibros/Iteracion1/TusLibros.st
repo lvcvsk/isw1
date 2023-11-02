@@ -82,7 +82,7 @@ test06cartWithTwoBooksKnowsItsContents
 	
 	self assert: cart listContents = listOfItems! !
 
-!CartTest methodsFor: 'tests' stamp: 'LK 11/2/2023 14:00:47'!
+!CartTest methodsFor: 'tests' stamp: 'LK 11/2/2023 18:40:37'!
 test07itemQuantityShouldBeGreaterThanZero
 	|isbn quantity availableItems cart|
 	cart := Cart new.
@@ -90,11 +90,11 @@ test07itemQuantityShouldBeGreaterThanZero
 	quantity := 0.
 	availableItems := OrderedCollection with: isbn.
 	cart availability: availableItems.
-	self should: [cart addToCartItem: isbn amount: quantity]		raise: Error		withExceptionDo: [:anError | self assert: anError messageText = 					'Amount should be greater than zero'].
+	self should: [cart addToCartItem: isbn amount: quantity]		raise: Error		withExceptionDo: [:anError | self assert: anError messageText = 		cart nonPositiveAmountOfItemsError].
 			
 ! !
 
-!CartTest methodsFor: 'tests' stamp: 'LK 11/2/2023 14:01:29'!
+!CartTest methodsFor: 'tests' stamp: 'LK 11/2/2023 18:40:23'!
 test08itemShouldBeAvailable
 
 	|isbn quantity availableItems cart|
@@ -107,7 +107,7 @@ test08itemShouldBeAvailable
 	self should: [cart addToCartItem: isbn amount: quantity]
 		raise: Error
 		withExceptionDo: [:anError | 
-				self assert: anError messageText = 'Item is not available']! !
+				self assert: anError messageText = cart nonAvailableItemError]! !
 
 
 !classDefinition: #Cart category: 'TusLibros'!
