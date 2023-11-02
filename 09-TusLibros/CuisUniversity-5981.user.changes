@@ -1,0 +1,2052 @@
+
+
+----QUIT----(13 August 2023 19:14:09) CuisUniversity-5981.image priorSource: 5713367!
+
+----STARTUP---- (13 August 2023 19:14:10) as /Users/hernan/Documents/Cuis/5.0-64Bits/Cuis-University-Installer/CuisUniversity-5981.image!
+
+
+----QUIT----(13 August 2023 19:14:10) CuisUniversity-5981.image priorSource: 10197065!
+
+----STARTUP---- (30 October 2023 17:54:31) as /home/clinux01/Descargas/linux64/linux64/CuisUniversity-5981.image!
+
+
+TestCase subclass: #XXXTest
+	instanceVariableNames: ''
+	classVariableNames: ''
+	poolDictionaries: ''
+	category: 'CuisUniversity'!
+
+!classDefinition: #XXXTest category: 'CuisUniversity' stamp: 'OA 10/30/2023 19:13:54'!
+TestCase subclass: #XXXTest
+	instanceVariableNames: ''
+	classVariableNames: ''
+	poolDictionaries: ''
+	category: 'CuisUniversity'!
+
+!classRemoval: #XXXTest stamp: 'OA 10/30/2023 19:14:04'!
+TestCase subclass: #XXXTest
+	instanceVariableNames: ''
+	classVariableNames: ''
+	poolDictionaries: ''
+	category: 'CuisUniversity'!
+
+TestCase subclass: #XXXTest
+	instanceVariableNames: ''
+	classVariableNames: ''
+	poolDictionaries: ''
+	category: 'TusLibros'!
+
+!classDefinition: #XXXTest category: 'TusLibros' stamp: 'OA 10/30/2023 19:14:17'!
+TestCase subclass: #XXXTest
+	instanceVariableNames: ''
+	classVariableNames: ''
+	poolDictionaries: ''
+	category: 'TusLibros'!
+
+!classDefinition: #Cart category: 'Cart' stamp: 'OA 10/30/2023 19:16:11'!
+Object subclass: #Cart
+	instanceVariableNames: ''
+	classVariableNames: ''
+	poolDictionaries: ''
+	category: 'Cart'!
+!XXXTest methodsFor: 'nil' stamp: 'OA 10/30/2023 19:15:55'!
+cartStartsEmpty 
+	|cart|
+	cart := Cart new.
+	
+	self assert: cart isEmpty! !
+
+Object subclass: #NameOfSubclass
+	instanceVariableNames: ''
+	classVariableNames: ''
+	poolDictionaries: ''
+	category: 'TusLibros'!
+
+!classDefinition: #NameOfSubclass category: 'TusLibros' stamp: 'OA 10/30/2023 19:16:18'!
+Object subclass: #NameOfSubclass
+	instanceVariableNames: ''
+	classVariableNames: ''
+	poolDictionaries: ''
+	category: 'TusLibros'!
+
+!classRemoval: #Cart stamp: 'OA 10/30/2023 19:16:29'!
+Object subclass: #Cart
+	instanceVariableNames: ''
+	classVariableNames: ''
+	poolDictionaries: ''
+	category: 'Cart'!
+
+!classRenamed: #NameOfSubclass as: #Cart stamp: 'OA 10/30/2023 19:16:42'!
+Smalltalk renameClassNamed: #NameOfSubclass as: #Cart!
+!XXXTest methodsFor: 'as yet unclassified' stamp: 'OA 10/30/2023 19:16:42' prior: 50650355!
+cartStartsEmpty 
+	|cart|
+	cart := Cart new.
+	
+	self assert: cart isEmpty! !
+
+Object subclass: #Cart
+	instanceVariableNames: ''
+	classVariableNames: ''
+	poolDictionaries: ''
+	category: 'TusLibros'!
+
+!classDefinition: #Cart category: 'TusLibros' stamp: 'OA 10/30/2023 19:16:50'!
+Object subclass: #Cart
+	instanceVariableNames: ''
+	classVariableNames: ''
+	poolDictionaries: ''
+	category: 'TusLibros'!
+!Cart methodsFor: 'nil' stamp: 'OA 10/30/2023 19:17:03' overrides: 16920235!
+initialize
+	^true! !
+!XXXTest methodsFor: 'as yet unclassified' stamp: 'OA 10/30/2023 19:18:51'!
+test01cartStartsEmpty 
+	|cart|
+	cart := Cart new.
+	
+	self assert: cart isEmpty! !
+
+!methodRemoval: XXXTest #cartStartsEmpty stamp: 'OA 10/30/2023 19:18:52'!
+cartStartsEmpty 
+	|cart|
+	cart := Cart new.
+	
+	self assert: cart isEmpty!
+
+!testRun: #XXXTest #test01cartStartsEmpty stamp: 'OA 10/30/2023 19:18:54'!
+ERROR!
+
+!testRun: #XXXTest #test01cartStartsEmpty stamp: 'OA 10/30/2023 19:18:54'!
+ERROR!
+
+Object subclass: #Cart
+	instanceVariableNames: 'cart'
+	classVariableNames: ''
+	poolDictionaries: ''
+	category: 'TusLibros'!
+
+!classDefinition: #Cart category: 'TusLibros' stamp: 'OA 10/30/2023 19:19:33'!
+Object subclass: #Cart
+	instanceVariableNames: 'cart'
+	classVariableNames: ''
+	poolDictionaries: ''
+	category: 'TusLibros'!
+!Cart methodsFor: 'as yet unclassified' stamp: 'OA 10/30/2023 19:19:45' prior: 50650396 overrides: 16920235!
+initialize
+	cart := true! !
+!Cart methodsFor: 'nil' stamp: 'OA 10/30/2023 19:20:00'!
+isEmpty
+	^true! !
+
+!testRun: #XXXTest #test01cartStartsEmpty stamp: 'OA 10/30/2023 19:20:02'!
+PASSED!
+!XXXTest methodsFor: 'nil' stamp: 'OA 10/30/2023 19:25:54'!
+test02
+	|cart isbn quantity|
+	cart := Cart new.
+	isbn := 1273849.
+	quantity := 1.
+	cart addToCartItem: isbn amount: quantity.
+	
+	self assert: cart size = 1! !
+
+!testRun: #XXXTest #test02 stamp: 'OA 10/30/2023 19:26:10'!
+ERROR!
+
+!testRun: #XXXTest #test02 stamp: 'OA 10/30/2023 19:26:10'!
+ERROR!
+!Cart methodsFor: 'nil' stamp: 'OA 10/30/2023 19:27:12'!
+addToCartItem: isbn amount: quantity
+	! !
+!Cart methodsFor: 'as yet unclassified' stamp: 'OA 10/30/2023 19:27:36' prior: 50650430!
+isEmpty
+	^cart isEmpty ! !
+!Cart methodsFor: 'as yet unclassified' stamp: 'OA 10/30/2023 19:27:43' prior: 50650427 overrides: 16920235!
+initialize
+	cart := OrderedCollection new! !
+!Cart methodsFor: 'as yet unclassified' stamp: 'OA 10/30/2023 19:29:45' prior: 50650447!
+addToCartItem: isbn amount: quantity
+	quantity timesRepeat: [cart addLast: isbn]! !
+
+!testRun: #XXXTest #test02 stamp: 'OA 10/30/2023 19:29:48'!
+ERROR!
+
+!testRun: #XXXTest #test02 stamp: 'OA 10/30/2023 19:29:48'!
+ERROR!
+!Cart methodsFor: 'nil' stamp: 'OA 10/30/2023 19:30:31' overrides: 16901663!
+size
+	^cart size! !
+
+!testRun: #XXXTest #test02 stamp: 'OA 10/30/2023 19:30:33'!
+PASSED!
+
+----End fileIn of /home/clinux01/Descargas/linux64/linux64/Packages/TerseGuide.pck.st----!
+!XXXTest methodsFor: 'as yet unclassified' stamp: 'OA 10/30/2023 19:33:43' prior: 50650436!
+test02
+	|cart isbn quantity|
+	cart := Cart new.
+	isbn := 1273849.
+	quantity := 1.
+	cart addToCartItem: isbn amount: quantity.
+	
+	self assert: cart size = 1! !
+!XXXTest methodsFor: 'as yet unclassified' stamp: 'OA 10/30/2023 19:36:07'!
+test03
+	|cart isbn quantity|
+	cart := Cart new.
+	isbn := 1273849.
+	quantity := 2.
+	cart addToCartItem: isbn amount: quantity.
+	
+	self assert: cart size = 1! !
+!XXXTest methodsFor: 'as yet unclassified' stamp: 'OA 10/30/2023 19:36:58' prior: 50653406!
+test03
+	|cart isbn quantity|
+	cart := Cart new.
+	isbn := 1273849.
+	quantity := 2.
+	cart addToCartItem: isbn amount: quantity.
+	
+	self assert: cart size = 2! !
+!Cart methodsFor: 'as yet unclassified' stamp: 'OA 10/30/2023 19:37:40' prior: 50650457 overrides: 16920235!
+initialize
+	cart := Dictionary new! !
+!Cart methodsFor: 'as yet unclassified' stamp: 'OA 10/30/2023 19:38:23' prior: 50650462!
+addToCartItem: isbn amount: quantity
+	quantity timesRepeat: [cart add: isbn -> quantity]! !
+
+!testRun: #XXXTest #test01cartStartsEmpty stamp: 'OA 10/30/2023 19:38:26'!
+PASSED!
+
+!testRun: #XXXTest #test02 stamp: 'OA 10/30/2023 19:38:27'!
+PASSED!
+
+!testRun: #XXXTest #test03 stamp: 'OA 10/30/2023 19:38:28'!
+FAILURE!
+
+!testRun: #XXXTest #test03 stamp: 'OA 10/30/2023 19:38:28'!
+FAILURE!
+
+!testRun: #XXXTest #test03 stamp: 'OA 10/30/2023 19:40:01'!
+FAILURE!
+
+!testRun: #XXXTest #test03 stamp: 'OA 10/30/2023 19:40:01'!
+FAILURE!
+!Cart methodsFor: 'as yet unclassified' stamp: 'OA 10/30/2023 19:46:20' prior: 50650472 overrides: 16901663!
+size
+	|size|
+	size := 0.
+	((cart values) sum: [:a | size + a]).
+	^size! !
+
+!testRun: #XXXTest #test03 stamp: 'OA 10/30/2023 19:46:23'!
+FAILURE!
+
+!testRun: #XXXTest #test03 stamp: 'OA 10/30/2023 19:46:23'!
+FAILURE!
+
+cart values!
+!Cart methodsFor: 'as yet unclassified' stamp: 'OA 10/30/2023 19:47:40' prior: 50653447 overrides: 16901663!
+size
+	|size|
+	size := 0.
+	((cart values) sum: [:a | size := size + a]).
+	^size! !
+
+!testRun: #XXXTest #test03 stamp: 'OA 10/30/2023 19:47:43'!
+PASSED!
+!Cart methodsFor: 'as yet unclassified' stamp: 'OA 10/30/2023 19:50:15' prior: 50653458 overrides: 16901663!
+size
+	^((cart values) sum: [:a |  a]).
+	! !
+
+!testRun: #XXXTest #test03 stamp: 'OA 10/30/2023 19:50:17'!
+PASSED!
+!XXXTest methodsFor: 'as yet unclassified' stamp: 'OA 10/30/2023 19:51:13'!
+test04
+	|cart isbn isbn2 quantity quantity2|
+	cart := Cart new.
+	isbn := 1273849.
+	quantity := 2.
+	isbn2 := 1829333.
+	quantity2 := 1.
+	cart addToCartItem: isbn amount: quantity.
+	
+	self assert: cart size = 3! !
+!XXXTest methodsFor: 'as yet unclassified' stamp: 'OA 10/30/2023 19:51:33' prior: 50653473!
+test04
+	|cart isbn isbn2 quantity quantity2|
+	cart := Cart new.
+	isbn := 1273849.
+	quantity := 2.
+	isbn2 := 1829333.
+	quantity2 := 1.
+	cart addToCartItem: isbn amount: quantity.
+	cart addToCartItem: isbn2 amount: quantity2.
+	
+	self assert: cart size = 3! !
+
+!testRun: #XXXTest #test04 stamp: 'OA 10/30/2023 19:51:41'!
+PASSED!
+
+!testRun: #XXXTest #test04 stamp: 'OA 10/30/2023 19:51:44'!
+PASSED!
+
+!testRun: #XXXTest #test01cartStartsEmpty stamp: 'OA 10/30/2023 19:51:44'!
+PASSED!
+
+!testRun: #XXXTest #test02 stamp: 'OA 10/30/2023 19:51:44'!
+PASSED!
+
+!testRun: #XXXTest #test03 stamp: 'OA 10/30/2023 19:51:44'!
+PASSED!
+
+!testRun: #XXXTest #test04 stamp: 'OA 10/30/2023 19:51:44'!
+PASSED!
+!Cart methodsFor: 'as yet unclassified' stamp: 'OA 10/30/2023 19:52:22' prior: 50653427!
+addToCartItem: isbn amount: quantity
+	cart add: isbn -> quantity! !
+
+!testRun: #XXXTest #test01cartStartsEmpty stamp: 'OA 10/30/2023 19:52:25'!
+PASSED!
+
+!testRun: #XXXTest #test02 stamp: 'OA 10/30/2023 19:52:25'!
+PASSED!
+
+!testRun: #XXXTest #test03 stamp: 'OA 10/30/2023 19:52:25'!
+PASSED!
+
+!testRun: #XXXTest #test04 stamp: 'OA 10/30/2023 19:52:25'!
+PASSED!
+!XXXTest methodsFor: 'as yet unclassified' stamp: 'OA 10/30/2023 19:54:11'!
+test05
+	|cart isbn quantity quantity2|
+	cart := Cart new.
+	isbn := 1273849.
+	quantity := 2.
+	quantity2 := 3.
+	cart addToCartItem: isbn amount: quantity.
+	cart addToCartItem: isbn amount: quantity2.
+	
+	self assert: cart size = 5! !
+
+!testRun: #XXXTest #test05 stamp: 'OA 10/30/2023 19:54:13'!
+FAILURE!
+
+!testRun: #XXXTest #test05 stamp: 'OA 10/30/2023 19:54:13'!
+FAILURE!
+!Cart methodsFor: 'as yet unclassified' stamp: 'OA 10/30/2023 19:57:30' prior: 50653508!
+addToCartItem: isbn amount: quantity
+
+	cart at: isbn put: ((cart at: isbn ifAbsent: [0]) + quantity).
+! !
+
+!testRun: #XXXTest #test05 stamp: 'OA 10/30/2023 19:57:37'!
+PASSED!
+
+!testRun: #XXXTest #test01cartStartsEmpty stamp: 'OA 10/30/2023 19:57:40'!
+PASSED!
+
+!testRun: #XXXTest #test02 stamp: 'OA 10/30/2023 19:57:40'!
+PASSED!
+
+!testRun: #XXXTest #test03 stamp: 'OA 10/30/2023 19:57:40'!
+PASSED!
+
+!testRun: #XXXTest #test04 stamp: 'OA 10/30/2023 19:57:40'!
+PASSED!
+
+!testRun: #XXXTest #test05 stamp: 'OA 10/30/2023 19:57:40'!
+PASSED!
+!XXXTest methodsFor: 'as yet unclassified' stamp: 'OA 10/30/2023 20:06:36'!
+test06
+	|cart isbn quantity isbn2 quantity2 listOfItems|
+	cart := Cart new.
+	isbn := 1273849.
+	isbn2 := 1239203.
+	quantity := 2.
+	quantity2 := 3.
+	cart addToCartItem: isbn amount: quantity.
+	cart addToCartItem: isbn2 amount: quantity2.
+	
+	listOfItems := OrderedCollection new.
+	listOfItems with: isbn with: quantity with: isbn2 with: quantity2.
+	
+	self assert: cart listContents = listOfItems! !
+
+!testRun: #XXXTest #test06 stamp: 'OA 10/30/2023 20:07:29'!
+ERROR!
+
+!testRun: #XXXTest #test06 stamp: 'OA 10/30/2023 20:07:29'!
+ERROR!
+
+!testRun: #XXXTest #test06 stamp: 'OA 10/30/2023 20:07:32'!
+ERROR!
+
+!testRun: #XXXTest #test06 stamp: 'OA 10/30/2023 20:07:32'!
+ERROR!
+!XXXTest methodsFor: 'as yet unclassified' stamp: 'OA 10/30/2023 20:08:09' prior: 50653557!
+test06
+	|cart isbn quantity isbn2 quantity2 listOfItems|
+	cart := Cart new.
+	isbn := 1273849.
+	isbn2 := 1239203.
+	quantity := 2.
+	quantity2 := 3.
+	cart addToCartItem: isbn amount: quantity.
+	cart addToCartItem: isbn2 amount: quantity2.
+	
+	listOfItems := OrderedCollection with: isbn with: quantity with: isbn2 with: quantity2.
+	
+	self assert: cart listContents = listOfItems! !
+!Cart methodsFor: 'nil' stamp: 'OA 10/30/2023 20:10:29'!
+listContents
+	|contents|
+	contents := OrderedCollection new.
+	
+	cart keysAndValuesDo: [:key :aValue | contents add: key ; add: aValue]! !
+
+!testRun: #XXXTest #test06 stamp: 'OA 10/30/2023 20:10:33'!
+FAILURE!
+
+!testRun: #XXXTest #test06 stamp: 'OA 10/30/2023 20:10:33'!
+FAILURE!
+!Cart methodsFor: 'as yet unclassified' stamp: 'OA 10/30/2023 20:12:07' prior: 50653595!
+listContents
+	|contents|
+	contents := OrderedCollection new.
+	
+	cart keysAndValuesDo: [:key :aValue | contents addLast: key ; addLast: aValue]! !
+
+!testRun: #XXXTest #test01cartStartsEmpty stamp: 'OA 10/30/2023 20:12:09'!
+PASSED!
+
+!testRun: #XXXTest #test02 stamp: 'OA 10/30/2023 20:12:09'!
+PASSED!
+
+!testRun: #XXXTest #test03 stamp: 'OA 10/30/2023 20:12:09'!
+PASSED!
+
+!testRun: #XXXTest #test04 stamp: 'OA 10/30/2023 20:12:09'!
+PASSED!
+
+!testRun: #XXXTest #test05 stamp: 'OA 10/30/2023 20:12:09'!
+PASSED!
+
+!testRun: #XXXTest #test06 stamp: 'OA 10/30/2023 20:12:09'!
+FAILURE!
+
+!testRun: #XXXTest #test06 stamp: 'OA 10/30/2023 20:12:09'!
+FAILURE!
+!XXXTest methodsFor: 'as yet unclassified' stamp: 'OA 10/30/2023 20:12:32' prior: 50653581!
+test06
+	|cart isbn quantity isbn2 quantity2 listOfItems|
+	cart := Cart new.
+	isbn := 1273849.
+	isbn2 := 1239203.
+	quantity := 2.
+	quantity2 := 3.
+	cart addToCartItem: isbn amount: quantity.
+	cart addToCartItem: isbn2 amount: quantity2.
+	
+	listOfItems := OrderedCollection with: isbn2 with: quantity2 with: isbn with: quantity.
+	
+	self assert: cart listContents = listOfItems! !
+
+!testRun: #XXXTest #test06 stamp: 'OA 10/30/2023 20:12:35'!
+FAILURE!
+
+!testRun: #XXXTest #test06 stamp: 'OA 10/30/2023 20:12:35'!
+FAILURE!
+!XXXTest methodsFor: 'as yet unclassified' stamp: 'OA 10/30/2023 20:13:02' prior: 50653631!
+test06
+	|cart isbn quantity isbn2 quantity2 listOfItems|
+	cart := Cart new.
+	isbn := 1273849.
+	isbn2 := 1239203.
+	quantity := 2.
+	quantity2 := 3.
+	cart addToCartItem: isbn amount: quantity.
+	cart addToCartItem: isbn2 amount: quantity2.
+	
+	listOfItems := OrderedCollection with: isbn with: quantity with: isbn2 with: quantity2.
+	
+	self assert: cart listContents = listOfItems! !
+
+!testRun: #XXXTest #test05 stamp: 'OA 10/30/2023 20:13:04'!
+PASSED!
+
+!testRun: #XXXTest #test06 stamp: 'OA 10/30/2023 20:13:06'!
+FAILURE!
+
+!testRun: #XXXTest #test06 stamp: 'OA 10/30/2023 20:13:06'!
+FAILURE!
+!Cart methodsFor: 'as yet unclassified' stamp: 'OA 10/30/2023 20:14:05' prior: 50653607!
+listContents
+	|contents|
+	contents := OrderedCollection new.
+	
+	cart keysAndValuesDo: [:key :aValue | contents add: key ; add: aValue]! !
+
+!testRun: #XXXTest #test06 stamp: 'OA 10/30/2023 20:14:08'!
+FAILURE!
+
+!testRun: #XXXTest #test06 stamp: 'OA 10/30/2023 20:14:08'!
+FAILURE!
+!XXXTest methodsFor: 'as yet unclassified' stamp: 'OA 10/30/2023 20:14:22' prior: 50653651!
+test06
+	|cart isbn quantity isbn2 quantity2 listOfItems|
+	cart := Cart new.
+	isbn := 1273849.
+	isbn2 := 1239203.
+	quantity := 2.
+	quantity2 := 3.
+	cart addToCartItem: isbn amount: quantity.
+	cart addToCartItem: isbn2 amount: quantity2.
+	
+	listOfItems := OrderedCollection with: isbn2 with: quantity2 with: isbn with: quantity.
+	
+	self assert: cart listContents = listOfItems! !
+
+!testRun: #XXXTest #test06 stamp: 'OA 10/30/2023 20:14:24'!
+FAILURE!
+
+!testRun: #XXXTest #test06 stamp: 'OA 10/30/2023 20:14:24'!
+FAILURE!
+!XXXTest methodsFor: 'as yet unclassified' stamp: 'OA 10/30/2023 20:14:57' prior: 50653685!
+test06
+	|cart isbn quantity isbn2 quantity2 listOfItems|
+	cart := Cart new.
+	isbn := 1273849.
+	isbn2 := 1239203.
+	quantity := 2.
+	quantity2 := 3.
+	cart addToCartItem: isbn amount: quantity.
+	cart addToCartItem: isbn2 amount: quantity2.
+	
+	listOfItems := OrderedCollection with: isbn with: quantity with: isbn2 with: quantity2.
+	
+	self assert: cart listContents = listOfItems! !
+!Cart methodsFor: 'as yet unclassified' stamp: 'OA 10/30/2023 20:16:54' prior: 50653673!
+listContents
+	|contents|
+	contents := OrderedCollection new.
+	
+	cart keysAndValuesDo: [:key :aValue | contents add: key . contents add: aValue]! !
+
+!testRun: #XXXTest #test06 stamp: 'OA 10/30/2023 20:16:56'!
+FAILURE!
+
+!testRun: #XXXTest #test06 stamp: 'OA 10/30/2023 20:16:56'!
+FAILURE!
+!Cart methodsFor: 'as yet unclassified' stamp: 'OA 10/30/2023 20:17:16' prior: 50653720!
+listContents
+	|contents|
+	contents := OrderedCollection new.
+	
+	cart keysAndValuesDo: [:key :aValue | contents addLast: key ; addLast: aValue]! !
+
+!testRun: #XXXTest #test06 stamp: 'OA 10/30/2023 20:17:18'!
+FAILURE!
+
+!testRun: #XXXTest #test06 stamp: 'OA 10/30/2023 20:17:18'!
+FAILURE!
+!Cart methodsFor: 'as yet unclassified' stamp: 'OA 10/30/2023 20:17:56' prior: 50653732!
+listContents
+	|contents|
+	contents := OrderedCollection new.
+	
+	cart keysAndValuesDo: [:key :aValue | contents addLast: key ; addLast: aValue]
+	^contents! !
+
+!testRun: #XXXTest #test06 stamp: 'OA 10/30/2023 20:17:59'!
+ERROR!
+
+!testRun: #XXXTest #test06 stamp: 'OA 10/30/2023 20:17:59'!
+ERROR!
+!Cart methodsFor: 'as yet unclassified' stamp: 'OA 10/30/2023 20:18:49' prior: 50653744!
+listContents
+	|contents|
+	contents := OrderedCollection new.
+	
+	cart keysAndValuesDo: [:key :aValue | contents addLast: key ; addLast: aValue].
+	^contents! !
+
+!testRun: #XXXTest #test06 stamp: 'OA 10/30/2023 20:18:51'!
+PASSED!
+
+!testRun: #XXXTest #test06 stamp: 'OA 10/30/2023 20:19:00'!
+PASSED!
+!XXXTest methodsFor: 'as yet unclassified' stamp: 'OA 10/30/2023 20:19:42' prior: 50653705!
+test06
+	|cart isbn quantity isbn2 quantity2 listOfItems|
+	cart := Cart new.
+	isbn := 1273849.
+	isbn2 := 1239203.
+	quantity := 2.
+	quantity2 := 3.
+	cart addToCartItem: isbn2 amount: quantity2.
+	cart addToCartItem: isbn amount: quantity.
+	
+	listOfItems := OrderedCollection with: isbn2 with: quantity2 with: isbn with: quantity.
+	
+	self assert: cart listContents = listOfItems! !
+
+!testRun: #XXXTest #test06 stamp: 'OA 10/30/2023 20:19:44'!
+PASSED!
+
+!testRun: #XXXTest #test01cartStartsEmpty stamp: 'OA 10/30/2023 20:39:58'!
+PASSED!
+
+!testRun: #XXXTest #test02 stamp: 'OA 10/30/2023 20:39:58'!
+PASSED!
+
+!testRun: #XXXTest #test03 stamp: 'OA 10/30/2023 20:39:58'!
+PASSED!
+
+!testRun: #XXXTest #test04 stamp: 'OA 10/30/2023 20:39:58'!
+PASSED!
+
+!testRun: #XXXTest #test05 stamp: 'OA 10/30/2023 20:39:58'!
+PASSED!
+
+!testRun: #XXXTest #test06 stamp: 'OA 10/30/2023 20:39:58'!
+PASSED!
+
+----STARTUP---- (1 November 2023 15:08:09) as /home/oscar/Downloads/linux64 (1)/linux64/CuisUniversity-5981.image!
+
+
+----End fileIn of /home/oscar/Downloads/linux64 (1)/linux64/TusLibros.st----!
+
+TestCase subclass: #CartTest
+	instanceVariableNames: ''
+	classVariableNames: ''
+	poolDictionaries: ''
+	category: 'TusLibros'!
+
+!classDefinition: #CartTest category: 'TusLibros' stamp: 'OA 11/1/2023 15:09:11'!
+TestCase subclass: #CartTest
+	instanceVariableNames: ''
+	classVariableNames: ''
+	poolDictionaries: ''
+	category: 'TusLibros'!
+
+!classRemoval: #CartTest stamp: 'OA 11/1/2023 15:09:19'!
+TestCase subclass: #CartTest
+	instanceVariableNames: ''
+	classVariableNames: ''
+	poolDictionaries: ''
+	category: 'TusLibros'!
+
+!classRenamed: #XXXTest as: #CartTest stamp: 'OA 11/1/2023 15:09:29'!
+Smalltalk renameClassNamed: #XXXTest as: #CartTest!
+!CartTest methodsFor: 'as yet unclassified' stamp: 'OA 11/1/2023 15:28:42'!
+cartStartsEmpty 
+	|cart|
+	cart := Cart new.
+	
+	self assert: cart isEmpty! !
+
+!methodRemoval: CartTest #test01cartStartsEmpty stamp: 'OA 11/1/2023 15:28:42'!
+test01cartStartsEmpty 
+	|cart|
+	cart := Cart new.
+	
+	self assert: cart isEmpty!
+
+----QUIT----(1 November 2023 15:39:57) CuisUniversity-5981.image priorSource: 10197292!
+
+----STARTUP---- (1 November 2023 17:44:21) as /home/oscar/Downloads/linux64 (1)/linux64/CuisUniversity-5981.image!
+
+!CartTest methodsFor: 'as yet unclassified' stamp: 'OA 11/1/2023 17:46:06'!
+cartWithOneBookSizeIsOne
+	|cart isbn quantity|
+	cart := Cart new.
+	isbn := 1273849.
+	quantity := 1.
+	cart addToCartItem: isbn amount: quantity.
+	
+	self assert: cart size = 1! !
+
+!methodRemoval: CartTest #test02 stamp: 'OA 11/1/2023 17:46:06'!
+test02
+	|cart isbn quantity|
+	cart := Cart new.
+	isbn := 1273849.
+	quantity := 1.
+	cart addToCartItem: isbn amount: quantity.
+	
+	self assert: cart size = 1!
+
+Object subclass: #Cart
+	instanceVariableNames: 'cart contents'
+	classVariableNames: ''
+	poolDictionaries: ''
+	category: 'TusLibros'!
+
+Object subclass: #Cart
+	instanceVariableNames: 'cart contents'
+	classVariableNames: ''
+	poolDictionaries: ''
+	category: 'TusLibros'!
+
+Object subclass: #Cart
+	instanceVariableNames: 'cat'
+	classVariableNames: ''
+	poolDictionaries: ''
+	category: 'TusLibros'!
+
+!classDefinition: #Cart category: 'TusLibros' stamp: 'OA 11/1/2023 17:47:27'!
+Object subclass: #Cart
+	instanceVariableNames: 'cat'
+	classVariableNames: ''
+	poolDictionaries: ''
+	category: 'TusLibros'!
+
+Object subclass: #Cart
+	instanceVariableNames: 'cart'
+	classVariableNames: ''
+	poolDictionaries: ''
+	category: 'TusLibros'!
+
+!classDefinition: #Cart category: 'TusLibros' stamp: 'OA 11/1/2023 17:47:28'!
+Object subclass: #Cart
+	instanceVariableNames: 'cart'
+	classVariableNames: ''
+	poolDictionaries: ''
+	category: 'TusLibros'!
+!Cart methodsFor: 'as yet unclassified' stamp: 'OA 11/1/2023 17:48:03' prior: 50650415!
+listContents
+
+	"|contents|
+	contents := OrderedCollection new.
+	
+	cart keysAndValuesDo: [:key :aValue | contents addLast: key ; addLast: aValue].
+	^contents"! !
+
+Object subclass: #Cart
+	instanceVariableNames: 'cart contents'
+	classVariableNames: ''
+	poolDictionaries: ''
+	category: 'TusLibros'!
+
+!classDefinition: #Cart category: 'TusLibros' stamp: 'OA 11/1/2023 17:48:12'!
+Object subclass: #Cart
+	instanceVariableNames: 'cart contents'
+	classVariableNames: ''
+	poolDictionaries: ''
+	category: 'TusLibros'!
+!Cart methodsFor: 'as yet unclassified' stamp: 'OA 11/1/2023 17:48:19' prior: 50650512!
+listContents
+	^contents
+	"|contents|
+	contents := OrderedCollection new.
+	
+	cart keysAndValuesDo: [:key :aValue | contents addLast: key ; addLast: aValue].
+	^contents"! !
+!Cart methodsFor: 'as yet unclassified' stamp: 'OA 11/1/2023 17:48:43' prior: 50650400!
+addToCartItem: isbn amount: quantity
+
+	cart at: isbn put: ((cart at: isbn ifAbsent: [0]) + quantity).
+	contents addLast: isbn ; addLast: quantity
+! !
+
+!testRun: #CartTest #test03 stamp: 'OA 11/1/2023 17:48:47'!
+ERROR!
+
+!testRun: #CartTest #test04 stamp: 'OA 11/1/2023 17:48:47'!
+ERROR!
+
+!testRun: #CartTest #test05 stamp: 'OA 11/1/2023 17:48:47'!
+ERROR!
+
+!testRun: #CartTest #test06 stamp: 'OA 11/1/2023 17:48:47'!
+ERROR!
+
+!testRun: #CartTest #test03 stamp: 'OA 11/1/2023 17:48:58'!
+ERROR!
+
+!testRun: #CartTest #test04 stamp: 'OA 11/1/2023 17:48:58'!
+ERROR!
+
+!testRun: #CartTest #test05 stamp: 'OA 11/1/2023 17:48:58'!
+ERROR!
+
+!testRun: #CartTest #test06 stamp: 'OA 11/1/2023 17:48:58'!
+ERROR!
+
+!testRun: #CartTest #test03 stamp: 'OA 11/1/2023 17:49:05'!
+ERROR!
+
+!testRun: #CartTest #test04 stamp: 'OA 11/1/2023 17:49:05'!
+ERROR!
+
+!testRun: #CartTest #test05 stamp: 'OA 11/1/2023 17:49:05'!
+ERROR!
+
+!testRun: #CartTest #test06 stamp: 'OA 11/1/2023 17:49:05'!
+ERROR!
+
+!testRun: #CartTest #test03 stamp: 'OA 11/1/2023 17:49:09'!
+ERROR!
+
+!testRun: #CartTest #test03 stamp: 'OA 11/1/2023 17:49:09'!
+ERROR!
+!Cart methodsFor: 'as yet unclassified' stamp: 'OA 11/1/2023 17:49:32' prior: 50650407 overrides: 16920235!
+initialize
+	cart := Dictionary new.
+	contents := OrderedCollection new! !
+
+!testRun: #CartTest #test03 stamp: 'OA 11/1/2023 17:49:34'!
+PASSED!
+
+!testRun: #CartTest #test04 stamp: 'OA 11/1/2023 17:49:34'!
+PASSED!
+
+!testRun: #CartTest #test05 stamp: 'OA 11/1/2023 17:49:34'!
+PASSED!
+
+!testRun: #CartTest #test06 stamp: 'OA 11/1/2023 17:49:34'!
+PASSED!
+!CartTest methodsFor: 'as yet unclassified' stamp: 'OA 11/1/2023 17:49:50'!
+test01cartStartsEmpty 
+	|cart|
+	cart := Cart new.
+	
+	self assert: cart isEmpty! !
+
+!methodRemoval: CartTest #cartStartsEmpty stamp: 'OA 11/1/2023 17:49:50'!
+cartStartsEmpty 
+	|cart|
+	cart := Cart new.
+	
+	self assert: cart isEmpty!
+!CartTest methodsFor: 'as yet unclassified' stamp: 'OA 11/1/2023 17:50:00'!
+test02cartWithOneBookSizeIsOne
+	|cart isbn quantity|
+	cart := Cart new.
+	isbn := 1273849.
+	quantity := 1.
+	cart addToCartItem: isbn amount: quantity.
+	
+	self assert: cart size = 1! !
+
+!methodRemoval: CartTest #cartWithOneBookSizeIsOne stamp: 'OA 11/1/2023 17:50:00'!
+cartWithOneBookSizeIsOne
+	|cart isbn quantity|
+	cart := Cart new.
+	isbn := 1273849.
+	quantity := 1.
+	cart addToCartItem: isbn amount: quantity.
+	
+	self assert: cart size = 1!
+!CartTest methodsFor: 'as yet unclassified' stamp: 'OA 11/1/2023 17:51:17'!
+test03cartWithTwoIdenticalBooksSizeIsTwo
+	|cart isbn quantity|
+	cart := Cart new.
+	isbn := 1273849.
+	quantity := 2.
+	cart addToCartItem: isbn amount: quantity.
+	
+	self assert: cart size = 2! !
+
+!methodRemoval: CartTest #test03 stamp: 'OA 11/1/2023 17:51:17'!
+test03
+	|cart isbn quantity|
+	cart := Cart new.
+	isbn := 1273849.
+	quantity := 2.
+	cart addToCartItem: isbn amount: quantity.
+	
+	self assert: cart size = 2!
+!CartTest methodsFor: 'as yet unclassified' stamp: 'OA 11/1/2023 17:52:02'!
+test04cartWithTwoBooksSizeIsSumOfQuantities
+	|cart isbn isbn2 quantity quantity2|
+	cart := Cart new.
+	isbn := 1273849.
+	quantity := 2.
+	isbn2 := 1829333.
+	quantity2 := 1.
+	cart addToCartItem: isbn amount: quantity.
+	cart addToCartItem: isbn2 amount: quantity2.
+	
+	self assert: cart size = 3! !
+
+!methodRemoval: CartTest #test04 stamp: 'OA 11/1/2023 17:52:02'!
+test04
+	|cart isbn isbn2 quantity quantity2|
+	cart := Cart new.
+	isbn := 1273849.
+	quantity := 2.
+	isbn2 := 1829333.
+	quantity2 := 1.
+	cart addToCartItem: isbn amount: quantity.
+	cart addToCartItem: isbn2 amount: quantity2.
+	
+	self assert: cart size = 3!
+
+!testRun: #CartTest #test01cartStartsEmpty stamp: 'OA 11/1/2023 17:53:33'!
+PASSED!
+
+!testRun: #CartTest #test02cartWithOneBookSizeIsOne stamp: 'OA 11/1/2023 17:53:33'!
+PASSED!
+
+!testRun: #CartTest #test03cartWithTwoIdenticalBooksSizeIsTwo stamp: 'OA 11/1/2023 17:53:33'!
+PASSED!
+
+!testRun: #CartTest #test04cartWithTwoBooksSizeIsSumOfQuantities stamp: 'OA 11/1/2023 17:53:33'!
+PASSED!
+
+!testRun: #CartTest #test05 stamp: 'OA 11/1/2023 17:53:33'!
+PASSED!
+
+!testRun: #CartTest #test06 stamp: 'OA 11/1/2023 17:53:33'!
+PASSED!
+!CartTest methodsFor: 'as yet unclassified' stamp: 'OA 11/1/2023 17:58:51'!
+test05carWithTwoIdenticalBooksSizeIsSomeOfQuantities
+	|cart isbn quantity quantity2|
+	cart := Cart new.
+	isbn := 1273849.
+	quantity := 2.
+	quantity2 := 3.
+	cart addToCartItem: isbn amount: quantity.
+	cart addToCartItem: isbn amount: quantity2.
+	
+	self assert: cart size = 5! !
+
+!methodRemoval: CartTest #test05 stamp: 'OA 11/1/2023 17:58:51'!
+test05
+	|cart isbn quantity quantity2|
+	cart := Cart new.
+	isbn := 1273849.
+	quantity := 2.
+	quantity2 := 3.
+	cart addToCartItem: isbn amount: quantity.
+	cart addToCartItem: isbn amount: quantity2.
+	
+	self assert: cart size = 5!
+!CartTest methodsFor: 'as yet unclassified' stamp: 'OA 11/1/2023 17:59:19'!
+test05cartWithTwoIdenticalBooksSizeIsSomeOfQuantities
+	|cart isbn quantity quantity2|
+	cart := Cart new.
+	isbn := 1273849.
+	quantity := 2.
+	quantity2 := 3.
+	cart addToCartItem: isbn amount: quantity.
+	cart addToCartItem: isbn amount: quantity2.
+	
+	self assert: cart size = 5! !
+
+!methodRemoval: CartTest #test05carWithTwoIdenticalBooksSizeIsSomeOfQuantities stamp: 'OA 11/1/2023 17:59:19'!
+test05carWithTwoIdenticalBooksSizeIsSomeOfQuantities
+	|cart isbn quantity quantity2|
+	cart := Cart new.
+	isbn := 1273849.
+	quantity := 2.
+	quantity2 := 3.
+	cart addToCartItem: isbn amount: quantity.
+	cart addToCartItem: isbn amount: quantity2.
+	
+	self assert: cart size = 5!
+!CartTest methodsFor: 'as yet unclassified' stamp: 'OA 11/1/2023 18:01:15'!
+test06cartWithTwoBooksKnowsItsContents
+	|cart isbn quantity isbn2 quantity2 listOfItems|
+	cart := Cart new.
+	isbn := 1273849.
+	isbn2 := 1239203.
+	quantity := 2.
+	quantity2 := 3.
+	cart addToCartItem: isbn2 amount: quantity2.
+	cart addToCartItem: isbn amount: quantity.
+	
+	listOfItems := OrderedCollection with: isbn2 with: quantity2 with: isbn with: quantity.
+	
+	self assert: cart listContents = listOfItems! !
+
+!methodRemoval: CartTest #test06 stamp: 'OA 11/1/2023 18:01:15'!
+test06
+	|cart isbn quantity isbn2 quantity2 listOfItems|
+	cart := Cart new.
+	isbn := 1273849.
+	isbn2 := 1239203.
+	quantity := 2.
+	quantity2 := 3.
+	cart addToCartItem: isbn2 amount: quantity2.
+	cart addToCartItem: isbn amount: quantity.
+	
+	listOfItems := OrderedCollection with: isbn2 with: quantity2 with: isbn with: quantity.
+	
+	self assert: cart listContents = listOfItems!
+!CartTest methodsFor: 'tests' stamp: 'OA 11/1/2023 18:17:49'!
+test07itemQuantityShouldBeGreaterThanZero
+	"time to test the errors, for example adding 0 times of an item"
+	|isbn quantity|
+	isbn := 5473533.
+	quantity := 0.
+	
+	self should: [Cart with: isbn amount: quantity]
+		raise: Error
+		withExceptionDo: [:anError | 
+				self assert: anError messageText = 'CannotAddZeroItems	']! !
+!CartTest class methodsFor: 'nil' stamp: 'OA 11/1/2023 18:18:45'!
+with: isbn amount: anAmount
+	 ! !
+
+!methodRemoval: CartTest class #with:amount: stamp: 'OA 11/1/2023 18:18:54'!
+with: isbn amount: anAmount
+	 !
+!Cart class methodsFor: 'nil' stamp: 'OA 11/1/2023 18:19:39'!
+with: isbn amount: anAmount
+	self new addToCartItem: isbn amount: anAmount ! !
+!Cart class methodsFor: 'as yet unclassified' stamp: 'OA 11/1/2023 18:22:27' prior: 50650767!
+with: isbn amount: anAmount
+	self requiresPositiveAmount: anAmount.
+
+	self new addToCartItem: isbn amount: anAmount ! !
+!Cart class methodsFor: 'nil' stamp: 'OA 11/1/2023 18:23:13'!
+requiresPositiveAmount: anAmount
+	anAmount >0 ifFalse: [self error: '']! !
+!Cart class methodsFor: 'as yet unclassified' stamp: 'OA 11/1/2023 18:23:30' prior: 50650779!
+requiresPositiveAmount: anAmount
+	anAmount >0 ifFalse: [self error: 'CannotAddZeroItems']! !
+
+!testRun: #CartTest #test01cartStartsEmpty stamp: 'OA 11/1/2023 18:23:34'!
+PASSED!
+
+!testRun: #CartTest #test02cartWithOneBookSizeIsOne stamp: 'OA 11/1/2023 18:23:34'!
+PASSED!
+
+!testRun: #CartTest #test03cartWithTwoIdenticalBooksSizeIsTwo stamp: 'OA 11/1/2023 18:23:34'!
+PASSED!
+
+!testRun: #CartTest #test04cartWithTwoBooksSizeIsSumOfQuantities stamp: 'OA 11/1/2023 18:23:34'!
+PASSED!
+
+!testRun: #CartTest #test05cartWithTwoIdenticalBooksSizeIsSomeOfQuantities stamp: 'OA 11/1/2023 18:23:34'!
+PASSED!
+
+!testRun: #CartTest #test06cartWithTwoBooksKnowsItsContents stamp: 'OA 11/1/2023 18:23:34'!
+PASSED!
+
+!testRun: #CartTest #test07itemQuantityShouldBeGreaterThanZero stamp: 'OA 11/1/2023 18:23:34'!
+FAILURE!
+
+!testRun: #CartTest #test07itemQuantityShouldBeGreaterThanZero stamp: 'OA 11/1/2023 18:23:34'!
+FAILURE!
+
+!testRun: #CartTest #test07itemQuantityShouldBeGreaterThanZero stamp: 'OA 11/1/2023 18:23:51'!
+FAILURE!
+
+!testRun: #CartTest #test07itemQuantityShouldBeGreaterThanZero stamp: 'OA 11/1/2023 18:23:51'!
+FAILURE!
+!CartTest methodsFor: 'tests' stamp: 'OA 11/1/2023 18:25:38' prior: 50650747!
+test07itemQuantityShouldBeGreaterThanZero
+	"time to test the errors, for example adding 0 times of an item"
+	|isbn|
+	isbn := 5473533.
+	
+	self should: [Cart with: isbn amount: 0]
+		raise: Error
+		withExceptionDo: [:anError | 
+				self assert: anError messageText = 'CannotAddZeroItems	']! !
+!CartTest methodsFor: 'tests' stamp: 'OA 11/1/2023 18:25:48' prior: 50650823!
+test07itemQuantityShouldBeGreaterThanZero
+
+	|isbn|
+	isbn := 5473533.
+	
+	self should: [Cart with: isbn amount: 0]
+		raise: Error
+		withExceptionDo: [:anError | 
+				self assert: anError messageText = 'CannotAddZeroItems	']! !
+
+!testRun: #CartTest #test07itemQuantityShouldBeGreaterThanZero stamp: 'OA 11/1/2023 18:25:51'!
+FAILURE!
+
+!testRun: #CartTest #test07itemQuantityShouldBeGreaterThanZero stamp: 'OA 11/1/2023 18:25:51'!
+FAILURE!
+
+!testRun: #CartTest #test01cartStartsEmpty stamp: 'OA 11/1/2023 18:30:18'!
+PASSED!
+
+!testRun: #CartTest #test02cartWithOneBookSizeIsOne stamp: 'OA 11/1/2023 18:30:20'!
+PASSED!
+
+!testRun: #CartTest #test03cartWithTwoIdenticalBooksSizeIsTwo stamp: 'OA 11/1/2023 18:30:22'!
+PASSED!
+
+!testRun: #CartTest #test04cartWithTwoBooksSizeIsSumOfQuantities stamp: 'OA 11/1/2023 18:30:24'!
+PASSED!
+
+!testRun: #CartTest #test05cartWithTwoIdenticalBooksSizeIsSomeOfQuantities stamp: 'OA 11/1/2023 18:30:27'!
+PASSED!
+
+!testRun: #CartTest #test06cartWithTwoBooksKnowsItsContents stamp: 'OA 11/1/2023 18:30:29'!
+PASSED!
+
+!testRun: #CartTest #test07itemQuantityShouldBeGreaterThanZero stamp: 'OA 11/1/2023 18:30:32'!
+FAILURE!
+
+!testRun: #CartTest #test07itemQuantityShouldBeGreaterThanZero stamp: 'OA 11/1/2023 18:30:32'!
+FAILURE!
+!Cart class methodsFor: 'as yet unclassified' stamp: 'OA 11/1/2023 18:31:51' prior: 50650785!
+requiresPositiveAmount: anAmount
+	anAmount >0 ifFalse: [self error: 'CannotAddZeroItems']! !
+!Cart class methodsFor: 'as yet unclassified' stamp: 'OA 11/1/2023 18:32:52' prior: 50650773!
+with: isbn amount: anAmount
+	self requiresPositiveAmount: anAmount.
+
+	self new addToCartItem: isbn amount: anAmount ! !
+!CartTest methodsFor: 'tests' stamp: 'OA 11/1/2023 18:34:17' prior: 50650835!
+test07itemQuantityShouldBeGreaterThanZero
+
+	|isbn quantity|
+	isbn := 5473533.
+	quantity := 0.
+	
+	self should: [Cart with: isbn amount: quantity]
+		raise: Error
+		withExceptionDo: [:anError | 
+				self assert: anError messageText = 'CannotAddZeroItems	']! !
+!CartTest methodsFor: 'tests' stamp: 'OA 11/1/2023 18:39:20'!
+test08itemShouldBeAvailable
+
+	|isbn quantity availableItems|
+	isbn := 5473533.
+	quantity := 1.
+	availableItems := OrderedCollection with: 1232112 with: 1232134 with: 7675477.
+	
+	self should: [Cart with: isbn amount: quantity]
+		raise: Error
+		withExceptionDo: [:anError | 
+				self assert: anError messageText = 'CannotAddZeroItems	']! !
+!CartTest methodsFor: 'tests' stamp: 'OA 11/1/2023 18:40:11' prior: 50650900!
+test08itemShouldBeAvailable
+
+	|isbn quantity availableItems|
+	isbn := 5473533.
+	quantity := 1.
+	availableItems := OrderedCollection with: 1232112 with: 1232134 with: 7675477.
+	
+	self should: [Cart with: isbn amount: quantity]
+		raise: Error
+		withExceptionDo: [:anError | 
+				self assert: anError messageText = 'ThisItemIsNotAvailable	']! !
+!CartTest methodsFor: 'tests' stamp: 'OA 11/1/2023 18:44:31' prior: 50650913!
+test08itemShouldBeAvailable
+
+	|isbn quantity availableItems|
+	isbn := 5473533.
+	quantity := 1.
+	availableItems := OrderedCollection with: 1232112 with: 1232134 with: 7675477.
+	
+	self should: [Cart with: isbn amount: quantity available: availableItems]
+		raise: Error
+		withExceptionDo: [:anError | 
+				self assert: anError messageText = 'ThisItemIsNotAvailable	']! !
+!Cart class methodsFor: 'as yet unclassified' stamp: 'OA 11/1/2023 18:45:08'!
+with: isbn amount: anAmount available: availableItems
+	self requiresPositiveAmount: anAmount.
+
+	self new addToCartItem: isbn amount: anAmount ! !
+!Cart class methodsFor: 'as yet unclassified' stamp: 'OA 11/1/2023 18:47:15' prior: 50650941!
+with: isbn amount: anAmount available: availableItems
+	self requiresPositiveAmount: anAmount.
+	self requires: isbn toBeIn: availableItems .
+
+	self new addToCartItem: isbn amount: anAmount ! !
+!Cart class methodsFor: 'as yet unclassified' stamp: 'OA 11/1/2023 18:47:15' prior: 50650949!
+with: isbn amount: anAmount available: availableItems
+	self requiresPositiveAmount: anAmount.
+	self requires: isbn toBeIn: availableItems .
+
+	self new addToCartItem: isbn amount: anAmount ! !
+!Cart class methodsFor: 'as yet unclassified' stamp: 'OA 11/1/2023 18:49:15'!
+requires: isbn toBeIn: availableItems
+	(availableItems includes: isbn) ifFalse: [self error: 'This']! !
+!Cart class methodsFor: 'as yet unclassified' stamp: 'OA 11/1/2023 18:49:36' prior: 50650967!
+requires: isbn toBeIn: availableItems
+	(availableItems includes: isbn) ifFalse: [self error: 'ThisItemIsNotAvailable']! !
+
+!testRun: #CartTest #test08itemShouldBeAvailable stamp: 'OA 11/1/2023 18:49:42'!
+FAILURE!
+
+!testRun: #CartTest #test08itemShouldBeAvailable stamp: 'OA 11/1/2023 18:49:42'!
+FAILURE!
+
+!testRun: #CartTest #test07itemQuantityShouldBeGreaterThanZero stamp: 'OA 11/1/2023 18:51:56'!
+FAILURE!
+
+!testRun: #CartTest #test07itemQuantityShouldBeGreaterThanZero stamp: 'OA 11/1/2023 18:51:56'!
+FAILURE!
+!CartTest methodsFor: 'tests' stamp: 'OA 11/1/2023 18:55:21' prior: 50650890!
+test07itemQuantityShouldBeGreaterThanZero
+
+	|isbn quantity|
+	isbn := 5473533.
+	quantity := 0.
+	
+	self should: [Cart with: isbn amount: quantity]
+		raise: Error
+		withExceptionDo: [:anError | 
+				self assert: (anError messageText = 'CannotAddZeroItems	')]! !
+
+!testRun: #CartTest #test07itemQuantityShouldBeGreaterThanZero stamp: 'OA 11/1/2023 18:55:24'!
+FAILURE!
+
+!testRun: #CartTest #test07itemQuantityShouldBeGreaterThanZero stamp: 'OA 11/1/2023 18:55:24'!
+FAILURE!
+!CartTest methodsFor: 'tests' stamp: 'OA 11/1/2023 18:55:37' prior: 50650993!
+test07itemQuantityShouldBeGreaterThanZero
+
+	|isbn quantity|
+	isbn := 5473533.
+	quantity := 0.
+	
+	self should: [Cart with: isbn amount: quantity]
+		raise: Error
+		withExceptionDo: [:anError | 
+				self assert: anError messageText = 'CannotAddZeroItems	']! !
+
+----QUIT----(1 November 2023 18:55:42) CuisUniversity-5981.image priorSource: 10201900!
+
+----STARTUP---- (1 November 2023 20:12:39) as /home/oscar/Downloads/linux64 (1)/linux64/CuisUniversity-5981.image!
+
+
+!testRun: #CartTest #test01cartStartsEmpty stamp: 'OA 11/1/2023 20:12:44'!
+PASSED!
+
+!testRun: #CartTest #test02cartWithOneBookSizeIsOne stamp: 'OA 11/1/2023 20:12:44'!
+PASSED!
+
+!testRun: #CartTest #test03cartWithTwoIdenticalBooksSizeIsTwo stamp: 'OA 11/1/2023 20:12:44'!
+PASSED!
+
+!testRun: #CartTest #test04cartWithTwoBooksSizeIsSumOfQuantities stamp: 'OA 11/1/2023 20:12:44'!
+PASSED!
+
+!testRun: #CartTest #test05cartWithTwoIdenticalBooksSizeIsSomeOfQuantities stamp: 'OA 11/1/2023 20:12:44'!
+PASSED!
+
+!testRun: #CartTest #test06cartWithTwoBooksKnowsItsContents stamp: 'OA 11/1/2023 20:12:44'!
+PASSED!
+
+!testRun: #CartTest #test07itemQuantityShouldBeGreaterThanZero stamp: 'OA 11/1/2023 20:12:44'!
+FAILURE!
+
+!testRun: #CartTest #test08itemShouldBeAvailable stamp: 'OA 11/1/2023 20:12:44'!
+FAILURE!
+
+!testRun: #CartTest #test01cartStartsEmpty stamp: 'OA 11/1/2023 20:12:49'!
+PASSED!
+
+!testRun: #CartTest #test02cartWithOneBookSizeIsOne stamp: 'OA 11/1/2023 20:12:49'!
+PASSED!
+
+!testRun: #CartTest #test03cartWithTwoIdenticalBooksSizeIsTwo stamp: 'OA 11/1/2023 20:12:49'!
+PASSED!
+
+!testRun: #CartTest #test04cartWithTwoBooksSizeIsSumOfQuantities stamp: 'OA 11/1/2023 20:12:49'!
+PASSED!
+
+!testRun: #CartTest #test05cartWithTwoIdenticalBooksSizeIsSomeOfQuantities stamp: 'OA 11/1/2023 20:12:49'!
+PASSED!
+
+!testRun: #CartTest #test06cartWithTwoBooksKnowsItsContents stamp: 'OA 11/1/2023 20:12:49'!
+PASSED!
+
+!testRun: #CartTest #test07itemQuantityShouldBeGreaterThanZero stamp: 'OA 11/1/2023 20:12:49'!
+FAILURE!
+
+!testRun: #CartTest #test08itemShouldBeAvailable stamp: 'OA 11/1/2023 20:12:49'!
+FAILURE!
+!CartTest methodsFor: 'tests' stamp: 'OA 11/1/2023 20:13:17' prior: 50651011!
+test07itemQuantityShouldBeGreaterThanZero
+
+	
+	self should: [Cart with: 1414893 amount: 0]
+		raise: Error
+		withExceptionDo: [:anError | 
+				self assert: anError messageText = 'CannotAddZeroItems	']! !
+
+!testRun: #CartTest #test07itemQuantityShouldBeGreaterThanZero stamp: 'OA 11/1/2023 20:13:19'!
+FAILURE!
+
+!testRun: #CartTest #test07itemQuantityShouldBeGreaterThanZero stamp: 'OA 11/1/2023 20:13:19'!
+FAILURE!
+!CartTest methodsFor: 'tests' stamp: 'OA 11/1/2023 20:17:31' prior: 50651078!
+test07itemQuantityShouldBeGreaterThanZero
+	|cart isbn amount|
+	cart := Cart new.
+	isbn := 1414893.
+	amount := 0.
+	
+	self should: []
+		raise: Error
+		withExceptionDo: [:anError | 
+				self assert: anError messageText = 'CannotAddZeroItems	']! !
+!CartTest methodsFor: 'tests' stamp: 'OA 11/1/2023 20:18:26' prior: 50651094!
+test07itemQuantityShouldBeGreaterThanZero
+	|cart isbn quantity|
+	cart := Cart new.
+	isbn := 1414893.
+	quantity := 0.
+	
+	self should: [cart addToCartItem: isbn amount: quantity]
+		raise: Error
+		withExceptionDo: [:anError | 
+				self assert: anError messageText = 'CannotAddZeroItems	']! !
+!Cart methodsFor: 'operations' stamp: 'OA 11/1/2023 20:19:12' prior: 50650540!
+addToCartItem: isbn amount: quantity
+	self requiresPositiveAmount: quantity.
+	cart at: isbn put: ((cart at: isbn ifAbsent: [0]) + quantity).
+	contents addLast: isbn ; addLast: quantity
+! !
+
+!testRun: #CartTest #test07itemQuantityShouldBeGreaterThanZero stamp: 'OA 11/1/2023 20:19:21'!
+FAILURE!
+
+!testRun: #CartTest #test07itemQuantityShouldBeGreaterThanZero stamp: 'OA 11/1/2023 20:19:21'!
+FAILURE!
+!Cart methodsFor: 'operations' stamp: 'OA 11/1/2023 20:20:46'!
+requiresPositiveAmount: quantity
+	(quantity > 0) ifFalse: [self error: ''] ! !
+!Cart methodsFor: 'operations' stamp: 'OA 11/1/2023 20:21:05' prior: 50651132!
+requiresPositiveAmount: quantity
+	(quantity > 0) ifFalse: [self error: 'CannotAddZeroItems'] ! !
+
+!testRun: #CartTest #test07itemQuantityShouldBeGreaterThanZero stamp: 'OA 11/1/2023 20:21:09'!
+FAILURE!
+
+!testRun: #CartTest #test07itemQuantityShouldBeGreaterThanZero stamp: 'OA 11/1/2023 20:21:09'!
+FAILURE!
+!CartTest methodsFor: 'tests' stamp: 'OA 11/1/2023 20:23:42' prior: 50651105!
+test07itemQuantityShouldBeGreaterThanZero
+	|cart isbn quantity|
+	cart := Cart new.
+	isbn := 1414893.
+	quantity := 0.
+	
+	self should: [cart addToCartItem: isbn amount: quantity]
+		raise: Error
+		withExceptionDo: [:anError | 
+				self assert: (anError messageText = 'CannotAddZeroItems	')]! !
+
+!testRun: #CartTest #test07itemQuantityShouldBeGreaterThanZero stamp: 'OA 11/1/2023 20:23:48'!
+FAILURE!
+
+!testRun: #CartTest #test07itemQuantityShouldBeGreaterThanZero stamp: 'OA 11/1/2023 20:23:48'!
+FAILURE!
+
+!testRun: #CartTest #test08itemShouldBeAvailable stamp: 'OA 11/1/2023 20:23:52'!
+FAILURE!
+
+!testRun: #CartTest #test08itemShouldBeAvailable stamp: 'OA 11/1/2023 20:23:52'!
+FAILURE!
+!CartTest methodsFor: 'tests' stamp: 'OA 11/1/2023 20:26:20' prior: 50651150!
+test07itemQuantityShouldBeGreaterThanZero
+	|cart isbn quantity|
+	cart := Cart new.
+	isbn := 1414893.
+	quantity := 0.
+	
+	self should: [cart addToCartItem: isbn amount: quantity]
+		raise: Error
+		withExceptionDo: [:anError | 
+				self assert: (anError messageText = 'TheAmountOfItemsHaveToBePositive	')]! !
+!CartTest methodsFor: 'tests' stamp: 'OA 11/1/2023 20:26:27' prior: 50651174!
+test07itemQuantityShouldBeGreaterThanZero
+	|cart isbn quantity|
+	cart := Cart new.
+	isbn := 1414893.
+	quantity := 0.
+	
+	self should: [cart addToCartItem: isbn amount: quantity]
+		raise: Error
+		withExceptionDo: [:anError | 
+				self assert: (anError messageText = 						'TheAmountOfItemsHaveToBePositive	')]! !
+
+!testRun: #CartTest #test07itemQuantityShouldBeGreaterThanZero stamp: 'OA 11/1/2023 20:26:27'!
+FAILURE!
+!CartTest methodsFor: 'tests' stamp: 'OA 11/1/2023 20:26:40' prior: 50651186!
+test07itemQuantityShouldBeGreaterThanZero
+	|cart isbn quantity|
+	cart := Cart new.
+	isbn := 1414893.
+	quantity := 0.
+	
+	self should: [cart addToCartItem: isbn amount: quantity]
+		raise: Error
+		withExceptionDo: [:anError | 
+				self assert: (anError messageText = 						'TheAmountOfItemsHasToBePositive	')]! !
+!Cart methodsFor: 'operations' stamp: 'OA 11/1/2023 20:26:54' prior: 50651137!
+requiresPositiveAmount: quantity
+	(quantity > 0) ifFalse: [self error: 'TheAmountOfItemsHasToBePositive'] ! !
+
+!testRun: #CartTest #test06cartWithTwoBooksKnowsItsContents stamp: 'OA 11/1/2023 20:28:18'!
+PASSED!
+
+!testRun: #CartTest #test07itemQuantityShouldBeGreaterThanZero stamp: 'OA 11/1/2023 20:28:19'!
+FAILURE!
+
+!testRun: #CartTest #test07itemQuantityShouldBeGreaterThanZero stamp: 'OA 11/1/2023 20:28:19'!
+FAILURE!
+
+!methodRemoval: Cart class #requires:toBeIn: stamp: 'OA 11/1/2023 20:30:16'!
+requires: isbn toBeIn: availableItems
+	(availableItems includes: isbn) ifFalse: [self error: 'ThisItemIsNotAvailable']!
+
+!methodRemoval: Cart class #requiresPositiveAmount: stamp: 'OA 11/1/2023 20:30:18'!
+requiresPositiveAmount: anAmount
+	anAmount >0 ifFalse: [self error: 'CannotAddZeroItems']!
+
+!methodRemoval: Cart class #with:amount:available: stamp: 'OA 11/1/2023 20:30:20'!
+with: isbn amount: anAmount available: availableItems
+	self requiresPositiveAmount: anAmount.
+	self requires: isbn toBeIn: availableItems .
+
+	self new addToCartItem: isbn amount: anAmount !
+
+!methodRemoval: Cart class #with:amount: stamp: 'OA 11/1/2023 20:30:21'!
+with: isbn amount: anAmount
+	self requiresPositiveAmount: anAmount.
+
+	self new addToCartItem: isbn amount: anAmount !
+
+!testRun: #CartTest #test01cartStartsEmpty stamp: 'OA 11/1/2023 20:30:29'!
+PASSED!
+
+!testRun: #CartTest #test02cartWithOneBookSizeIsOne stamp: 'OA 11/1/2023 20:30:29'!
+PASSED!
+
+!testRun: #CartTest #test03cartWithTwoIdenticalBooksSizeIsTwo stamp: 'OA 11/1/2023 20:30:29'!
+PASSED!
+
+!testRun: #CartTest #test04cartWithTwoBooksSizeIsSumOfQuantities stamp: 'OA 11/1/2023 20:30:29'!
+PASSED!
+
+!testRun: #CartTest #test05cartWithTwoIdenticalBooksSizeIsSomeOfQuantities stamp: 'OA 11/1/2023 20:30:29'!
+PASSED!
+
+!testRun: #CartTest #test06cartWithTwoBooksKnowsItsContents stamp: 'OA 11/1/2023 20:30:29'!
+PASSED!
+
+!testRun: #CartTest #test07itemQuantityShouldBeGreaterThanZero stamp: 'OA 11/1/2023 20:30:29'!
+FAILURE!
+
+!testRun: #CartTest #test08itemShouldBeAvailable stamp: 'OA 11/1/2023 20:30:29'!
+FAILURE!
+!Cart methodsFor: 'operations' stamp: 'OA 11/1/2023 20:31:15' prior: 50651215!
+requiresPositiveAmount: quantity
+	(quantity > 0) ifFalse: [self error: 'TheAmountOfItemsHasToBePositive	'] ! !
+
+!testRun: #CartTest #test07itemQuantityShouldBeGreaterThanZero stamp: 'OA 11/1/2023 20:31:18'!
+PASSED!
+!CartTest methodsFor: 'tests' stamp: 'OA 11/1/2023 20:40:15' prior: 50650927!
+test08itemShouldBeAvailable
+
+	|isbn quantity availableItems cart|
+	cart := Cart new.
+	isbn := 5473533.
+	quantity := 1.
+	availableItems := OrderedCollection with: 1232112 with: 1232134 with: 7675477.
+	cart theAvailableItems: availableItems .
+	self should: [cart addToCartItem: isbn amount: quantity]
+		raise: Error
+		withExceptionDo: [:anError | 
+				self assert: anError messageText = 'ThisItemIsNotAvailable	']! !
+
+Object subclass: #Cart
+	instanceVariableNames: 'cart contents availableItems'
+	classVariableNames: ''
+	poolDictionaries: ''
+	category: 'TusLibros'!
+
+!classDefinition: #Cart category: 'TusLibros' stamp: 'OA 11/1/2023 20:40:27'!
+Object subclass: #Cart
+	instanceVariableNames: 'cart contents availableItems'
+	classVariableNames: ''
+	poolDictionaries: ''
+	category: 'TusLibros'!
+!Cart methodsFor: 'nil' stamp: 'OA 11/1/2023 20:42:08'!
+theAvailableitems: availableItem
+	availableItems := availableItem ! !
+!Cart methodsFor: 'operations' stamp: 'OA 11/1/2023 20:43:13' prior: 50651117!
+addToCartItem: isbn amount: quantity
+	self requiresPositiveAmount: quantity.
+	self requireItem: isbn isAvailable: availableItems.
+	cart at: isbn put: ((cart at: isbn ifAbsent: [0]) + quantity).
+	contents addLast: isbn ; addLast: quantity
+! !
+!Cart methodsFor: 'nil' stamp: 'OA 11/1/2023 20:45:07'!
+requireItem: isbn isAvailable: availableItem  
+	(availableItem includes: isbn) ifFalse: [self error: '']! !
+!Cart methodsFor: 'as yet unclassified' stamp: 'OA 11/1/2023 20:45:23' prior: 50651334!
+requireItem: isbn isAvailable: availableItem  
+	(availableItem includes: isbn) ifFalse: [self error: 'ThisItemIsNotAvailable']! !
+
+!testRun: #CartTest #test08itemShouldBeAvailable stamp: 'OA 11/1/2023 20:45:26'!
+ERROR!
+
+!testRun: #CartTest #test08itemShouldBeAvailable stamp: 'OA 11/1/2023 20:45:26'!
+ERROR!
+!Cart methodsFor: 'as yet unclassified' stamp: 'OA 11/1/2023 20:45:59'!
+theAvailableItems: availableItem
+	availableItems := availableItem ! !
+
+!methodRemoval: Cart #theAvailableitems: stamp: 'OA 11/1/2023 20:45:59'!
+theAvailableitems: availableItem
+	availableItems := availableItem !
+
+!testRun: #CartTest #test01cartStartsEmpty stamp: 'OA 11/1/2023 20:46:03'!
+PASSED!
+
+!testRun: #CartTest #test02cartWithOneBookSizeIsOne stamp: 'OA 11/1/2023 20:46:03'!
+ERROR!
+
+!testRun: #CartTest #test03cartWithTwoIdenticalBooksSizeIsTwo stamp: 'OA 11/1/2023 20:46:03'!
+ERROR!
+
+!testRun: #CartTest #test04cartWithTwoBooksSizeIsSumOfQuantities stamp: 'OA 11/1/2023 20:46:03'!
+ERROR!
+
+!testRun: #CartTest #test05cartWithTwoIdenticalBooksSizeIsSomeOfQuantities stamp: 'OA 11/1/2023 20:46:03'!
+ERROR!
+
+!testRun: #CartTest #test06cartWithTwoBooksKnowsItsContents stamp: 'OA 11/1/2023 20:46:03'!
+ERROR!
+
+!testRun: #CartTest #test07itemQuantityShouldBeGreaterThanZero stamp: 'OA 11/1/2023 20:46:03'!
+PASSED!
+
+!testRun: #CartTest #test08itemShouldBeAvailable stamp: 'OA 11/1/2023 20:46:03'!
+FAILURE!
+
+!testRun: #CartTest #test07itemQuantityShouldBeGreaterThanZero stamp: 'OA 11/1/2023 20:46:24'!
+PASSED!
+
+!testRun: #CartTest #test06cartWithTwoBooksKnowsItsContents stamp: 'OA 11/1/2023 20:46:26'!
+ERROR!
+
+!testRun: #CartTest #test06cartWithTwoBooksKnowsItsContents stamp: 'OA 11/1/2023 20:46:26'!
+ERROR!
+
+Object subclass: #Cart
+	instanceVariableNames: 'cart contents'
+	classVariableNames: ''
+	poolDictionaries: ''
+	category: 'TusLibros'!
+
+!classDefinition: #Cart category: 'TusLibros' stamp: 'OA 11/1/2023 20:47:53'!
+Object subclass: #Cart
+	instanceVariableNames: 'cart contents'
+	classVariableNames: ''
+	poolDictionaries: ''
+	category: 'TusLibros'!
+!Cart methodsFor: 'operations' stamp: 'OA 11/1/2023 20:48:02' prior: 50651324!
+addToCartItem: isbn amount: quantity
+	cart at: isbn put: ((cart at: isbn ifAbsent: [0]) + quantity).
+	contents addLast: isbn ; addLast: quantity
+! !
+!Cart methodsFor: 'operations' stamp: 'OA 11/1/2023 20:48:16' prior: 50650531!
+listContents
+	^contents! !
+
+!methodRemoval: Cart #requiresPositiveAmount: stamp: 'OA 11/1/2023 20:48:22'!
+requiresPositiveAmount: quantity
+	(quantity > 0) ifFalse: [self error: 'TheAmountOfItemsHasToBePositive	'] !
+
+!methodRemoval: Cart #requireItem:isAvailable: stamp: 'OA 11/1/2023 20:48:29'!
+requireItem: isbn isAvailable: availableItem  
+	(availableItem includes: isbn) ifFalse: [self error: 'ThisItemIsNotAvailable']!
+
+!methodRemoval: Cart #theAvailableItems: stamp: 'OA 11/1/2023 20:48:32'!
+theAvailableItems: availableItem
+	availableItems := availableItem !
+
+!testRun: #CartTest #test01cartStartsEmpty stamp: 'OA 11/1/2023 20:48:41'!
+PASSED!
+
+!testRun: #CartTest #test02cartWithOneBookSizeIsOne stamp: 'OA 11/1/2023 20:48:41'!
+PASSED!
+
+!testRun: #CartTest #test03cartWithTwoIdenticalBooksSizeIsTwo stamp: 'OA 11/1/2023 20:48:41'!
+PASSED!
+
+!testRun: #CartTest #test04cartWithTwoBooksSizeIsSumOfQuantities stamp: 'OA 11/1/2023 20:48:41'!
+PASSED!
+
+!testRun: #CartTest #test05cartWithTwoIdenticalBooksSizeIsSomeOfQuantities stamp: 'OA 11/1/2023 20:48:41'!
+PASSED!
+
+!testRun: #CartTest #test06cartWithTwoBooksKnowsItsContents stamp: 'OA 11/1/2023 20:48:41'!
+PASSED!
+
+!testRun: #CartTest #test07itemQuantityShouldBeGreaterThanZero stamp: 'OA 11/1/2023 20:48:41'!
+FAILURE!
+
+!testRun: #CartTest #test08itemShouldBeAvailable stamp: 'OA 11/1/2023 20:48:41'!
+ERROR!
+!CartTest methodsFor: 'tests' stamp: 'OA 11/1/2023 20:50:28' prior: 50651202!
+test07itemQuantityShouldBeGreaterThanZero
+	|isbn quantity availableItems|
+	isbn := 1414893.
+	quantity := 0.
+	availableItems := OrderedCollection with: isbn.
+	
+	self should: [Cart with: isbn amount: quantity available: availableItems]
+		raise: Error
+		withExceptionDo: [:anError | 
+				self assert: (anError messageText = 						'TheAmountOfItemsHasToBePositive	')]! !
+!Cart class methodsFor: 'nil' stamp: 'OA 11/1/2023 20:52:10'!
+with: isbn amount: anAmount available: availableItems
+
+	self requireAmountGreaterThanZero: anAmount.
+	self new addToCartItem: isbn amount: anAmount ! !
+!Cart class methodsFor: 'nil' stamp: 'OA 11/1/2023 20:52:43'!
+requireAmountGreaterThanZero: anAmount
+	(anAmount > 0) ifFalse: [self error: '']! !
+!Cart class methodsFor: 'as yet unclassified' stamp: 'OA 11/1/2023 20:52:57' prior: 50651482!
+requireAmountGreaterThanZero: anAmount
+	(anAmount > 0) ifFalse: [self error: 'TheAmountOfItemsHasToBePositive']! !
+!CartTest methodsFor: 'tests' stamp: 'OA 11/1/2023 20:54:24' prior: 50651292!
+test08itemShouldBeAvailable
+
+	|isbn quantity availableItems|
+	isbn := 5473533.
+	quantity := 1.
+	availableItems := OrderedCollection with: 1232112 with: 1232134 with: 7675477.
+
+	self should: [Cart with: isbn amount: quantity available: availableItems]
+		raise: Error
+		withExceptionDo: [:anError | 
+				self assert: anError messageText = 'ThisItemIsNotAvailable	']! !
+
+!testRun: #CartTest #test07itemQuantityShouldBeGreaterThanZero stamp: 'OA 11/1/2023 20:54:30'!
+FAILURE!
+
+!testRun: #CartTest #test07itemQuantityShouldBeGreaterThanZero stamp: 'OA 11/1/2023 20:54:30'!
+FAILURE!
+!Cart class methodsFor: 'as yet unclassified' stamp: 'OA 11/1/2023 20:55:10' prior: 50651488!
+requireAmountGreaterThanZero: anAmount
+	(anAmount > 0) ifFalse: [self error: 'TheAmountOfItemsHasToBePositive']! !
+
+!testRun: #CartTest #test07itemQuantityShouldBeGreaterThanZero stamp: 'OA 11/1/2023 20:55:16'!
+FAILURE!
+
+!testRun: #CartTest #test07itemQuantityShouldBeGreaterThanZero stamp: 'OA 11/1/2023 20:55:16'!
+FAILURE!
+
+!testRun: #CartTest #test01cartStartsEmpty stamp: 'OA 11/1/2023 21:01:50'!
+PASSED!
+
+!testRun: #CartTest #test02cartWithOneBookSizeIsOne stamp: 'OA 11/1/2023 21:01:50'!
+PASSED!
+
+!testRun: #CartTest #test03cartWithTwoIdenticalBooksSizeIsTwo stamp: 'OA 11/1/2023 21:01:50'!
+PASSED!
+
+!testRun: #CartTest #test04cartWithTwoBooksSizeIsSumOfQuantities stamp: 'OA 11/1/2023 21:01:50'!
+PASSED!
+
+!testRun: #CartTest #test05cartWithTwoIdenticalBooksSizeIsSomeOfQuantities stamp: 'OA 11/1/2023 21:01:50'!
+PASSED!
+
+!testRun: #CartTest #test06cartWithTwoBooksKnowsItsContents stamp: 'OA 11/1/2023 21:01:50'!
+PASSED!
+
+!testRun: #CartTest #test07itemQuantityShouldBeGreaterThanZero stamp: 'OA 11/1/2023 21:01:50'!
+FAILURE!
+
+!testRun: #CartTest #test08itemShouldBeAvailable stamp: 'OA 11/1/2023 21:01:50'!
+FAILURE!
+!CartTest methodsFor: 'tests' stamp: 'OA 11/1/2023 21:11:00' prior: 50651461!
+test07itemQuantityShouldBeGreaterThanZero
+	|isbn quantity availableItems cart|
+	cart := Cart new.
+	isbn := 1414893.
+	quantity := 0.
+	availableItems := OrderedCollection with: isbn.
+	cart availability: availableItems.
+	self should: [cart addToCartItem: isbn amount: quantity]
+		raise: Error
+		withExceptionDo: [:anError | 
+				self assert: (anError messageText = 						'TheAmountOfItemsHasToBePositive	')]! !
+
+Object subclass: #Cart
+	instanceVariableNames: 'cart contents itemsAvailable'
+	classVariableNames: ''
+	poolDictionaries: ''
+	category: 'TusLibros'!
+
+!classDefinition: #Cart category: 'TusLibros' stamp: 'OA 11/1/2023 21:11:10'!
+Object subclass: #Cart
+	instanceVariableNames: 'cart contents itemsAvailable'
+	classVariableNames: ''
+	poolDictionaries: ''
+	category: 'TusLibros'!
+!Cart methodsFor: 'nil' stamp: 'OA 11/1/2023 21:11:29'!
+availability: availableItems
+	itemsAvailable := availableItems ! !
+!Cart methodsFor: 'operations' stamp: 'OA 11/1/2023 21:12:08' prior: 50651408!
+addToCartItem: isbn amount: quantity
+	self requireAmountGreaterThanZero: quantity.
+	
+	cart at: isbn put: ((cart at: isbn ifAbsent: [0]) + quantity).
+	contents addLast: isbn ; addLast: quantity
+! !
+!Cart methodsFor: 'nil' stamp: 'OA 11/1/2023 21:12:48'!
+requireAmountGreaterThanZero: anAmount
+	(anAmount >0) ifFalse: [self error: '']! !
+!Cart methodsFor: 'as yet unclassified' stamp: 'OA 11/1/2023 21:13:01' prior: 50651594!
+requireAmountGreaterThanZero: anAmount
+	(anAmount >0) ifFalse: [self error: 'TheAmountOfItemsHasToBePositive']! !
+
+!testRun: #CartTest #test07itemQuantityShouldBeGreaterThanZero stamp: 'OA 11/1/2023 21:13:06'!
+FAILURE!
+
+!testRun: #CartTest #test07itemQuantityShouldBeGreaterThanZero stamp: 'OA 11/1/2023 21:13:06'!
+FAILURE!
+
+!testRun: #CartTest #test07itemQuantityShouldBeGreaterThanZero stamp: 'OA 11/1/2023 21:14:28'!
+FAILURE!
+
+!methodRemoval: Cart class #requireAmountGreaterThanZero: stamp: 'OA 11/1/2023 21:14:41'!
+requireAmountGreaterThanZero: anAmount
+	(anAmount > 0) ifFalse: [self error: 'TheAmountOfItemsHasToBePositive']!
+
+!methodRemoval: Cart class #with:amount:available: stamp: 'OA 11/1/2023 21:14:43'!
+with: isbn amount: anAmount available: availableItems
+
+	self requireAmountGreaterThanZero: anAmount.
+	self new addToCartItem: isbn amount: anAmount !
+
+!testRun: #CartTest #test01cartStartsEmpty stamp: 'OA 11/1/2023 21:14:47'!
+PASSED!
+
+!testRun: #CartTest #test02cartWithOneBookSizeIsOne stamp: 'OA 11/1/2023 21:14:47'!
+PASSED!
+
+!testRun: #CartTest #test03cartWithTwoIdenticalBooksSizeIsTwo stamp: 'OA 11/1/2023 21:14:47'!
+PASSED!
+
+!testRun: #CartTest #test04cartWithTwoBooksSizeIsSumOfQuantities stamp: 'OA 11/1/2023 21:14:47'!
+PASSED!
+
+!testRun: #CartTest #test05cartWithTwoIdenticalBooksSizeIsSomeOfQuantities stamp: 'OA 11/1/2023 21:14:47'!
+PASSED!
+
+!testRun: #CartTest #test06cartWithTwoBooksKnowsItsContents stamp: 'OA 11/1/2023 21:14:47'!
+PASSED!
+
+!testRun: #CartTest #test07itemQuantityShouldBeGreaterThanZero stamp: 'OA 11/1/2023 21:14:47'!
+FAILURE!
+
+!testRun: #CartTest #test08itemShouldBeAvailable stamp: 'OA 11/1/2023 21:14:47'!
+FAILURE!
+
+!testRun: #CartTest #test07itemQuantityShouldBeGreaterThanZero stamp: 'OA 11/1/2023 21:15:37'!
+FAILURE!
+
+!testRun: #CartTest #test07itemQuantityShouldBeGreaterThanZero stamp: 'OA 11/1/2023 21:15:37'!
+FAILURE!
+
+!testRun: #CartTest #test06cartWithTwoBooksKnowsItsContents stamp: 'OA 11/1/2023 21:15:41'!
+PASSED!
+
+!testRun: #CartTest #test07itemQuantityShouldBeGreaterThanZero stamp: 'OA 11/1/2023 21:15:43'!
+FAILURE!
+!Cart methodsFor: 'as yet unclassified' stamp: 'OA 11/1/2023 21:16:25' prior: 50651600!
+requireAmountGreaterThanZero: anAmount
+	(anAmount >0) ifFalse: [self error: 'TheAmountOfItemsHasToBePositive']! !
+
+!testRun: #CartTest #test07itemQuantityShouldBeGreaterThanZero stamp: 'OA 11/1/2023 21:16:30'!
+FAILURE!
+
+!testRun: #CartTest #test07itemQuantityShouldBeGreaterThanZero stamp: 'OA 11/1/2023 21:16:30'!
+FAILURE!
+!Cart methodsFor: 'operations' stamp: 'OA 11/1/2023 21:17:49' prior: 50651586!
+addToCartItem: isbn amount: quantity
+	self requireAmountGreaterThanZero: quantity.
+	self requireItemIsAvailable: itemsAvailable.
+	
+	cart at: isbn put: ((cart at: isbn ifAbsent: [0]) + quantity).
+	contents addLast: isbn ; addLast: quantity
+! !
+!Cart methodsFor: 'operations' stamp: 'OA 11/1/2023 21:19:06' prior: 50651681!
+addToCartItem: isbn amount: quantity
+	self requireAmountGreaterThanZero: quantity.
+	self requireItemIsAvailable: isbn.
+	
+	cart at: isbn put: ((cart at: isbn ifAbsent: [0]) + quantity).
+	contents addLast: isbn ; addLast: quantity
+! !
+!Cart methodsFor: 'nil' stamp: 'OA 11/1/2023 21:19:41'!
+requireItemIsAvailable: isbn
+	(itemsAvailable includes: isbn) ifFalse: [self error: '']! !
+!Cart methodsFor: 'as yet unclassified' stamp: 'OA 11/1/2023 21:19:56' prior: 50651702!
+requireItemIsAvailable: isbn
+	(itemsAvailable includes: isbn) ifFalse: [self error: 'ThisItemIsNotAvailable']! !
+!CartTest methodsFor: 'tests' stamp: 'OA 11/1/2023 21:21:14' prior: 50651495!
+test08itemShouldBeAvailable
+
+	|isbn quantity availableItems cart|
+	cart := Cart new.
+	isbn := 5473533.
+	quantity := 1.
+	availableItems := OrderedCollection with: 1232112 with: 1232134 with: 7675477.
+	cart availability: availableItems .
+	
+	self should: [cart addToCartItem: isbn amount: quantity]
+		raise: Error
+		withExceptionDo: [:anError | 
+				self assert: anError messageText = 'ThisItemIsNotAvailable	']! !
+
+!testRun: #CartTest #test01cartStartsEmpty stamp: 'OA 11/1/2023 21:21:18'!
+PASSED!
+
+!testRun: #CartTest #test02cartWithOneBookSizeIsOne stamp: 'OA 11/1/2023 21:21:18'!
+ERROR!
+
+!testRun: #CartTest #test03cartWithTwoIdenticalBooksSizeIsTwo stamp: 'OA 11/1/2023 21:21:18'!
+ERROR!
+
+!testRun: #CartTest #test04cartWithTwoBooksSizeIsSumOfQuantities stamp: 'OA 11/1/2023 21:21:18'!
+ERROR!
+
+!testRun: #CartTest #test05cartWithTwoIdenticalBooksSizeIsSomeOfQuantities stamp: 'OA 11/1/2023 21:21:18'!
+ERROR!
+
+!testRun: #CartTest #test06cartWithTwoBooksKnowsItsContents stamp: 'OA 11/1/2023 21:21:18'!
+ERROR!
+
+!testRun: #CartTest #test07itemQuantityShouldBeGreaterThanZero stamp: 'OA 11/1/2023 21:21:18'!
+FAILURE!
+
+!testRun: #CartTest #test08itemShouldBeAvailable stamp: 'OA 11/1/2023 21:21:18'!
+FAILURE!
+!CartTest methodsFor: 'tests' stamp: 'OA 11/1/2023 21:22:20' prior: 50650602!
+test02cartWithOneBookSizeIsOne
+	|cart isbn quantity availableItems|
+	cart := Cart new.
+	isbn := 1273849.
+	quantity := 1.
+	cart addToCartItem: isbn amount: quantity.
+	availableItems := OrderedCollection with: isbn.
+	cart availability: availableItems.
+	
+	self assert: cart size = 1! !
+
+!testRun: #CartTest #test02cartWithOneBookSizeIsOne stamp: 'OA 11/1/2023 21:22:22'!
+ERROR!
+
+!testRun: #CartTest #test02cartWithOneBookSizeIsOne stamp: 'OA 11/1/2023 21:22:22'!
+ERROR!
+
+----End fileIn of /home/oscar/Downloads/linux64 (1)/linux64/Packages/TerseGuide.pck.st----!
+
+!testRun: #CartTest #test02cartWithOneBookSizeIsOne stamp: 'OA 11/1/2023 21:24:12'!
+ERROR!
+
+!testRun: #CartTest #test07itemQuantityShouldBeGreaterThanZero stamp: 'OA 11/1/2023 21:24:37'!
+FAILURE!
+
+!testRun: #CartTest #test07itemQuantityShouldBeGreaterThanZero stamp: 'OA 11/1/2023 21:24:37'!
+FAILURE!
+
+!testRun: #CartTest #test07itemQuantityShouldBeGreaterThanZero stamp: 'OA 11/1/2023 21:26:55'!
+FAILURE!
+
+!testRun: #CartTest #test07itemQuantityShouldBeGreaterThanZero stamp: 'OA 11/1/2023 21:26:55'!
+FAILURE!
+
+!testRun: #CartTest #test08itemShouldBeAvailable stamp: 'OA 11/1/2023 21:27:00'!
+FAILURE!
+
+!testRun: #CartTest #test08itemShouldBeAvailable stamp: 'OA 11/1/2023 21:27:00'!
+FAILURE!
+!Cart methodsFor: 'as yet unclassified' stamp: 'OA 11/1/2023 21:28:11' prior: 50651668!
+requireAmountGreaterThanZero: anAmount
+	(anAmount >0) ifFalse: [self error: 'TheAmountOfItemsHasToBePositive']! !
+
+!testRun: #CartTest #test07itemQuantityShouldBeGreaterThanZero stamp: 'OA 11/1/2023 21:28:16'!
+FAILURE!
+
+!testRun: #CartTest #test07itemQuantityShouldBeGreaterThanZero stamp: 'OA 11/1/2023 21:28:16'!
+FAILURE!
+
+!testRun: #CartTest #test02cartWithOneBookSizeIsOne stamp: 'OA 11/1/2023 21:29:43'!
+ERROR!
+
+!testRun: #CartTest #test02cartWithOneBookSizeIsOne stamp: 'OA 11/1/2023 21:29:43'!
+ERROR!
+!CartTest methodsFor: 'tests' stamp: 'OA 11/1/2023 21:30:48' prior: 50651755!
+test02cartWithOneBookSizeIsOne
+	|cart isbn quantity availableItems|
+	cart := Cart new.
+	isbn := 1273849.
+	quantity := 1.
+	availableItems := OrderedCollection with: isbn.
+	cart availability: availableItems.
+	cart addToCartItem: isbn amount: quantity.
+	
+	self assert: cart size = 1! !
+
+!testRun: #CartTest #test02cartWithOneBookSizeIsOne stamp: 'OA 11/1/2023 21:30:50'!
+PASSED!
+!CartTest methodsFor: 'tests' stamp: 'OA 11/1/2023 21:31:12' prior: 50650619!
+test03cartWithTwoIdenticalBooksSizeIsTwo
+	|cart isbn quantity availableItems|
+	cart := Cart new.
+	isbn := 1273849.
+	quantity := 2.
+	availableItems := OrderedCollection with: isbn.
+	cart availability: availableItems.
+	cart addToCartItem: isbn amount: quantity.
+	
+	self assert: cart size = 2! !
+
+!testRun: #CartTest #test03cartWithTwoIdenticalBooksSizeIsTwo stamp: 'OA 11/1/2023 21:31:14'!
+PASSED!
+
+!testRun: #CartTest #test04cartWithTwoBooksSizeIsSumOfQuantities stamp: 'OA 11/1/2023 21:31:16'!
+ERROR!
+
+!testRun: #CartTest #test04cartWithTwoBooksSizeIsSumOfQuantities stamp: 'OA 11/1/2023 21:31:16'!
+ERROR!
+!CartTest methodsFor: 'tests' stamp: 'OA 11/1/2023 21:32:03' prior: 50650635!
+test04cartWithTwoBooksSizeIsSumOfQuantities
+	|cart isbn isbn2 quantity quantity2 availableItems|
+	cart := Cart new.
+	isbn := 1273849.
+	quantity := 2.
+	isbn2 := 1829333.
+	quantity2 := 1.
+	availableItems := OrderedCollection with: isbn with: isbn2.
+	cart availability: availableItems.
+	cart addToCartItem: isbn amount: quantity.
+	cart addToCartItem: isbn2 amount: quantity2.
+	
+	self assert: cart size = 3! !
+
+!testRun: #CartTest #test04cartWithTwoBooksSizeIsSumOfQuantities stamp: 'OA 11/1/2023 21:32:05'!
+PASSED!
+
+!testRun: #CartTest #test05cartWithTwoIdenticalBooksSizeIsSomeOfQuantities stamp: 'OA 11/1/2023 21:32:09'!
+ERROR!
+
+!testRun: #CartTest #test05cartWithTwoIdenticalBooksSizeIsSomeOfQuantities stamp: 'OA 11/1/2023 21:32:09'!
+ERROR!
+
+!testRun: #CartTest #test05cartWithTwoIdenticalBooksSizeIsSomeOfQuantities stamp: 'OA 11/1/2023 21:32:32'!
+ERROR!
+
+!testRun: #CartTest #test05cartWithTwoIdenticalBooksSizeIsSomeOfQuantities stamp: 'OA 11/1/2023 21:32:32'!
+ERROR!
+!CartTest methodsFor: 'tests' stamp: 'OA 11/1/2023 21:32:35' prior: 50650694!
+test05cartWithTwoIdenticalBooksSizeIsSomeOfQuantities
+	|cart isbn quantity quantity2 availableItems|
+	cart := Cart new.
+	isbn := 1273849.
+	quantity := 2.
+	quantity2 := 3.
+	availableItems := OrderedCollection with: isbn.
+	cart availability: availableItems.
+	cart addToCartItem: isbn amount: quantity.
+	cart addToCartItem: isbn amount: quantity2.
+	
+	self assert: cart size = 5! !
+
+!testRun: #CartTest #test05cartWithTwoIdenticalBooksSizeIsSomeOfQuantities stamp: 'OA 11/1/2023 21:32:39'!
+PASSED!
+
+!testRun: #CartTest #test06cartWithTwoBooksKnowsItsContents stamp: 'OA 11/1/2023 21:32:42'!
+ERROR!
+
+!testRun: #CartTest #test06cartWithTwoBooksKnowsItsContents stamp: 'OA 11/1/2023 21:32:42'!
+ERROR!
+!CartTest methodsFor: 'tests' stamp: 'OA 11/1/2023 21:33:03' prior: 50650718!
+test06cartWithTwoBooksKnowsItsContents
+	|cart isbn quantity isbn2 quantity2 listOfItems availableItems|
+	cart := Cart new.
+	isbn := 1273849.
+	isbn2 := 1239203.
+	quantity := 2.
+	quantity2 := 3.
+	availableItems := OrderedCollection with: isbn with: isbn2.
+	cart availability: availableItems.
+	cart addToCartItem: isbn2 amount: quantity2.
+	cart addToCartItem: isbn amount: quantity.
+	
+	listOfItems := OrderedCollection with: isbn2 with: quantity2 with: isbn with: quantity.
+	
+	self assert: cart listContents = listOfItems! !
+
+!testRun: #CartTest #test06cartWithTwoBooksKnowsItsContents stamp: 'OA 11/1/2023 21:33:06'!
+PASSED!
+
+!testRun: #CartTest #test07itemQuantityShouldBeGreaterThanZero stamp: 'OA 11/1/2023 21:33:09'!
+FAILURE!
+!CartTest methodsFor: 'tests' stamp: 'OA 11/1/2023 21:34:20' prior: 50651554!
+test07itemQuantityShouldBeGreaterThanZero
+	|isbn quantity availableItems cart|
+	cart := Cart new.
+	isbn := 1414893.
+	quantity := 0.
+	availableItems := OrderedCollection with: isbn.
+	cart availability: availableItems.
+	self should: [cart addToCartItem: isbn amount: quantity]
+		raise: Error
+		withExceptionDo: [:anError | 
+				self assert: (anError messageText = 						'TheAmountOfItemsHasToBePositive	')]! !
+
+!testRun: #CartTest #test07itemQuantityShouldBeGreaterThanZero stamp: 'OA 11/1/2023 21:34:21'!
+FAILURE!
+
+!testRun: #CartTest #test07itemQuantityShouldBeGreaterThanZero stamp: 'OA 11/1/2023 21:34:21'!
+FAILURE!
+!Cart methodsFor: 'as yet unclassified' stamp: 'OA 11/1/2023 21:35:19' prior: 50654714!
+requireAmountGreaterThanZero: anAmount
+	(anAmount =0) ifFalse: [self error: 'TheAmountOfItemsHasToBePositive']! !
+
+!testRun: #CartTest #test07itemQuantityShouldBeGreaterThanZero stamp: 'OA 11/1/2023 21:35:25'!
+FAILURE!
+
+!testRun: #CartTest #test07itemQuantityShouldBeGreaterThanZero stamp: 'OA 11/1/2023 21:35:25'!
+FAILURE!
+!Cart methodsFor: 'as yet unclassified' stamp: 'OA 11/1/2023 21:35:40' prior: 50654877!
+requireAmountGreaterThanZero: anAmount
+	(anAmount > 0) ifFalse: [self error: 'TheAmountOfItemsHasToBePositive']! !
+
+!testRun: #CartTest #test07itemQuantityShouldBeGreaterThanZero stamp: 'OA 11/1/2023 21:35:43'!
+FAILURE!
+
+!testRun: #CartTest #test07itemQuantityShouldBeGreaterThanZero stamp: 'OA 11/1/2023 21:35:43'!
+FAILURE!
+
+!testRun: #CartTest #test01cartStartsEmpty stamp: 'OA 11/1/2023 21:42:46'!
+PASSED!
+
+!testRun: #CartTest #test02cartWithOneBookSizeIsOne stamp: 'OA 11/1/2023 21:42:46'!
+PASSED!
+
+!testRun: #CartTest #test03cartWithTwoIdenticalBooksSizeIsTwo stamp: 'OA 11/1/2023 21:42:46'!
+PASSED!
+
+!testRun: #CartTest #test04cartWithTwoBooksSizeIsSumOfQuantities stamp: 'OA 11/1/2023 21:42:46'!
+PASSED!
+
+!testRun: #CartTest #test05cartWithTwoIdenticalBooksSizeIsSomeOfQuantities stamp: 'OA 11/1/2023 21:42:46'!
+PASSED!
+
+!testRun: #CartTest #test06cartWithTwoBooksKnowsItsContents stamp: 'OA 11/1/2023 21:42:46'!
+PASSED!
+
+!testRun: #CartTest #test07itemQuantityShouldBeGreaterThanZero stamp: 'OA 11/1/2023 21:42:46'!
+FAILURE!
+
+!testRun: #CartTest #test08itemShouldBeAvailable stamp: 'OA 11/1/2023 21:42:46'!
+FAILURE!
+
+----QUIT----(1 November 2023 21:43:47) CuisUniversity-5981.image priorSource: 10219872!
