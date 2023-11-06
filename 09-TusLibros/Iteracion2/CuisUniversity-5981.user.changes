@@ -39930,3 +39930,348 @@ PASSED!
 PASSED!
 
 ----QUIT----(6 November 2023 15:31:55) CuisUniversity-5981.image priorSource: 12335970!
+
+----STARTUP---- (6 November 2023 15:58:47) as /home/oscar/Documents/ISW1/linux64/linux64/CuisUniversity-5981.image!
+
+
+----End fileIn of /home/oscar/Documents/ISW1/linux64/linux64/TusLibros.st----!
+
+!testRun: #MerchantProcessorTest #test01shouldRaiseStolenCardError stamp: 'OA 11/6/2023 16:01:14'!
+PASSED!
+
+!testRun: #MerchantProcessorTest #test02shouldRaiseInsuficientFundsError stamp: 'OA 11/6/2023 16:01:14'!
+PASSED!
+
+!testRun: #MerchantProcessorTest #test03shouldGiveTransactionID stamp: 'OA 11/6/2023 16:01:14'!
+PASSED!
+
+!testRun: #CreditCardTest #test01cannotUseEmptyNameForCreditCard stamp: 'OA 11/6/2023 16:01:24'!
+PASSED!
+
+!testRun: #CreditCardTest #test02shouldBe16DigitsCreditCardID stamp: 'OA 11/6/2023 16:01:24'!
+PASSED!
+
+!testRun: #CreditCardTest #test03shouldUseValidFormatExpiryDate stamp: 'OA 11/6/2023 16:01:24'!
+PASSED!
+
+!testRun: #CreditCardTest #test04currentMonthOfYearShouldBeValidDate stamp: 'OA 11/6/2023 16:01:24'!
+PASSED!
+
+!testRun: #CreditCardTest #test05shouldBeExpiredIfExpiryDateHasPassed stamp: 'OA 11/6/2023 16:01:24'!
+PASSED!
+
+!testRun: #CreditCardTest #test06shouldStoreLimit stamp: 'OA 11/6/2023 16:01:24'!
+PASSED!
+!MerchantProcessorTest methodsFor: 'testing' stamp: 'OA 11/6/2023 16:05:49' prior: 50677686!
+test01shouldRaiseStolenCardError
+
+	|mp stolenCreditCards creditCard limit|
+	
+	creditCard := self validCreditCard .
+	limit := creditCard limit.
+	stolenCreditCards := OrderedCollection new.
+	stolenCreditCards add: creditCard.
+	
+	mp := MerchantProcessor for: stolenCreditCards.
+	
+	self
+		should: [mp debit: 100 from: creditCard]
+		raise: Error
+		withExceptionDo: [:anError | 
+				self assert: anError messageText = mp stolenCardErrorDescription]	
+	
+	
+	
+	
+	! !
+!MerchantProcessorTest methodsFor: 'testing' stamp: 'OA 11/6/2023 16:06:19' prior: 50678071!
+test01shouldRaiseStolenCardError
+
+	|mp stolenCreditCards creditCard limit|
+	
+	creditCard := self validCreditCard .
+	limit := creditCard limit.
+	stolenCreditCards := OrderedCollection new.
+	stolenCreditCards add: creditCard.
+	
+	mp := MerchantProcessor for: stolenCreditCards.
+	
+	self
+		should: [mp debit: 100 from: creditCard]
+		raise: Error
+		withExceptionDo: [:anError | 
+				self assert: anError messageText = mp stolenCardErrorDescription.
+				self assert: creditCard limit equals: limit ]	
+	
+	
+	
+	
+	! !
+
+!testRun: #MerchantProcessorTest #test01shouldRaiseStolenCardError stamp: 'OA 11/6/2023 16:06:22'!
+PASSED!
+!CreditCard methodsFor: 'nil' stamp: 'OA 11/6/2023 16:10:02'!
+updateLimit: anAmount
+	limit := limit - anAmount! !
+!MerchantProcessor methodsFor: 'debit' stamp: 'OA 11/6/2023 16:10:30' prior: 50678002!
+debit: anAmount from: aCreditCard
+
+	| transactionId |
+	
+	(stolenCards includes: aCreditCard) ifTrue: [self error: self stolenCardErrorDescription].
+	
+	(aCreditCard limit < anAmount) ifTrue: [self error: self declinedCreditCardErrorDescription].
+	
+	aCreditCard updateLimit: anAmount.
+	
+	transactionId := '123'.
+	
+	^transactionId! !
+
+!testRun: #MerchantProcessorTest #test01shouldRaiseStolenCardError stamp: 'OA 11/6/2023 16:14:01'!
+PASSED!
+
+!testRun: #MerchantProcessorTest #test02shouldRaiseInsuficientFundsError stamp: 'OA 11/6/2023 16:14:01'!
+PASSED!
+
+!testRun: #MerchantProcessorTest #test03shouldGiveTransactionID stamp: 'OA 11/6/2023 16:14:01'!
+PASSED!
+!MerchantProcessorTest methodsFor: 'testing' stamp: 'OA 11/6/2023 16:14:45' prior: 50677702!
+test02shouldRaiseInsuficientFundsError
+
+	|mp creditCard|
+	
+	creditCard := self validCreditCard.
+	creditCard addLimit: 30.
+	
+	mp := MerchantProcessor for: OrderedCollection new.
+	
+	self
+		should: [mp debit: 100 from: creditCard]
+		raise: Error
+		withExceptionDo: [:anError | 
+				self assert: anError messageText = mp declinedCreditCardErrorDescription]	
+	
+	
+	
+	
+	! !
+!MerchantProcessorTest methodsFor: 'testing' stamp: 'OA 11/6/2023 16:15:36' prior: 50678140!
+test02shouldRaiseInsuficientFundsError
+
+	|mp creditCard limit|
+	
+	creditCard := self validCreditCard.
+	creditCard addLimit: 30.
+	limit := creditCard limit.
+	
+	mp := MerchantProcessor for: OrderedCollection new.
+	
+	self
+		should: [mp debit: 100 from: creditCard]
+		raise: Error
+		withExceptionDo: [:anError | 
+				self assert: anError messageText = mp declinedCreditCardErrorDescription.
+				self assert: creditCard limit equals: limit]	
+	
+	
+	
+	
+	! !
+
+!testRun: #MerchantProcessorTest #test02shouldRaiseInsuficientFundsError stamp: 'OA 11/6/2023 16:15:40'!
+PASSED!
+!MerchantProcessorTest methodsFor: 'testing' stamp: 'OA 11/6/2023 16:17:09' prior: 50677716!
+test03shouldGiveTransactionID
+
+	|mp creditCard limit|
+	
+	creditCard := self validCreditCard.
+	creditCard addLimit: 150.
+	limit := creditCard limit.
+	
+	mp := MerchantProcessor for: OrderedCollection new.
+	
+	self assert: (mp debit: 100 from: creditCard) = '123'.
+	self assert: creditCard limit equals: limit
+	
+	
+	
+	
+	! !
+
+!testRun: #MerchantProcessorTest #test01shouldRaiseStolenCardError stamp: 'OA 11/6/2023 16:17:12'!
+PASSED!
+
+!testRun: #MerchantProcessorTest #test02shouldRaiseInsuficientFundsError stamp: 'OA 11/6/2023 16:17:12'!
+PASSED!
+
+!testRun: #MerchantProcessorTest #test03shouldGiveTransactionID stamp: 'OA 11/6/2023 16:17:12'!
+FAILURE!
+
+!testRun: #MerchantProcessorTest #test03shouldGiveTransactionID stamp: 'OA 11/6/2023 16:17:12'!
+FAILURE!
+!MerchantProcessorTest methodsFor: 'testing' stamp: 'OA 11/6/2023 16:17:37' prior: 50678176!
+test03shouldGiveTransactionID
+
+	|mp creditCard limit|
+	
+	creditCard := self validCreditCard.
+	creditCard addLimit: 150.
+	limit := creditCard limit.
+	
+	mp := MerchantProcessor for: OrderedCollection new.
+	
+	self assert: (mp debit: 100 from: creditCard) = '123'.
+	self assert: creditCard limit equals: limit-100
+	
+	
+	
+	
+	! !
+
+!testRun: #MerchantProcessorTest #test03shouldGiveTransactionID stamp: 'OA 11/6/2023 16:17:38'!
+PASSED!
+
+!testRun: #MerchantProcessorTest #test01shouldRaiseStolenCardError stamp: 'OA 11/6/2023 16:17:41'!
+PASSED!
+
+!testRun: #MerchantProcessorTest #test02shouldRaiseInsuficientFundsError stamp: 'OA 11/6/2023 16:17:41'!
+PASSED!
+
+!testRun: #MerchantProcessorTest #test03shouldGiveTransactionID stamp: 'OA 11/6/2023 16:17:41'!
+PASSED!
+
+!testRun: #CartTest #test01NewCartsAreCreatedEmpty stamp: 'OA 11/6/2023 16:19:59'!
+PASSED!
+
+!testRun: #CartTest #test02CanNotAddItemsThatDoNotBelongToStore stamp: 'OA 11/6/2023 16:19:59'!
+PASSED!
+
+!testRun: #CartTest #test03AfterAddingAnItemTheCartIsNotEmptyAnymore stamp: 'OA 11/6/2023 16:19:59'!
+PASSED!
+
+!testRun: #CartTest #test04CanNotAddNonPositiveNumberOfItems stamp: 'OA 11/6/2023 16:19:59'!
+PASSED!
+
+!testRun: #CartTest #test05CanNotAddMoreThanOneItemNotSellByTheStore stamp: 'OA 11/6/2023 16:19:59'!
+PASSED!
+
+!testRun: #CartTest #test06CartRemembersAddedItems stamp: 'OA 11/6/2023 16:19:59'!
+PASSED!
+
+!testRun: #CartTest #test07CartDoesNotHoldNotAddedItems stamp: 'OA 11/6/2023 16:19:59'!
+PASSED!
+
+!testRun: #CartTest #test08CartRemembersTheNumberOfAddedItems stamp: 'OA 11/6/2023 16:19:59'!
+PASSED!
+
+!testRun: #CartTest #test09CartCalculatesCorrectPricesForOneItem stamp: 'OA 11/6/2023 16:19:59'!
+PASSED!
+
+!testRun: #CartTest #test10CartCalculatesCorrectPricesForManyItems stamp: 'OA 11/6/2023 16:19:59'!
+PASSED!
+
+!testRun: #CashierTest #test01cannotMakeCashierWithEmptyCart stamp: 'OA 11/6/2023 16:20:02'!
+PASSED!
+
+!testRun: #CashierTest #test02cannotUseExpiredCreditCardForCashier stamp: 'OA 11/6/2023 16:20:02'!
+PASSED!
+
+!testRun: #CashierTest #test03cannotUsePastDateForCashier stamp: 'OA 11/6/2023 16:20:02'!
+PASSED!
+
+!testRun: #CreditCardTest #test01cannotUseEmptyNameForCreditCard stamp: 'OA 11/6/2023 16:20:05'!
+PASSED!
+
+!testRun: #CreditCardTest #test02shouldBe16DigitsCreditCardID stamp: 'OA 11/6/2023 16:20:05'!
+PASSED!
+
+!testRun: #CreditCardTest #test03shouldUseValidFormatExpiryDate stamp: 'OA 11/6/2023 16:20:05'!
+PASSED!
+
+!testRun: #CreditCardTest #test04currentMonthOfYearShouldBeValidDate stamp: 'OA 11/6/2023 16:20:05'!
+PASSED!
+
+!testRun: #CreditCardTest #test05shouldBeExpiredIfExpiryDateHasPassed stamp: 'OA 11/6/2023 16:20:05'!
+PASSED!
+
+!testRun: #CreditCardTest #test06shouldStoreLimit stamp: 'OA 11/6/2023 16:20:05'!
+PASSED!
+
+!testRun: #MerchantProcessorTest #test01shouldRaiseStolenCardError stamp: 'OA 11/6/2023 16:20:07'!
+PASSED!
+
+!testRun: #MerchantProcessorTest #test02shouldRaiseInsuficientFundsError stamp: 'OA 11/6/2023 16:20:07'!
+PASSED!
+
+!testRun: #MerchantProcessorTest #test03shouldGiveTransactionID stamp: 'OA 11/6/2023 16:20:07'!
+PASSED!
+
+!testRun: #MerchantProcessorTest #test01shouldRaiseStolenCardError stamp: 'OA 11/6/2023 16:25:07'!
+PASSED!
+
+!testRun: #MerchantProcessorTest #test02shouldRaiseInsuficientFundsError stamp: 'OA 11/6/2023 16:25:07'!
+PASSED!
+
+!testRun: #MerchantProcessorTest #test03shouldGiveTransactionID stamp: 'OA 11/6/2023 16:25:07'!
+PASSED!
+
+!testRun: #CreditCardTest #test01cannotUseEmptyNameForCreditCard stamp: 'OA 11/6/2023 16:25:11'!
+PASSED!
+
+!testRun: #CreditCardTest #test02shouldBe16DigitsCreditCardID stamp: 'OA 11/6/2023 16:25:11'!
+PASSED!
+
+!testRun: #CreditCardTest #test03shouldUseValidFormatExpiryDate stamp: 'OA 11/6/2023 16:25:11'!
+PASSED!
+
+!testRun: #CreditCardTest #test04currentMonthOfYearShouldBeValidDate stamp: 'OA 11/6/2023 16:25:11'!
+PASSED!
+
+!testRun: #CreditCardTest #test05shouldBeExpiredIfExpiryDateHasPassed stamp: 'OA 11/6/2023 16:25:11'!
+PASSED!
+
+!testRun: #CreditCardTest #test06shouldStoreLimit stamp: 'OA 11/6/2023 16:25:11'!
+PASSED!
+
+!testRun: #CashierTest #test01cannotMakeCashierWithEmptyCart stamp: 'OA 11/6/2023 16:25:14'!
+PASSED!
+
+!testRun: #CashierTest #test02cannotUseExpiredCreditCardForCashier stamp: 'OA 11/6/2023 16:25:14'!
+PASSED!
+
+!testRun: #CashierTest #test03cannotUsePastDateForCashier stamp: 'OA 11/6/2023 16:25:14'!
+PASSED!
+
+!testRun: #CartTest #test01NewCartsAreCreatedEmpty stamp: 'OA 11/6/2023 16:25:16'!
+PASSED!
+
+!testRun: #CartTest #test02CanNotAddItemsThatDoNotBelongToStore stamp: 'OA 11/6/2023 16:25:16'!
+PASSED!
+
+!testRun: #CartTest #test03AfterAddingAnItemTheCartIsNotEmptyAnymore stamp: 'OA 11/6/2023 16:25:16'!
+PASSED!
+
+!testRun: #CartTest #test04CanNotAddNonPositiveNumberOfItems stamp: 'OA 11/6/2023 16:25:16'!
+PASSED!
+
+!testRun: #CartTest #test05CanNotAddMoreThanOneItemNotSellByTheStore stamp: 'OA 11/6/2023 16:25:16'!
+PASSED!
+
+!testRun: #CartTest #test06CartRemembersAddedItems stamp: 'OA 11/6/2023 16:25:16'!
+PASSED!
+
+!testRun: #CartTest #test07CartDoesNotHoldNotAddedItems stamp: 'OA 11/6/2023 16:25:16'!
+PASSED!
+
+!testRun: #CartTest #test08CartRemembersTheNumberOfAddedItems stamp: 'OA 11/6/2023 16:25:16'!
+PASSED!
+
+!testRun: #CartTest #test09CartCalculatesCorrectPricesForOneItem stamp: 'OA 11/6/2023 16:25:16'!
+PASSED!
+
+!testRun: #CartTest #test10CartCalculatesCorrectPricesForManyItems stamp: 'OA 11/6/2023 16:25:16'!
+PASSED!
+
+----QUIT----(6 November 2023 16:26:10) CuisUniversity-5981.image priorSource: 11027328!
