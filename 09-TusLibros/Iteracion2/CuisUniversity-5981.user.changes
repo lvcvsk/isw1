@@ -38844,3 +38844,947 @@ TestCase subclass: #MPTest
 	classVariableNames: ''
 	poolDictionaries: ''
 	category: 'TusLibros'!
+
+----QUIT----(6 November 2023 00:54:40) CuisUniversity-5981.image priorSource: 12291964!
+
+----STARTUP---- (6 November 2023 14:27:12) as C:\Users\lucas\OneDrive\Desktop\Facultad\isw1\windows64\CuisUniversity-5981.image!
+
+
+!classRenamed: #MPTest as: #MerchantProcessorTest stamp: 'LK 11/6/2023 14:27:28'!
+Smalltalk renameClassNamed: #MPTest as: #MerchantProcessorTest!
+!MerchantProcessorTest methodsFor: 'nil' stamp: 'LK 11/6/2023 14:27:48'!
+test01
+! !
+
+!classDefinition: #MerchantProcessor category: 'TusLibros' stamp: 'LK 11/6/2023 14:28:49'!
+Object subclass: #MerchantProcessor
+	instanceVariableNames: 'stolenCards'
+	classVariableNames: ''
+	poolDictionaries: ''
+	category: 'TusLibros'!
+!MerchantProcessorTest class methodsFor: 'nil' stamp: 'LK 11/6/2023 14:28:35'!
+test01
+
+	|mp|
+	
+	mp := MerchantProcessor new.
+	
+	! !
+!MerchantProcessor class methodsFor: 'no messages' stamp: 'LK 11/6/2023 14:29:24'!
+for: aCollectionOfStolenCards
+
+	^self new initializeFor: aCollectionOfStolenCards.! !
+!MerchantProcessor methodsFor: 'no messages' stamp: 'LK 11/6/2023 14:29:46'!
+initializeFor: aCollectionOfStolenCards
+
+	stolenCards := aCollectionOfStolenCards.! !
+!MerchantProcessor methodsFor: 'as yet unclassified' stamp: 'LK 11/6/2023 14:30:03'!
+addStolenCard: aCreditCard
+
+	stolenCards add: aCreditCard! !
+
+!classDefinition: #Cashier category: 'TusLibros' stamp: 'LK 11/6/2023 14:53:56'!
+Object subclass: #Cashier
+	instanceVariableNames: 'cart creditCard todaysDate priceCatalog mp'
+	classVariableNames: ''
+	poolDictionaries: ''
+	category: 'TusLibros'!
+!Cashier methodsFor: 'operations' stamp: 'LK 11/6/2023 14:53:53' prior: 50715524!
+checkout
+	
+	|totalAmount|
+	
+	totalAmount := cart valueOfCart.
+	
+	mp debit: totalAmount from: creditCard .
+	
+	^totalAmount.
+	
+	! !
+
+!methodRemoval: Cashier #debit:from: stamp: 'LK 11/6/2023 14:54:02'!
+debit: totalAmount from: aCreditCard 
+	!
+!MerchantProcessor methodsFor: 'as yet unclassified' stamp: 'LK 11/6/2023 14:56:06'!
+debit: anAmount from: aCreditCard! !
+!Cashier methodsFor: 'initialization' stamp: 'LK 11/6/2023 14:56:57'!
+initializeFor: aCart from: aCreditCard andTodayIs: aMonthOfYear withMP: aMerchantProcessor 
+
+	cart := aCart.
+	creditCard := aCreditCard.
+	todaysDate := aMonthOfYear.! !
+!Cashier class methodsFor: 'as yet unclassified' stamp: 'LK 11/6/2023 14:56:57' prior: 50716211!
+for: aCart from: aCreditCard andTodayIs: aMonthOfYear
+
+	(aCart isEmpty) ifTrue: [self error: self invalidCartErrorMessage].
+	
+	(aCreditCard isExpiredAsToday: aMonthOfYear) ifTrue: [self error: self expiredCCErrorMessage].
+	
+	(aMonthOfYear = GregorianMonthOfYear current) ifFalse: [self error: self notValidTodayDateMessage].
+
+	^self new initializeFor: aCart from: aCreditCard andTodayIs: aMonthOfYear withMP: mp ! !
+
+!methodRemoval: Cashier #initializeFor:from:andTodayIs: stamp: 'LK 11/6/2023 14:56:57'!
+initializeFor: aCart from: aCreditCard andTodayIs: aMonthOfYear
+
+	cart := aCart.
+	creditCard := aCreditCard.
+	todaysDate := aMonthOfYear.!
+!Cashier methodsFor: 'initialization' stamp: 'LK 11/6/2023 14:57:09' prior: 50716338!
+initializeFor: aCart from: aCreditCard andTodayIs: aMonthOfYear withMP: aMerchantProcessor 
+
+	cart := aCart.
+	creditCard := aCreditCard.
+	todaysDate := aMonthOfYear.
+	mp := aMerchantProcessor.! !
+
+!classDefinition: #CreditCard category: 'TusLibros' stamp: 'LK 11/6/2023 14:58:52'!
+Object subclass: #CreditCard
+	instanceVariableNames: 'expirationDate cardNumber cardOwner limit'
+	classVariableNames: ''
+	poolDictionaries: ''
+	category: 'TusLibros'!
+!CreditCard methodsFor: 'as yet unclassified' stamp: 'LK 11/6/2023 14:58:50'!
+addLimit: aLimitAmount
+
+	limit := aLimitAmount ! !
+!MerchantProcessorTest class methodsFor: 'as yet unclassified' stamp: 'LK 11/6/2023 15:00:42' prior: 50716293!
+test01
+
+	|mp stolenCreditCards creditCard|
+	
+	creditCard := CreditCard new.
+	stolenCreditCards := OrderedCollection new.
+	stolenCreditCards add: creditCard.
+	
+	mp := MerchantProcessor for: stolenCreditCards.
+	
+	! !
+!MerchantProcessorTest class methodsFor: 'as yet unclassified' stamp: 'LK 11/6/2023 15:00:58' prior: 50716393!
+test01
+
+	|mp stolenCreditCards creditCard|
+	
+	creditCard := CreditCard new.
+	stolenCreditCards := OrderedCollection new.
+	stolenCreditCards add: creditCard.
+	
+	mp := MerchantProcessor for: stolenCreditCards.
+	
+	mp debit: 100 from: stolenCreditCards.
+	
+	
+	! !
+!MerchantProcessorTest class methodsFor: 'as yet unclassified' stamp: 'LK 11/6/2023 15:01:25' prior: 50716404!
+test01
+
+	|mp stolenCreditCards creditCard|
+	
+	creditCard := CreditCard new.
+	stolenCreditCards := OrderedCollection new.
+	stolenCreditCards add: creditCard.
+	
+	mp := MerchantProcessor for: stolenCreditCards.
+	
+	mp debit: 100 from: stolenCreditCards.
+	
+	
+	
+	! !
+!MerchantProcessorTest methodsFor: 'as yet unclassified' stamp: 'LK 11/6/2023 15:01:34' prior: 50716282!
+test01
+
+	|mp stolenCreditCards creditCard|
+	
+	creditCard := CreditCard new.
+	stolenCreditCards := OrderedCollection new.
+	stolenCreditCards add: creditCard.
+	
+	mp := MerchantProcessor for: stolenCreditCards.
+	
+	mp debit: 100 from: stolenCreditCards.
+	
+	
+	
+	! !
+
+!methodRemoval: MerchantProcessorTest class #test01 stamp: 'LK 11/6/2023 15:01:36'!
+test01
+
+	|mp stolenCreditCards creditCard|
+	
+	creditCard := CreditCard new.
+	stolenCreditCards := OrderedCollection new.
+	stolenCreditCards add: creditCard.
+	
+	mp := MerchantProcessor for: stolenCreditCards.
+	
+	mp debit: 100 from: stolenCreditCards.
+	
+	
+	
+	!
+!MerchantProcessorTest methodsFor: 'as yet unclassified' stamp: 'LK 11/6/2023 15:03:06' prior: 50716428!
+test01
+
+	|mp stolenCreditCards creditCard|
+	
+	creditCard := CreditCard withNumber: '1234567890123567' fromOwner: 'Pepe' withExpDate: GregorianMonthOfYear current.
+	stolenCreditCards := OrderedCollection new.
+	stolenCreditCards add: creditCard.
+	
+	mp := MerchantProcessor for: stolenCreditCards.
+	
+	
+	self
+		should: [mp debit: 100 from: stolenCreditCards]
+		raise: Error
+		withExceptionDo: [:anError | 
+				self assert: anError messageText = MerchantProcessor stolenCardErrorDescription]	
+	
+	
+	
+	
+	! !
+!MerchantProcessorTest methodsFor: 'as yet unclassified' stamp: 'LK 11/6/2023 15:03:26'!
+validCreditCard
+
+	^CreditCard withNumber: '1234567890123567' fromOwner: 'Pepe' withExpDate: GregorianMonthOfYear current! !
+!MerchantProcessorTest methodsFor: 'as yet unclassified' stamp: 'LK 11/6/2023 15:03:35' prior: 50716451!
+test01
+
+	|mp stolenCreditCards creditCard|
+	
+	creditCard := self validCreditCard .
+	stolenCreditCards := OrderedCollection new.
+	stolenCreditCards add: creditCard.
+	
+	mp := MerchantProcessor for: stolenCreditCards.
+	
+	
+	self
+		should: [mp debit: 100 from: stolenCreditCards]
+		raise: Error
+		withExceptionDo: [:anError | 
+				self assert: anError messageText = MerchantProcessor stolenCardErrorDescription]	
+	
+	
+	
+	
+	! !
+
+!testRun: #MerchantProcessorTest #test01 stamp: 'LK 11/6/2023 15:03:43'!
+FAILURE!
+
+!testRun: #MerchantProcessorTest #test01 stamp: 'LK 11/6/2023 15:03:43'!
+FAILURE!
+!MerchantProcessor methodsFor: 'as yet unclassified' stamp: 'LK 11/6/2023 15:04:02'!
+stolenCardErrorDescription! !
+!MerchantProcessor methodsFor: 'as yet unclassified' stamp: 'LK 11/6/2023 15:04:35' prior: 50716334!
+debit: anAmount from: aCreditCard
+
+	(stolenCards includes: aCreditCard) ifTrue: [self error: self stolenCardErrorDescription]! !
+!MerchantProcessor methodsFor: 'as yet unclassified' stamp: 'LK 11/6/2023 15:05:01' prior: 50716499!
+stolenCardErrorDescription
+
+	^'This credit card was stolen!!'! !
+
+!testRun: #MerchantProcessorTest #test01 stamp: 'LK 11/6/2023 15:05:03'!
+FAILURE!
+
+!testRun: #MerchantProcessorTest #test01 stamp: 'LK 11/6/2023 15:05:04'!
+FAILURE!
+
+self validCreditCard!
+
+!testRun: #MerchantProcessorTest #test01 stamp: 'LK 11/6/2023 15:05:17'!
+FAILURE!
+!MerchantProcessorTest methodsFor: 'as yet unclassified' stamp: 'LK 11/6/2023 15:05:43' prior: 50716478!
+test01
+
+	|mp stolenCreditCards creditCard|
+	
+	creditCard := self validCreditCard .
+	stolenCreditCards := OrderedCollection new.
+	stolenCreditCards add: creditCard.
+	
+	mp := MerchantProcessor for: stolenCreditCards.
+	
+	
+	self
+		should: [mp debit: 100 from: stolenCreditCards]
+		raise: Error
+		withExceptionDo: [:anError | 
+				self assert: anError messageText = mp stolenCardErrorDescription]	
+	
+	
+	
+	
+	! !
+
+!testRun: #MerchantProcessorTest #test01 stamp: 'LK 11/6/2023 15:05:43'!
+FAILURE!
+
+!testRun: #MerchantProcessorTest #test01 stamp: 'LK 11/6/2023 15:05:48'!
+FAILURE!
+!MerchantProcessorTest methodsFor: 'as yet unclassified' stamp: 'LK 11/6/2023 15:05:54' prior: 50716526!
+test01
+
+	|mp stolenCreditCards creditCard|
+	
+	creditCard := self validCreditCard .
+	stolenCreditCards := OrderedCollection new.
+	stolenCreditCards add: creditCard.
+	
+	mp := MerchantProcessor for: stolenCreditCards.
+	
+	self
+		should: [mp debit: 100 from: stolenCreditCards]
+		raise: Error
+		withExceptionDo: [:anError | 
+				self assert: anError messageText = mp stolenCardErrorDescription]	
+	
+	
+	
+	
+	! !
+!MerchantProcessorTest methodsFor: 'as yet unclassified' stamp: 'LK 11/6/2023 15:06:01' prior: 50716548!
+test01
+
+	|mp stolenCreditCards creditCard|
+	
+	creditCard := self validCreditCard .
+	stolenCreditCards := OrderedCollection new.
+	stolenCreditCards add: creditCard.
+	
+	mp := MerchantProcessor for: stolenCreditCards.
+	
+	self
+		should: [mp debit: 100 from: creditCard]
+		raise: Error
+		withExceptionDo: [:anError | 
+				self assert: anError messageText = mp stolenCardErrorDescription]	
+	
+	
+	
+	
+	! !
+
+!testRun: #MerchantProcessorTest #test01 stamp: 'LK 11/6/2023 15:06:02'!
+PASSED!
+
+!testRun: #MerchantProcessorTest #test01 stamp: 'LK 11/6/2023 15:06:02'!
+PASSED!
+!MerchantProcessorTest methodsFor: 'as yet unclassified' stamp: 'LK 11/6/2023 15:06:59' prior: 50716564!
+test01
+
+	|mp stolenCreditCards creditCard|
+	
+	creditCard := self validCreditCard.
+	creditCard addLimit: 30.
+	stolenCreditCards := OrderedCollection new.
+	
+	mp := MerchantProcessor for: stolenCreditCards.
+	
+	self
+		should: [mp debit: 100 from: creditCard]
+		raise: Error
+		withExceptionDo: [:anError | 
+				self assert: anError messageText = mp declinedCreditCardErrorDescription]	
+	
+	
+	
+	
+	! !
+!MerchantProcessor methodsFor: 'as yet unclassified' stamp: 'LK 11/6/2023 15:07:21'!
+declinedCreditCardErrorDescription
+
+	^'Your card has been declined.'! !
+!CreditCard methodsFor: 'as yet unclassified' stamp: 'LK 11/6/2023 15:07:37'!
+limit
+
+	^limit! !
+!MerchantProcessor methodsFor: 'as yet unclassified' stamp: 'LK 11/6/2023 15:08:13' prior: 50716504!
+debit: anAmount from: aCreditCard
+
+	(stolenCards includes: aCreditCard) ifTrue: [self error: self stolenCardErrorDescription].
+	
+	(aCreditCard limit < anAmount) ifTrue: [self error: self declinedCreditCardErrorDescription].! !
+!MerchantProcessorTest methodsFor: 'as yet unclassified' stamp: 'LK 11/6/2023 15:08:29'!
+test02
+
+	|mp stolenCreditCards creditCard|
+	
+	creditCard := self validCreditCard.
+	creditCard addLimit: 30.
+	stolenCreditCards := OrderedCollection new.
+	
+	mp := MerchantProcessor for: stolenCreditCards.
+	
+	self
+		should: [mp debit: 100 from: creditCard]
+		raise: Error
+		withExceptionDo: [:anError | 
+				self assert: anError messageText = mp declinedCreditCardErrorDescription]	
+	
+	
+	
+	
+	! !
+!MerchantProcessorTest methodsFor: 'as yet unclassified' stamp: 'LK 11/6/2023 15:06:01' prior: 50716585!
+test01
+
+	|mp stolenCreditCards creditCard|
+	
+	creditCard := self validCreditCard .
+	stolenCreditCards := OrderedCollection new.
+	stolenCreditCards add: creditCard.
+	
+	mp := MerchantProcessor for: stolenCreditCards.
+	
+	self
+		should: [mp debit: 100 from: creditCard]
+		raise: Error
+		withExceptionDo: [:anError | 
+				self assert: anError messageText = mp stolenCardErrorDescription]	
+	
+	
+	
+	
+	! !
+
+!testRun: #MerchantProcessorTest #test01 stamp: 'LK 11/6/2023 15:08:41'!
+PASSED!
+
+!testRun: #MerchantProcessorTest #test01 stamp: 'LK 11/6/2023 15:08:41'!
+PASSED!
+
+!testRun: #MerchantProcessorTest #test02 stamp: 'LK 11/6/2023 15:08:41'!
+PASSED!
+!MerchantProcessorTest methodsFor: 'as yet unclassified' stamp: 'LK 11/6/2023 15:09:22'!
+test03
+
+	|mp stolenCreditCards creditCard|
+	
+	creditCard := self validCreditCard.
+	creditCard addLimit: 150.
+	stolenCreditCards := OrderedCollection new.
+	
+	mp := MerchantProcessor for: stolenCreditCards.
+	
+	self assert: (mp debit: 100 from: creditCard = '123')
+	
+	
+	
+	
+	! !
+!MerchantProcessor methodsFor: 'as yet unclassified' stamp: 'LK 11/6/2023 15:09:38' prior: 50716609!
+debit: anAmount from: aCreditCard
+
+	(stolenCards includes: aCreditCard) ifTrue: [self error: self stolenCardErrorDescription].
+	
+	(aCreditCard limit < anAmount) ifTrue: [self error: self declinedCreditCardErrorDescription].
+	
+	^'123'! !
+!MerchantProcessor methodsFor: 'as yet unclassified' stamp: 'LK 11/6/2023 15:09:54' prior: 50716670!
+debit: anAmount from: aCreditCard
+
+	| transactionId |
+	(stolenCards includes: aCreditCard) ifTrue: [self error: self stolenCardErrorDescription].
+	
+	(aCreditCard limit < anAmount) ifTrue: [self error: self declinedCreditCardErrorDescription].
+	
+	transactionId := '123'.
+	
+	^transactionId! !
+!MerchantProcessor methodsFor: 'as yet unclassified' stamp: 'LK 11/6/2023 15:09:58' prior: 50716681!
+debit: anAmount from: aCreditCard
+
+	| transactionId |
+	
+	(stolenCards includes: aCreditCard) ifTrue: [self error: self stolenCardErrorDescription].
+	
+	(aCreditCard limit < anAmount) ifTrue: [self error: self declinedCreditCardErrorDescription].
+	
+	transactionId := '123'.
+	
+	^transactionId! !
+
+!testRun: #MerchantProcessorTest #test03 stamp: 'LK 11/6/2023 15:10:03'!
+ERROR!
+!MerchantProcessorTest methodsFor: 'as yet unclassified' stamp: 'LK 11/6/2023 15:10:14' prior: 50716658!
+test03
+
+	|mp stolenCreditCards creditCard|
+	
+	creditCard := self validCreditCard.
+	creditCard addLimit: 150.
+	stolenCreditCards := OrderedCollection new.
+	
+	mp := MerchantProcessor for: stolenCreditCards.
+	
+	self assert: (mp debit: 100 from: creditCard) = '123'
+	
+	
+	
+	
+	! !
+
+!testRun: #MerchantProcessorTest #test03 stamp: 'LK 11/6/2023 15:10:15'!
+PASSED!
+
+!testRun: #MerchantProcessorTest #test01 stamp: 'LK 11/6/2023 15:10:15'!
+PASSED!
+
+!testRun: #MerchantProcessorTest #test02 stamp: 'LK 11/6/2023 15:10:15'!
+PASSED!
+
+!testRun: #MerchantProcessorTest #test03 stamp: 'LK 11/6/2023 15:10:15'!
+PASSED!
+!MerchantProcessorTest methodsFor: 'testing' stamp: 'LK 11/6/2023 15:11:33'!
+test01shouldRaiseStolenCardError
+
+	|mp stolenCreditCards creditCard|
+	
+	creditCard := self validCreditCard .
+	stolenCreditCards := OrderedCollection new.
+	stolenCreditCards add: creditCard.
+	
+	mp := MerchantProcessor for: stolenCreditCards.
+	
+	self
+		should: [mp debit: 100 from: creditCard]
+		raise: Error
+		withExceptionDo: [:anError | 
+				self assert: anError messageText = mp stolenCardErrorDescription]	
+	
+	
+	
+	
+	! !
+
+!methodRemoval: MerchantProcessorTest #test01 stamp: 'LK 11/6/2023 15:11:33'!
+test01
+
+	|mp stolenCreditCards creditCard|
+	
+	creditCard := self validCreditCard .
+	stolenCreditCards := OrderedCollection new.
+	stolenCreditCards add: creditCard.
+	
+	mp := MerchantProcessor for: stolenCreditCards.
+	
+	self
+		should: [mp debit: 100 from: creditCard]
+		raise: Error
+		withExceptionDo: [:anError | 
+				self assert: anError messageText = mp stolenCardErrorDescription]	
+	
+	
+	
+	
+	!
+!MerchantProcessorTest methodsFor: 'testing' stamp: 'LK 11/6/2023 15:11:44'!
+test02shouldRaiseInsuficientFundsError
+
+	|mp stolenCreditCards creditCard|
+	
+	creditCard := self validCreditCard.
+	creditCard addLimit: 30.
+	stolenCreditCards := OrderedCollection new.
+	
+	mp := MerchantProcessor for: stolenCreditCards.
+	
+	self
+		should: [mp debit: 100 from: creditCard]
+		raise: Error
+		withExceptionDo: [:anError | 
+				self assert: anError messageText = mp declinedCreditCardErrorDescription]	
+	
+	
+	
+	
+	! !
+
+!methodRemoval: MerchantProcessorTest #test02 stamp: 'LK 11/6/2023 15:11:44'!
+test02
+
+	|mp stolenCreditCards creditCard|
+	
+	creditCard := self validCreditCard.
+	creditCard addLimit: 30.
+	stolenCreditCards := OrderedCollection new.
+	
+	mp := MerchantProcessor for: stolenCreditCards.
+	
+	self
+		should: [mp debit: 100 from: creditCard]
+		raise: Error
+		withExceptionDo: [:anError | 
+				self assert: anError messageText = mp declinedCreditCardErrorDescription]	
+	
+	
+	
+	
+	!
+!MerchantProcessorTest methodsFor: 'testing' stamp: 'LK 11/6/2023 15:12:01'!
+test03shouldGiveTransactionID
+
+	|mp stolenCreditCards creditCard|
+	
+	creditCard := self validCreditCard.
+	creditCard addLimit: 150.
+	stolenCreditCards := OrderedCollection new.
+	
+	mp := MerchantProcessor for: stolenCreditCards.
+	
+	self assert: (mp debit: 100 from: creditCard) = '123'
+	
+	
+	
+	
+	! !
+
+!methodRemoval: MerchantProcessorTest #test03 stamp: 'LK 11/6/2023 15:12:01'!
+test03
+
+	|mp stolenCreditCards creditCard|
+	
+	creditCard := self validCreditCard.
+	creditCard addLimit: 150.
+	stolenCreditCards := OrderedCollection new.
+	
+	mp := MerchantProcessor for: stolenCreditCards.
+	
+	self assert: (mp debit: 100 from: creditCard) = '123'
+	
+	
+	
+	
+	!
+
+!testRun: #CreditCardTest #test05shouldBeExpiredIfExpiryDateHasPassed stamp: 'LK 11/6/2023 15:13:15'!
+PASSED!
+
+!testRun: #CartTest #test01NewCartsAreCreatedEmpty stamp: 'LK 11/6/2023 15:13:22'!
+PASSED!
+
+!testRun: #CartTest #test02CanNotAddItemsThatDoNotBelongToStore stamp: 'LK 11/6/2023 15:13:22'!
+PASSED!
+
+!testRun: #CartTest #test03AfterAddingAnItemTheCartIsNotEmptyAnymore stamp: 'LK 11/6/2023 15:13:22'!
+PASSED!
+
+!testRun: #CartTest #test04CanNotAddNonPositiveNumberOfItems stamp: 'LK 11/6/2023 15:13:22'!
+PASSED!
+
+!testRun: #CartTest #test05CanNotAddMoreThanOneItemNotSellByTheStore stamp: 'LK 11/6/2023 15:13:22'!
+PASSED!
+
+!testRun: #CartTest #test06CartRemembersAddedItems stamp: 'LK 11/6/2023 15:13:22'!
+PASSED!
+
+!testRun: #CartTest #test07CartDoesNotHoldNotAddedItems stamp: 'LK 11/6/2023 15:13:22'!
+PASSED!
+
+!testRun: #CartTest #test08CartRemembersTheNumberOfAddedItems stamp: 'LK 11/6/2023 15:13:23'!
+PASSED!
+
+!testRun: #CartTest #test09CartCalculatesCorrectPricesForOneItem stamp: 'LK 11/6/2023 15:13:23'!
+PASSED!
+
+!testRun: #CartTest #test10CartCalculatesCorrectPricesForManyItems stamp: 'LK 11/6/2023 15:13:23'!
+PASSED!
+
+!testRun: #CashierTest #test01cannotMakeCashierWithEmptyCart stamp: 'LK 11/6/2023 15:13:23'!
+PASSED!
+
+!testRun: #CashierTest #test02cannotUseExpiredCreditCardForCashier stamp: 'LK 11/6/2023 15:13:23'!
+PASSED!
+
+!testRun: #CashierTest #test03cannotUsePastDateForCashier stamp: 'LK 11/6/2023 15:13:23'!
+PASSED!
+
+!testRun: #CreditCardTest #test01cannotUseEmptyNameForCreditCard stamp: 'LK 11/6/2023 15:13:23'!
+PASSED!
+
+!testRun: #CreditCardTest #test02shouldBe16DigitsCreditCardID stamp: 'LK 11/6/2023 15:13:23'!
+PASSED!
+
+!testRun: #CreditCardTest #test03shouldUseValidFormatExpiryDate stamp: 'LK 11/6/2023 15:13:23'!
+PASSED!
+
+!testRun: #CreditCardTest #test04currentMonthOfYearShouldBeValidDate stamp: 'LK 11/6/2023 15:13:23'!
+PASSED!
+
+!testRun: #CreditCardTest #test05shouldBeExpiredIfExpiryDateHasPassed stamp: 'LK 11/6/2023 15:13:23'!
+PASSED!
+
+!testRun: #MerchantProcessorTest #test01shouldRaiseStolenCardError stamp: 'LK 11/6/2023 15:13:23'!
+PASSED!
+
+!testRun: #MerchantProcessorTest #test02shouldRaiseInsuficientFundsError stamp: 'LK 11/6/2023 15:13:23'!
+PASSED!
+
+!testRun: #MerchantProcessorTest #test03shouldGiveTransactionID stamp: 'LK 11/6/2023 15:13:23'!
+PASSED!
+
+!testRun: #CashierTest #test01cannotMakeCashierWithEmptyCart stamp: 'LK 11/6/2023 15:13:40'!
+PASSED!
+
+!testRun: #CashierTest #test02cannotUseExpiredCreditCardForCashier stamp: 'LK 11/6/2023 15:13:42'!
+PASSED!
+
+Object subclass: #Cashier
+	instanceVariableNames: 'cart creditCard todaysDate priceCatalog mp transactionId'
+	classVariableNames: ''
+	poolDictionaries: ''
+	category: 'TusLibros'!
+
+!classDefinition: #Cashier category: 'TusLibros' stamp: 'LK 11/6/2023 15:15:08'!
+Object subclass: #Cashier
+	instanceVariableNames: 'cart creditCard todaysDate priceCatalog mp transactionId'
+	classVariableNames: ''
+	poolDictionaries: ''
+	category: 'TusLibros'!
+!Cashier methodsFor: 'operations' stamp: 'LK 11/6/2023 15:15:17' prior: 50716323!
+checkout
+	
+	|totalAmount|
+	
+	totalAmount := cart valueOfCart.
+	
+	transactionId := mp debit: totalAmount from: creditCard .
+	
+	^totalAmount.
+	
+	! !
+!Cashier methodsFor: 'operations' stamp: 'LK 11/6/2023 15:15:30'!
+getTransactionId
+
+	^transactionId.! !
+!CreditCardTest methodsFor: 'testing' stamp: 'LK 11/6/2023 15:17:09'!
+test06shouldStoreLimit
+
+	|cardName idCreditCard expiryDate cc|
+	
+	cardName := 'Carlos'.
+	idCreditCard := '1234567890123456'.
+	expiryDate := GregorianMonthOfYear yearNumber: 2018 monthNumber: 12.
+	cc := CreditCard withNumber: idCreditCard fromOwner: cardName withExpDate: expiryDate.
+	
+	self assert: ((cc isExpiredAsToday: GregorianMonthOfYear current) = true)
+
+	
+	
+	
+	! !
+!CreditCardTest methodsFor: 'testing' stamp: 'LK 11/6/2023 15:17:17' prior: 50716920!
+test06shouldStoreLimit
+
+	|cardName idCreditCard expiryDate cc|
+	
+	cardName := 'Carlos'.
+	idCreditCard := '1234567890123456'.
+	expiryDate := GregorianMonthOfYear current.
+	cc := CreditCard withNumber: idCreditCard fromOwner: cardName withExpDate: expiryDate.
+	
+	self assert: ((cc isExpiredAsToday: GregorianMonthOfYear current) = true)
+
+	
+	
+	
+	! !
+!CreditCardTest methodsFor: 'testing' stamp: 'LK 11/6/2023 15:18:19' prior: 50716935!
+test06shouldStoreLimit
+
+	|cardName idCreditCard expiryDate cc|
+	
+	cardName := 'Carlos'.
+	idCreditCard := '1234567890123456'.
+	expiryDate := GregorianMonthOfYear current.
+	cc := CreditCard withNumber: idCreditCard fromOwner: cardName withExpDate: expiryDate.
+	
+	cc addLimit: 30.
+	
+	self assert: (cc limit) = 30
+
+	
+	
+	
+	! !
+
+!testRun: #CreditCardTest #test06shouldStoreLimit stamp: 'LK 11/6/2023 15:18:20'!
+PASSED!
+
+!testRun: #CreditCardTest #test01cannotUseEmptyNameForCreditCard stamp: 'LK 11/6/2023 15:18:20'!
+PASSED!
+
+!testRun: #CreditCardTest #test02shouldBe16DigitsCreditCardID stamp: 'LK 11/6/2023 15:18:20'!
+PASSED!
+
+!testRun: #CreditCardTest #test03shouldUseValidFormatExpiryDate stamp: 'LK 11/6/2023 15:18:20'!
+PASSED!
+
+!testRun: #CreditCardTest #test04currentMonthOfYearShouldBeValidDate stamp: 'LK 11/6/2023 15:18:20'!
+PASSED!
+
+!testRun: #CreditCardTest #test05shouldBeExpiredIfExpiryDateHasPassed stamp: 'LK 11/6/2023 15:18:20'!
+PASSED!
+
+!testRun: #CreditCardTest #test06shouldStoreLimit stamp: 'LK 11/6/2023 15:18:20'!
+PASSED!
+!CreditCard methodsFor: 'as yet unclassified' stamp: 'LK 11/6/2023 15:18:43' prior: 50715207!
+isExpiredAsToday: aCurrentMonthOfYear
+
+	"se puede mejorar la logica, menor o igual"
+	
+	((aCurrentMonthOfYear < expirationDate) or: [expirationDate = aCurrentMonthOfYear]) ifFalse: [^true] ifTrue: [^false].! !
+!CashierTest methodsFor: 'testing' stamp: 'LK 11/6/2023 15:20:12' prior: 50716232!
+test03cannotUsePastDateForCashier
+
+	| cart pastDate|
+	
+	cart := self createCart.
+	cart add: self itemSellByTheStore.
+	pastDate := GregorianMonthOfYear current previous: (TimeUnits month with: 1).
+	
+	self 
+		should: [Cashier for: cart from: self defaultCreditCard andTodayIs: pastDate.]
+		raise: Error - MessageNotUnderstood
+		withExceptionDo: [ :anError |
+				self assert: anError messageText = Cashier notValidTodayDateMessage.]
+! !
+
+!testRun: #CashierTest #test03cannotUsePastDateForCashier stamp: 'LK 11/6/2023 15:20:13'!
+PASSED!
+
+!testRun: #CashierTest #test01cannotMakeCashierWithEmptyCart stamp: 'LK 11/6/2023 15:20:13'!
+PASSED!
+
+!testRun: #CashierTest #test02cannotUseExpiredCreditCardForCashier stamp: 'LK 11/6/2023 15:20:13'!
+PASSED!
+
+!testRun: #CashierTest #test03cannotUsePastDateForCashier stamp: 'LK 11/6/2023 15:20:13'!
+PASSED!
+!CreditCardTest methodsFor: 'testing' stamp: 'LK 11/6/2023 15:20:39' prior: 50716067!
+test05shouldBeExpiredIfExpiryDateHasPassed
+
+	|cardName idCreditCard expiryDate cc|
+	
+	cardName := 'Carlos'.
+	idCreditCard := '1234567890123456'.
+	expiryDate := GregorianMonthOfYear current previous: (TimeUnits month with: 1)..
+	cc := CreditCard withNumber: idCreditCard fromOwner: cardName withExpDate: expiryDate.
+	
+	self assert: ((cc isExpiredAsToday: GregorianMonthOfYear current) = true)
+
+	
+	
+	
+	! !
+!CreditCardTest methodsFor: 'testing' stamp: 'LK 11/6/2023 15:20:40' prior: 50717024!
+test05shouldBeExpiredIfExpiryDateHasPassed
+
+	|cardName idCreditCard expiryDate cc|
+	
+	cardName := 'Carlos'.
+	idCreditCard := '1234567890123456'.
+	expiryDate := GregorianMonthOfYear current previous: (TimeUnits month with: 1).
+	cc := CreditCard withNumber: idCreditCard fromOwner: cardName withExpDate: expiryDate.
+	
+	self assert: ((cc isExpiredAsToday: GregorianMonthOfYear current) = true)
+
+	
+	
+	
+	! !
+
+!testRun: #CreditCardTest #test05shouldBeExpiredIfExpiryDateHasPassed stamp: 'LK 11/6/2023 15:20:41'!
+PASSED!
+
+!testRun: #CreditCardTest #test01cannotUseEmptyNameForCreditCard stamp: 'LK 11/6/2023 15:20:41'!
+PASSED!
+
+!testRun: #CreditCardTest #test02shouldBe16DigitsCreditCardID stamp: 'LK 11/6/2023 15:20:41'!
+PASSED!
+
+!testRun: #CreditCardTest #test03shouldUseValidFormatExpiryDate stamp: 'LK 11/6/2023 15:20:41'!
+PASSED!
+
+!testRun: #CreditCardTest #test04currentMonthOfYearShouldBeValidDate stamp: 'LK 11/6/2023 15:20:41'!
+PASSED!
+
+!testRun: #CreditCardTest #test05shouldBeExpiredIfExpiryDateHasPassed stamp: 'LK 11/6/2023 15:20:41'!
+PASSED!
+
+!testRun: #CreditCardTest #test06shouldStoreLimit stamp: 'LK 11/6/2023 15:20:41'!
+PASSED!
+
+!testRun: #CartTest #test01NewCartsAreCreatedEmpty stamp: 'LK 11/6/2023 15:21:40'!
+PASSED!
+
+!testRun: #CartTest #test02CanNotAddItemsThatDoNotBelongToStore stamp: 'LK 11/6/2023 15:21:40'!
+PASSED!
+
+!testRun: #CartTest #test03AfterAddingAnItemTheCartIsNotEmptyAnymore stamp: 'LK 11/6/2023 15:21:40'!
+PASSED!
+
+!testRun: #CartTest #test04CanNotAddNonPositiveNumberOfItems stamp: 'LK 11/6/2023 15:21:40'!
+PASSED!
+
+!testRun: #CartTest #test05CanNotAddMoreThanOneItemNotSellByTheStore stamp: 'LK 11/6/2023 15:21:40'!
+PASSED!
+
+!testRun: #CartTest #test06CartRemembersAddedItems stamp: 'LK 11/6/2023 15:21:40'!
+PASSED!
+
+!testRun: #CartTest #test07CartDoesNotHoldNotAddedItems stamp: 'LK 11/6/2023 15:21:40'!
+PASSED!
+
+!testRun: #CartTest #test08CartRemembersTheNumberOfAddedItems stamp: 'LK 11/6/2023 15:21:40'!
+PASSED!
+
+!testRun: #CartTest #test09CartCalculatesCorrectPricesForOneItem stamp: 'LK 11/6/2023 15:21:40'!
+PASSED!
+
+!testRun: #CartTest #test10CartCalculatesCorrectPricesForManyItems stamp: 'LK 11/6/2023 15:21:40'!
+PASSED!
+
+!testRun: #CashierTest #test01cannotMakeCashierWithEmptyCart stamp: 'LK 11/6/2023 15:21:40'!
+PASSED!
+
+!testRun: #CashierTest #test02cannotUseExpiredCreditCardForCashier stamp: 'LK 11/6/2023 15:21:40'!
+PASSED!
+
+!testRun: #CashierTest #test03cannotUsePastDateForCashier stamp: 'LK 11/6/2023 15:21:40'!
+PASSED!
+
+!testRun: #CreditCardTest #test01cannotUseEmptyNameForCreditCard stamp: 'LK 11/6/2023 15:21:40'!
+PASSED!
+
+!testRun: #CreditCardTest #test02shouldBe16DigitsCreditCardID stamp: 'LK 11/6/2023 15:21:40'!
+PASSED!
+
+!testRun: #CreditCardTest #test03shouldUseValidFormatExpiryDate stamp: 'LK 11/6/2023 15:21:40'!
+PASSED!
+
+!testRun: #CreditCardTest #test04currentMonthOfYearShouldBeValidDate stamp: 'LK 11/6/2023 15:21:40'!
+PASSED!
+
+!testRun: #CreditCardTest #test05shouldBeExpiredIfExpiryDateHasPassed stamp: 'LK 11/6/2023 15:21:40'!
+PASSED!
+
+!testRun: #CreditCardTest #test06shouldStoreLimit stamp: 'LK 11/6/2023 15:21:40'!
+PASSED!
+
+!testRun: #MerchantProcessorTest #test01shouldRaiseStolenCardError stamp: 'LK 11/6/2023 15:21:40'!
+PASSED!
+
+!testRun: #MerchantProcessorTest #test02shouldRaiseInsuficientFundsError stamp: 'LK 11/6/2023 15:21:40'!
+PASSED!
+
+!testRun: #MerchantProcessorTest #test03shouldGiveTransactionID stamp: 'LK 11/6/2023 15:21:40'!
+PASSED!
+
+----QUIT----(6 November 2023 15:22:19) CuisUniversity-5981.image priorSource: 12307847!

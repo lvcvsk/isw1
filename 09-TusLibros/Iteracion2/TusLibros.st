@@ -177,14 +177,14 @@ test02cannotUseExpiredCreditCardForCashier
 				self assert: anError messageText = Cashier expiredCCErrorMessage.]
 ! !
 
-!CashierTest methodsFor: 'testing' stamp: 'LK 11/6/2023 00:49:03'!
+!CashierTest methodsFor: 'testing' stamp: 'LK 11/6/2023 15:20:12'!
 test03cannotUsePastDateForCashier
 
 	| cart pastDate|
 	
 	cart := self createCart.
 	cart add: self itemSellByTheStore.
-	pastDate := GregorianMonthOfYear yearNumber: 2012 monthNumber: 2.
+	pastDate := GregorianMonthOfYear current previous: (TimeUnits month with: 1).
 	
 	self 
 		should: [Cashier for: cart from: self defaultCreditCard andTodayIs: pastDate.]
@@ -238,7 +238,7 @@ TestCase subclass: #CreditCardTest
 	poolDictionaries: ''
 	category: 'TusLibros'!
 
-!CreditCardTest methodsFor: 'as yet unclassified' stamp: 'LK 11/6/2023 00:41:21'!
+!CreditCardTest methodsFor: 'testing' stamp: 'LK 11/6/2023 00:41:21'!
 test01cannotUseEmptyNameForCreditCard
 
 	|invalidName idCreditCard expiryDate|
@@ -256,7 +256,7 @@ test01cannotUseEmptyNameForCreditCard
 	
 	! !
 
-!CreditCardTest methodsFor: 'as yet unclassified' stamp: 'LK 11/6/2023 00:41:47'!
+!CreditCardTest methodsFor: 'testing' stamp: 'LK 11/6/2023 00:41:47'!
 test02shouldBe16DigitsCreditCardID
 
 	|cardName invalidIdCard expiryDate|
@@ -274,7 +274,7 @@ test02shouldBe16DigitsCreditCardID
 	
 	! !
 
-!CreditCardTest methodsFor: 'as yet unclassified' stamp: 'LK 11/6/2023 00:42:05'!
+!CreditCardTest methodsFor: 'testing' stamp: 'LK 11/6/2023 00:42:05'!
 test03shouldUseValidFormatExpiryDate
 
 	|cardName idCreditCard expiryDate|
@@ -292,7 +292,7 @@ test03shouldUseValidFormatExpiryDate
 	
 	! !
 
-!CreditCardTest methodsFor: 'as yet unclassified' stamp: 'LK 11/6/2023 00:42:31'!
+!CreditCardTest methodsFor: 'testing' stamp: 'LK 11/6/2023 00:42:31'!
 test04currentMonthOfYearShouldBeValidDate
 
 	|cardName idCreditCard expiryDate cc|
@@ -309,14 +309,14 @@ test04currentMonthOfYearShouldBeValidDate
 	
 	! !
 
-!CreditCardTest methodsFor: 'as yet unclassified' stamp: 'LK 11/6/2023 00:43:16'!
+!CreditCardTest methodsFor: 'testing' stamp: 'LK 11/6/2023 15:20:40'!
 test05shouldBeExpiredIfExpiryDateHasPassed
 
 	|cardName idCreditCard expiryDate cc|
 	
 	cardName := 'Carlos'.
 	idCreditCard := '1234567890123456'.
-	expiryDate := GregorianMonthOfYear yearNumber: 2018 monthNumber: 12.
+	expiryDate := GregorianMonthOfYear current previous: (TimeUnits month with: 1).
 	cc := CreditCard withNumber: idCreditCard fromOwner: cardName withExpDate: expiryDate.
 	
 	self assert: ((cc isExpiredAsToday: GregorianMonthOfYear current) = true)
@@ -326,13 +326,99 @@ test05shouldBeExpiredIfExpiryDateHasPassed
 	
 	! !
 
+!CreditCardTest methodsFor: 'testing' stamp: 'LK 11/6/2023 15:18:19'!
+test06shouldStoreLimit
+
+	|cardName idCreditCard expiryDate cc|
+	
+	cardName := 'Carlos'.
+	idCreditCard := '1234567890123456'.
+	expiryDate := GregorianMonthOfYear current.
+	cc := CreditCard withNumber: idCreditCard fromOwner: cardName withExpDate: expiryDate.
+	
+	cc addLimit: 30.
+	
+	self assert: (cc limit) = 30
+
+	
+	
+	
+	! !
+
 
-!classDefinition: #MPTest category: 'TusLibros'!
-TestCase subclass: #MPTest
+!classDefinition: #MerchantProcessorTest category: 'TusLibros'!
+TestCase subclass: #MerchantProcessorTest
 	instanceVariableNames: ''
 	classVariableNames: ''
 	poolDictionaries: ''
 	category: 'TusLibros'!
+
+!MerchantProcessorTest methodsFor: 'testing' stamp: 'LK 11/6/2023 15:11:33'!
+test01shouldRaiseStolenCardError
+
+	|mp stolenCreditCards creditCard|
+	
+	creditCard := self validCreditCard .
+	stolenCreditCards := OrderedCollection new.
+	stolenCreditCards add: creditCard.
+	
+	mp := MerchantProcessor for: stolenCreditCards.
+	
+	self
+		should: [mp debit: 100 from: creditCard]
+		raise: Error
+		withExceptionDo: [:anError | 
+				self assert: anError messageText = mp stolenCardErrorDescription]	
+	
+	
+	
+	
+	! !
+
+!MerchantProcessorTest methodsFor: 'testing' stamp: 'LK 11/6/2023 15:11:44'!
+test02shouldRaiseInsuficientFundsError
+
+	|mp stolenCreditCards creditCard|
+	
+	creditCard := self validCreditCard.
+	creditCard addLimit: 30.
+	stolenCreditCards := OrderedCollection new.
+	
+	mp := MerchantProcessor for: stolenCreditCards.
+	
+	self
+		should: [mp debit: 100 from: creditCard]
+		raise: Error
+		withExceptionDo: [:anError | 
+				self assert: anError messageText = mp declinedCreditCardErrorDescription]	
+	
+	
+	
+	
+	! !
+
+!MerchantProcessorTest methodsFor: 'testing' stamp: 'LK 11/6/2023 15:12:01'!
+test03shouldGiveTransactionID
+
+	|mp stolenCreditCards creditCard|
+	
+	creditCard := self validCreditCard.
+	creditCard addLimit: 150.
+	stolenCreditCards := OrderedCollection new.
+	
+	mp := MerchantProcessor for: stolenCreditCards.
+	
+	self assert: (mp debit: 100 from: creditCard) = '123'
+	
+	
+	
+	
+	! !
+
+!MerchantProcessorTest methodsFor: 'testing' stamp: 'LK 11/6/2023 15:03:26'!
+validCreditCard
+
+	^CreditCard withNumber: '1234567890123567' fromOwner: 'Pepe' withExpDate: GregorianMonthOfYear current! !
 
 
 !classDefinition: #Cart category: 'TusLibros'!
@@ -426,35 +512,37 @@ acceptingItemsOf: aCatalog
 
 !classDefinition: #Cashier category: 'TusLibros'!
 Object subclass: #Cashier
-	instanceVariableNames: 'cart creditCard todaysDate priceCatalog'
+	instanceVariableNames: 'cart creditCard todaysDate priceCatalog mp transactionId'
 	classVariableNames: ''
 	poolDictionaries: ''
 	category: 'TusLibros'!
 
-!Cashier methodsFor: 'operations' stamp: 'LK 11/3/2023 03:12:11'!
+!Cashier methodsFor: 'operations' stamp: 'LK 11/6/2023 15:15:17'!
 checkout
 	
 	|totalAmount|
 	
 	totalAmount := cart valueOfCart.
 	
-	self debit: totalAmount from: creditCard .
+	transactionId := mp debit: totalAmount from: creditCard .
 	
 	^totalAmount.
 	
 	! !
 
-!Cashier methodsFor: 'operations' stamp: 'LK 11/2/2023 19:24:45'!
-debit: totalAmount from: aCreditCard 
-	! !
+!Cashier methodsFor: 'operations' stamp: 'LK 11/6/2023 15:15:30'!
+getTransactionId
+
+	^transactionId.! !
 
 
-!Cashier methodsFor: 'initialization' stamp: 'LK 11/3/2023 03:02:00'!
-initializeFor: aCart from: aCreditCard andTodayIs: aMonthOfYear
+!Cashier methodsFor: 'initialization' stamp: 'LK 11/6/2023 14:57:09'!
+initializeFor: aCart from: aCreditCard andTodayIs: aMonthOfYear withMP: aMerchantProcessor 
 
 	cart := aCart.
 	creditCard := aCreditCard.
-	todaysDate := aMonthOfYear.! !
+	todaysDate := aMonthOfYear.
+	mp := aMerchantProcessor.! !
 
 "-- -- -- -- -- -- -- -- -- -- -- -- -- -- -- -- -- -- "!
 
@@ -467,7 +555,7 @@ expiredCCErrorMessage
 
 	^'This credit card is expired.'! !
 
-!Cashier class methodsFor: 'as yet unclassified' stamp: 'LK 11/6/2023 00:48:32'!
+!Cashier class methodsFor: 'as yet unclassified' stamp: 'LK 11/6/2023 14:56:57'!
 for: aCart from: aCreditCard andTodayIs: aMonthOfYear
 
 	(aCart isEmpty) ifTrue: [self error: self invalidCartErrorMessage].
@@ -476,7 +564,7 @@ for: aCart from: aCreditCard andTodayIs: aMonthOfYear
 	
 	(aMonthOfYear = GregorianMonthOfYear current) ifFalse: [self error: self notValidTodayDateMessage].
 
-	^self new initializeFor: aCart from: aCreditCard andTodayIs: aMonthOfYear ! !
+	^self new initializeFor: aCart from: aCreditCard andTodayIs: aMonthOfYear withMP: mp ! !
 
 !Cashier class methodsFor: 'as yet unclassified' stamp: 'LK 11/3/2023 03:03:16'!
 invalidCartErrorMessage
@@ -491,10 +579,15 @@ notValidTodayDateMessage
 
 !classDefinition: #CreditCard category: 'TusLibros'!
 Object subclass: #CreditCard
-	instanceVariableNames: 'expirationDate cardNumber cardOwner'
+	instanceVariableNames: 'expirationDate cardNumber cardOwner limit'
 	classVariableNames: ''
 	poolDictionaries: ''
 	category: 'TusLibros'!
+
+!CreditCard methodsFor: 'as yet unclassified' stamp: 'LK 11/6/2023 14:58:50'!
+addLimit: aLimitAmount
+
+	limit := aLimitAmount ! !
 
 !CreditCard methodsFor: 'as yet unclassified' stamp: 'LK 11/2/2023 19:55:07'!
 initializeCard: aNumber fromOwner: aNameOfOwner withExpDate: aMonthOfYear
@@ -503,12 +596,17 @@ initializeCard: aNumber fromOwner: aNameOfOwner withExpDate: aMonthOfYear
 	cardNumber := aNumber.
 	cardOwner := aNameOfOwner.! !
 
-!CreditCard methodsFor: 'as yet unclassified' stamp: 'LK 11/3/2023 02:52:08'!
+!CreditCard methodsFor: 'as yet unclassified' stamp: 'LK 11/6/2023 15:18:43'!
 isExpiredAsToday: aCurrentMonthOfYear
 
-	"se puede mejorar la logica"
+	"se puede mejorar la logica, menor o igual"
 	
 	((aCurrentMonthOfYear < expirationDate) or: [expirationDate = aCurrentMonthOfYear]) ifFalse: [^true] ifTrue: [^false].! !
+
+!CreditCard methodsFor: 'as yet unclassified' stamp: 'LK 11/6/2023 15:07:37'!
+limit
+
+	^limit! !
 
 "-- -- -- -- -- -- -- -- -- -- -- -- -- -- -- -- -- -- "!
 
@@ -555,3 +653,57 @@ withNumber: anIDCard fromOwner: aNameOfOwner withExpDate: aMonthOfYear
 	self validateExpiryDate: aMonthOfYear.
 	
 	^self new initializeCard: anIDCard fromOwner: aNameOfOwner withExpDate: aMonthOfYear! !
+
+
+!classDefinition: #MerchantProcessor category: 'TusLibros'!
+Object subclass: #MerchantProcessor
+	instanceVariableNames: 'stolenCards'
+	classVariableNames: ''
+	poolDictionaries: ''
+	category: 'TusLibros'!
+
+!MerchantProcessor methodsFor: 'initialization' stamp: 'LK 11/6/2023 14:30:03'!
+addStolenCard: aCreditCard
+
+	stolenCards add: aCreditCard! !
+
+!MerchantProcessor methodsFor: 'initialization' stamp: 'LK 11/6/2023 14:29:46'!
+initializeFor: aCollectionOfStolenCards
+
+	stolenCards := aCollectionOfStolenCards.! !
+
+
+!MerchantProcessor methodsFor: 'debit' stamp: 'LK 11/6/2023 15:09:58'!
+debit: anAmount from: aCreditCard
+
+	| transactionId |
+	
+	(stolenCards includes: aCreditCard) ifTrue: [self error: self stolenCardErrorDescription].
+	
+	(aCreditCard limit < anAmount) ifTrue: [self error: self declinedCreditCardErrorDescription].
+	
+	transactionId := '123'.
+	
+	^transactionId! !
+
+
+!MerchantProcessor methodsFor: 'errors' stamp: 'LK 11/6/2023 15:07:21'!
+declinedCreditCardErrorDescription
+
+	^'Your card has been declined.'! !
+
+!MerchantProcessor methodsFor: 'errors' stamp: 'LK 11/6/2023 15:05:01'!
+stolenCardErrorDescription
+
+	^'This credit card was stolen!!'! !
+
+"-- -- -- -- -- -- -- -- -- -- -- -- -- -- -- -- -- -- "!
+
+!classDefinition: 'MerchantProcessor class' category: 'TusLibros'!
+MerchantProcessor class
+	instanceVariableNames: ''!
+
+!MerchantProcessor class methodsFor: 'as yet unclassified' stamp: 'LK 11/6/2023 14:29:24'!
+for: aCollectionOfStolenCards
+
+	^self new initializeFor: aCollectionOfStolenCards.! !
