@@ -355,12 +355,13 @@ TestCase subclass: #MerchantProcessorTest
 	poolDictionaries: ''
 	category: 'TusLibros'!
 
-!MerchantProcessorTest methodsFor: 'testing' stamp: 'LK 11/6/2023 15:11:33'!
+!MerchantProcessorTest methodsFor: 'testing' stamp: 'OA 11/6/2023 16:06:19'!
 test01shouldRaiseStolenCardError
 
-	|mp stolenCreditCards creditCard|
+	|mp stolenCreditCards creditCard limit|
 	
 	creditCard := self validCreditCard .
+	limit := creditCard limit.
 	stolenCreditCards := OrderedCollection new.
 	stolenCreditCards add: creditCard.
 	
@@ -370,20 +371,22 @@ test01shouldRaiseStolenCardError
 		should: [mp debit: 100 from: creditCard]
 		raise: Error
 		withExceptionDo: [:anError | 
-				self assert: anError messageText = mp stolenCardErrorDescription]	
+				self assert: anError messageText = mp stolenCardErrorDescription.
+				self assert: creditCard limit equals: limit ]	
 	
 	
 	
 	
 	! !
 
-!MerchantProcessorTest methodsFor: 'testing' stamp: 'LK 11/6/2023 15:29:16'!
+!MerchantProcessorTest methodsFor: 'testing' stamp: 'OA 11/6/2023 16:15:36'!
 test02shouldRaiseInsuficientFundsError
 
-	|mp creditCard|
+	|mp creditCard limit|
 	
 	creditCard := self validCreditCard.
 	creditCard addLimit: 30.
+	limit := creditCard limit.
 	
 	mp := MerchantProcessor for: OrderedCollection new.
 	
@@ -391,24 +394,27 @@ test02shouldRaiseInsuficientFundsError
 		should: [mp debit: 100 from: creditCard]
 		raise: Error
 		withExceptionDo: [:anError | 
-				self assert: anError messageText = mp declinedCreditCardErrorDescription]	
+				self assert: anError messageText = mp declinedCreditCardErrorDescription.
+				self assert: creditCard limit equals: limit]	
 	
 	
 	
 	
 	! !
 
-!MerchantProcessorTest methodsFor: 'testing' stamp: 'LK 11/6/2023 15:29:26'!
+!MerchantProcessorTest methodsFor: 'testing' stamp: 'OA 11/6/2023 16:17:37'!
 test03shouldGiveTransactionID
 
-	|mp creditCard|
+	|mp creditCard limit|
 	
 	creditCard := self validCreditCard.
 	creditCard addLimit: 150.
+	limit := creditCard limit.
 	
 	mp := MerchantProcessor for: OrderedCollection new.
 	
-	self assert: (mp debit: 100 from: creditCard) = '123'
+	self assert: (mp debit: 100 from: creditCard) = '123'.
+	self assert: creditCard limit equals: limit-100
 	
 	
 	
@@ -584,29 +590,35 @@ Object subclass: #CreditCard
 	poolDictionaries: ''
 	category: 'TusLibros'!
 
-!CreditCard methodsFor: 'as yet unclassified' stamp: 'LK 11/6/2023 14:58:50'!
-addLimit: aLimitAmount
-
-	limit := aLimitAmount ! !
-
-!CreditCard methodsFor: 'as yet unclassified' stamp: 'LK 11/2/2023 19:55:07'!
+!CreditCard methodsFor: 'initialization' stamp: 'LK 11/2/2023 19:55:07'!
 initializeCard: aNumber fromOwner: aNameOfOwner withExpDate: aMonthOfYear
 
 	expirationDate := aMonthOfYear.
 	cardNumber := aNumber.
 	cardOwner := aNameOfOwner.! !
 
-!CreditCard methodsFor: 'as yet unclassified' stamp: 'LK 11/6/2023 15:18:43'!
+
+!CreditCard methodsFor: 'information' stamp: 'LK 11/6/2023 15:18:43'!
 isExpiredAsToday: aCurrentMonthOfYear
 
 	"se puede mejorar la logica, menor o igual"
 	
 	((aCurrentMonthOfYear < expirationDate) or: [expirationDate = aCurrentMonthOfYear]) ifFalse: [^true] ifTrue: [^false].! !
 
-!CreditCard methodsFor: 'as yet unclassified' stamp: 'LK 11/6/2023 15:07:37'!
+!CreditCard methodsFor: 'information' stamp: 'LK 11/6/2023 15:07:37'!
 limit
 
 	^limit! !
+
+
+!CreditCard methodsFor: 'operations' stamp: 'LK 11/6/2023 14:58:50'!
+addLimit: aLimitAmount
+
+	limit := aLimitAmount ! !
+
+!CreditCard methodsFor: 'operations' stamp: 'OA 11/6/2023 16:10:02'!
+updateLimit: anAmount
+	limit := limit - anAmount! !
 
 "-- -- -- -- -- -- -- -- -- -- -- -- -- -- -- -- -- -- "!
 
@@ -673,7 +685,7 @@ initializeFor: aCollectionOfStolenCards
 	stolenCards := aCollectionOfStolenCards.! !
 
 
-!MerchantProcessor methodsFor: 'debit' stamp: 'LK 11/6/2023 15:09:58'!
+!MerchantProcessor methodsFor: 'debit' stamp: 'OA 11/6/2023 16:10:30'!
 debit: anAmount from: aCreditCard
 
 	| transactionId |
@@ -681,6 +693,8 @@ debit: anAmount from: aCreditCard
 	(stolenCards includes: aCreditCard) ifTrue: [self error: self stolenCardErrorDescription].
 	
 	(aCreditCard limit < anAmount) ifTrue: [self error: self declinedCreditCardErrorDescription].
+	
+	aCreditCard updateLimit: anAmount.
 	
 	transactionId := '123'.
 	
