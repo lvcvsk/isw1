@@ -39788,3 +39788,145 @@ PASSED!
 PASSED!
 
 ----QUIT----(6 November 2023 15:22:19) CuisUniversity-5981.image priorSource: 12307847!
+
+----STARTUP---- (6 November 2023 15:28:24) as C:\Users\lucas\OneDrive\Desktop\Facultad\isw1\windows64\CuisUniversity-5981.image!
+
+!MerchantProcessorTest methodsFor: 'testing' stamp: 'LK 11/6/2023 15:29:16' prior: 50716762!
+test02shouldRaiseInsuficientFundsError
+
+	|mp creditCard|
+	
+	creditCard := self validCreditCard.
+	creditCard addLimit: 30.
+	
+	mp := MerchantProcessor for: OrderedCollection new.
+	
+	self
+		should: [mp debit: 100 from: creditCard]
+		raise: Error
+		withExceptionDo: [:anError | 
+				self assert: anError messageText = mp declinedCreditCardErrorDescription]	
+	
+	
+	
+	
+	! !
+!MerchantProcessorTest methodsFor: 'testing' stamp: 'LK 11/6/2023 15:29:26' prior: 50716793!
+test03shouldGiveTransactionID
+
+	|mp creditCard|
+	
+	creditCard := self validCreditCard.
+	creditCard addLimit: 150.
+	
+	mp := MerchantProcessor for: OrderedCollection new.
+	
+	self assert: (mp debit: 100 from: creditCard) = '123'
+	
+	
+	
+	
+	! !
+!CashierTest methodsFor: 'testing' stamp: 'LK 11/6/2023 15:29:58' prior: 50716095!
+test01cannotMakeCashierWithEmptyCart
+
+	|cart mp|
+	
+	cart := self createCart.
+	mp := MerchantProcessor for: OrderedCollection new.
+	
+	self 
+		should: [Cashier for: cart from: self defaultCreditCard andTodayIs: self today withMP: mp.]
+		raise: Error - MessageNotUnderstood
+		withExceptionDo: [ :anError |
+				self assert: anError messageText = Cashier invalidCartErrorMessage.]! !
+!CashierTest methodsFor: 'testing' stamp: 'LK 11/6/2023 15:30:13' prior: 50716144!
+test02cannotUseExpiredCreditCardForCashier
+
+	| cart mp |
+	
+	cart := self createCart.
+	cart add: self itemSellByTheStore.
+	mp := MerchantProcessor for: OrderedCollection new.
+	self 
+		should: [Cashier for: cart from: self expiredCreditCard andTodayIs: self today withMP: mp]
+		raise: Error - MessageNotUnderstood
+		withExceptionDo: [ :anError |
+				self assert: anError messageText = Cashier expiredCCErrorMessage.]
+! !
+!CashierTest methodsFor: 'testing' stamp: 'LK 11/6/2023 15:30:40' prior: 50716995!
+test03cannotUsePastDateForCashier
+
+	| cart pastDate mp|
+	
+	cart := self createCart.
+	cart add: self itemSellByTheStore.
+	pastDate := GregorianMonthOfYear current previous: (TimeUnits month with: 1).
+	mp := MerchantProcessor for: OrderedCollection new.
+	
+	self 
+		should: [Cashier for: cart from: self defaultCreditCard andTodayIs: pastDate withMP: mp.]
+		raise: Error - MessageNotUnderstood
+		withExceptionDo: [ :anError |
+				self assert: anError messageText = Cashier notValidTodayDateMessage.]
+! !
+!Cashier class methodsFor: 'as yet unclassified' stamp: 'LK 11/6/2023 15:30:56'!
+for: aCart from: aCreditCard andTodayIs: aMonthOfYear withMP: mp
+
+	(aCart isEmpty) ifTrue: [self error: self invalidCartErrorMessage].
+	
+	(aCreditCard isExpiredAsToday: aMonthOfYear) ifTrue: [self error: self expiredCCErrorMessage].
+	
+	(aMonthOfYear = GregorianMonthOfYear current) ifFalse: [self error: self notValidTodayDateMessage].
+
+	^self new initializeFor: aCart from: aCreditCard andTodayIs: aMonthOfYear withMP: mp ! !
+
+!testRun: #CashierTest #test01cannotMakeCashierWithEmptyCart stamp: 'LK 11/6/2023 15:30:57'!
+PASSED!
+
+!testRun: #CashierTest #test02cannotUseExpiredCreditCardForCashier stamp: 'LK 11/6/2023 15:30:57'!
+PASSED!
+
+!testRun: #CashierTest #test03cannotUsePastDateForCashier stamp: 'LK 11/6/2023 15:30:57'!
+PASSED!
+
+!testRun: #CashierTest #test01cannotMakeCashierWithEmptyCart stamp: 'LK 11/6/2023 15:31:00'!
+PASSED!
+
+!testRun: #CashierTest #test02cannotUseExpiredCreditCardForCashier stamp: 'LK 11/6/2023 15:31:00'!
+PASSED!
+
+!testRun: #CashierTest #test03cannotUsePastDateForCashier stamp: 'LK 11/6/2023 15:31:00'!
+PASSED!
+
+!methodRemoval: Cashier class #for:from:andTodayIs: stamp: 'LK 11/6/2023 15:31:07'!
+for: aCart from: aCreditCard andTodayIs: aMonthOfYear
+
+	(aCart isEmpty) ifTrue: [self error: self invalidCartErrorMessage].
+	
+	(aCreditCard isExpiredAsToday: aMonthOfYear) ifTrue: [self error: self expiredCCErrorMessage].
+	
+	(aMonthOfYear = GregorianMonthOfYear current) ifFalse: [self error: self notValidTodayDateMessage].
+
+	^self new initializeFor: aCart from: aCreditCard andTodayIs: aMonthOfYear withMP: mp !
+!Cashier class methodsFor: 'as yet unclassified' stamp: 'LK 11/6/2023 15:31:18' prior: 50717233!
+for: aCart from: aCreditCard andTodayIs: aMonthOfYear withMP: aMerchantProcessor
+
+	(aCart isEmpty) ifTrue: [self error: self invalidCartErrorMessage].
+	
+	(aCreditCard isExpiredAsToday: aMonthOfYear) ifTrue: [self error: self expiredCCErrorMessage].
+	
+	(aMonthOfYear = GregorianMonthOfYear current) ifFalse: [self error: self notValidTodayDateMessage].
+
+	^self new initializeFor: aCart from: aCreditCard andTodayIs: aMonthOfYear withMP: aMerchantProcessor ! !
+
+!testRun: #CashierTest #test01cannotMakeCashierWithEmptyCart stamp: 'LK 11/6/2023 15:31:22'!
+PASSED!
+
+!testRun: #CashierTest #test02cannotUseExpiredCreditCardForCashier stamp: 'LK 11/6/2023 15:31:22'!
+PASSED!
+
+!testRun: #CashierTest #test03cannotUsePastDateForCashier stamp: 'LK 11/6/2023 15:31:22'!
+PASSED!
+
+----QUIT----(6 November 2023 15:31:55) CuisUniversity-5981.image priorSource: 12335970!

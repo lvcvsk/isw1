@@ -149,45 +149,47 @@ TestCase subclass: #CashierTest
 	poolDictionaries: ''
 	category: 'TusLibros'!
 
-!CashierTest methodsFor: 'testing' stamp: 'LK 11/6/2023 00:43:52'!
+!CashierTest methodsFor: 'testing' stamp: 'LK 11/6/2023 15:29:58'!
 test01cannotMakeCashierWithEmptyCart
 
-	|cart|
+	|cart mp|
 	
 	cart := self createCart.
+	mp := MerchantProcessor for: OrderedCollection new.
 	
 	self 
-		should: [Cashier for: cart from: self defaultCreditCard andTodayIs: self today.]
+		should: [Cashier for: cart from: self defaultCreditCard andTodayIs: self today withMP: mp.]
 		raise: Error - MessageNotUnderstood
 		withExceptionDo: [ :anError |
 				self assert: anError messageText = Cashier invalidCartErrorMessage.]! !
 
-!CashierTest methodsFor: 'testing' stamp: 'LK 11/6/2023 00:44:35'!
+!CashierTest methodsFor: 'testing' stamp: 'LK 11/6/2023 15:30:13'!
 test02cannotUseExpiredCreditCardForCashier
 
-	| cart |
+	| cart mp |
 	
 	cart := self createCart.
 	cart add: self itemSellByTheStore.
-	
+	mp := MerchantProcessor for: OrderedCollection new.
 	self 
-		should: [Cashier for: cart from: self expiredCreditCard andTodayIs: self today.]
+		should: [Cashier for: cart from: self expiredCreditCard andTodayIs: self today withMP: mp]
 		raise: Error - MessageNotUnderstood
 		withExceptionDo: [ :anError |
 				self assert: anError messageText = Cashier expiredCCErrorMessage.]
 ! !
 
-!CashierTest methodsFor: 'testing' stamp: 'LK 11/6/2023 15:20:12'!
+!CashierTest methodsFor: 'testing' stamp: 'LK 11/6/2023 15:30:40'!
 test03cannotUsePastDateForCashier
 
-	| cart pastDate|
+	| cart pastDate mp|
 	
 	cart := self createCart.
 	cart add: self itemSellByTheStore.
 	pastDate := GregorianMonthOfYear current previous: (TimeUnits month with: 1).
+	mp := MerchantProcessor for: OrderedCollection new.
 	
 	self 
-		should: [Cashier for: cart from: self defaultCreditCard andTodayIs: pastDate.]
+		should: [Cashier for: cart from: self defaultCreditCard andTodayIs: pastDate withMP: mp.]
 		raise: Error - MessageNotUnderstood
 		withExceptionDo: [ :anError |
 				self assert: anError messageText = Cashier notValidTodayDateMessage.]
@@ -375,16 +377,15 @@ test01shouldRaiseStolenCardError
 	
 	! !
 
-!MerchantProcessorTest methodsFor: 'testing' stamp: 'LK 11/6/2023 15:11:44'!
+!MerchantProcessorTest methodsFor: 'testing' stamp: 'LK 11/6/2023 15:29:16'!
 test02shouldRaiseInsuficientFundsError
 
-	|mp stolenCreditCards creditCard|
+	|mp creditCard|
 	
 	creditCard := self validCreditCard.
 	creditCard addLimit: 30.
-	stolenCreditCards := OrderedCollection new.
 	
-	mp := MerchantProcessor for: stolenCreditCards.
+	mp := MerchantProcessor for: OrderedCollection new.
 	
 	self
 		should: [mp debit: 100 from: creditCard]
@@ -397,16 +398,15 @@ test02shouldRaiseInsuficientFundsError
 	
 	! !
 
-!MerchantProcessorTest methodsFor: 'testing' stamp: 'LK 11/6/2023 15:12:01'!
+!MerchantProcessorTest methodsFor: 'testing' stamp: 'LK 11/6/2023 15:29:26'!
 test03shouldGiveTransactionID
 
-	|mp stolenCreditCards creditCard|
+	|mp creditCard|
 	
 	creditCard := self validCreditCard.
 	creditCard addLimit: 150.
-	stolenCreditCards := OrderedCollection new.
 	
-	mp := MerchantProcessor for: stolenCreditCards.
+	mp := MerchantProcessor for: OrderedCollection new.
 	
 	self assert: (mp debit: 100 from: creditCard) = '123'
 	
@@ -555,8 +555,8 @@ expiredCCErrorMessage
 
 	^'This credit card is expired.'! !
 
-!Cashier class methodsFor: 'as yet unclassified' stamp: 'LK 11/6/2023 14:56:57'!
-for: aCart from: aCreditCard andTodayIs: aMonthOfYear
+!Cashier class methodsFor: 'as yet unclassified' stamp: 'LK 11/6/2023 15:31:18'!
+for: aCart from: aCreditCard andTodayIs: aMonthOfYear withMP: aMerchantProcessor
 
 	(aCart isEmpty) ifTrue: [self error: self invalidCartErrorMessage].
 	
@@ -564,7 +564,7 @@ for: aCart from: aCreditCard andTodayIs: aMonthOfYear
 	
 	(aMonthOfYear = GregorianMonthOfYear current) ifFalse: [self error: self notValidTodayDateMessage].
 
-	^self new initializeFor: aCart from: aCreditCard andTodayIs: aMonthOfYear withMP: mp ! !
+	^self new initializeFor: aCart from: aCreditCard andTodayIs: aMonthOfYear withMP: aMerchantProcessor ! !
 
 !Cashier class methodsFor: 'as yet unclassified' stamp: 'LK 11/3/2023 03:03:16'!
 invalidCartErrorMessage
