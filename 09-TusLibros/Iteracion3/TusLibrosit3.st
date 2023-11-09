@@ -253,58 +253,133 @@ TestCase subclass: #InputInterfaceTest
 	poolDictionaries: ''
 	category: 'TusLibros'!
 
-!InputInterfaceTest methodsFor: 'as yet unclassified' stamp: 'LK 11/6/2023 20:11:45'!
-inputFrom: aUser and: aPassword 
-
-	^inputBehavior value: aUser value: aPassword ! !
-
-!InputInterfaceTest methodsFor: 'as yet unclassified' stamp: 'LK 11/6/2023 20:10:27'!
-setUp
-
-	testObjectsFactory := StoreTestObjectsFactory new.
-	inputBehavior := [ :anAmount :aCreditCard | ]! !
-
-!InputInterfaceTest methodsFor: 'as yet unclassified' stamp: 'LK 11/6/2023 20:55:04'!
-test01
+!InputInterfaceTest methodsFor: 'testing' stamp: 'LK 11/9/2023 15:39:28'!
+test01cannotCreateCardWithInvalidCredentials
 
 	|inputInterface|
 	
-	inputInterface := InputInterface with: self.
+	inputInterface := InputInterface with: self andMP: self.
 	
 	inputBehavior := [:aUser :aPassword | self error: InputInterface invalidLoginCredentialsErrorMessage].
 	
 	self
-		should: [inputInterface createCartwithUser: (testObjectsFactory invalidUser) usingPassword: (testObjectsFactory invalidPassword)]
+		should: [inputInterface createCartwithUser: testObjectsFactory invalidUser usingPassword: testObjectsFactory invalidPassword]
 		raise: Error 
 		withExceptionDo: [:anError |
 			self assert: anError messageText = InputInterface invalidLoginCredentialsErrorMessage.]
 		
 		! !
 
-!InputInterfaceTest methodsFor: 'as yet unclassified' stamp: 'LK 11/6/2023 20:59:51'!
-test02
+!InputInterfaceTest methodsFor: 'testing' stamp: 'LK 11/9/2023 15:39:31'!
+test02canCreateCartForValidUser
 
 	|inputInterface cartID|
 	
-	inputInterface := InputInterface with: self.
+	inputInterface := InputInterface with: self andMP: self.
 	
 	cartID := inputInterface createCartwithUser: testObjectsFactory validUser usingPassword: testObjectsFactory validPassword.
 	
 	self shouldnt: [inputInterface listCartWithID: cartID] 
-	raise: Error! !
+		raise: Error! !
 
-!InputInterfaceTest methodsFor: 'as yet unclassified' stamp: 'LK 11/6/2023 21:04:50'!
-test03
+!InputInterfaceTest methodsFor: 'testing' stamp: 'LK 11/9/2023 15:39:37'!
+test03cannotAddValidItemWithInvalidCartID
+
+	|inputInterface|
+	
+	inputInterface := InputInterface with: self andMP: self.
+	
+	self should: [inputInterface addToCart:  testObjectsFactory invalidCartID withAmount: 1 of: 23424.]
+		raise: Error
+		withExceptionDo: [:anError |
+			self assert: anError messageText = InputInterface InvalidCartIDErrorDescription].
+	! !
+
+!InputInterfaceTest methodsFor: 'testing' stamp: 'LK 11/9/2023 15:39:39'!
+test04canAddValidItemWithValidCartID
 
 	|inputInterface cartID|
 	
-	inputInterface := InputInterface with: self.
+	inputInterface := InputInterface with: self andMP: self.
 	
 	cartID := inputInterface createCartwithUser: testObjectsFactory validUser usingPassword: testObjectsFactory validPassword.
 	
-	inputInterface addToCart:  cartID amount: 1 of: 23424.
+	self shouldnt: [inputInterface addToCart:  cartID withAmount: 10 of: testObjectsFactory itemSellByTheStore.]
+		raise: Error.
+	! !
+
+!InputInterfaceTest methodsFor: 'testing' stamp: 'LK 11/9/2023 15:39:42'!
+test05canListItemsOfValidCart
+
+	|inputInterface cartID|
 	
-	self assert: (inputInterface listCartWithID: cartID) = (OrderedCollection with: 23424)! !
+	inputInterface := InputInterface with: self andMP: self.
+	
+	cartID := inputInterface createCartwithUser: testObjectsFactory validUser usingPassword: testObjectsFactory validPassword.
+	
+	inputInterface addToCart: cartID withAmount: 10 of: testObjectsFactory itemSellByTheStore.
+	
+	self assert: '| ISBN: validBook | Quantity: 10 |' equals: (inputInterface listCartWithID: cartID)! !
+
+!InputInterfaceTest methodsFor: 'testing' stamp: 'LK 11/9/2023 15:39:44'!
+test06cannotListItemsOfInalidCart
+
+	|inputInterface |
+	
+	inputInterface := InputInterface with: self andMP: self.
+	
+	inputInterface createCartwithUser: testObjectsFactory validUser usingPassword: testObjectsFactory validPassword.
+	
+	self should: [inputInterface listCartWithID: testObjectsFactory invalidCartID]
+		raise: Error
+		withExceptionDo: [:anError |
+			self assert: anError messageText = InputInterface InvalidCartIDErrorDescription].! !
+
+!InputInterfaceTest methodsFor: 'testing' stamp: 'LK 11/9/2023 15:39:46'!
+test07cannotCheckoutCartWithInvalidCartID
+
+	|inputInterface |
+	
+	inputInterface := InputInterface with: self andMP: self.
+	
+	inputInterface createCartwithUser: testObjectsFactory validUser usingPassword: testObjectsFactory validPassword.
+	
+	self should: [inputInterface checkoutFor: testObjectsFactory invalidCartID usingCreditCardFrom: 'Pepe' numbered: '332138791237023' withExpiryDate: GregorianMonthOfYear current]
+		raise: Error
+		withExceptionDo: [:anError |
+			self assert: anError messageText = InputInterface InvalidCartIDErrorDescription].! !
+
+!InputInterfaceTest methodsFor: 'testing' stamp: 'LK 11/9/2023 15:46:02'!
+test08canCheckout
+
+	|inputInterface cartID total|
+	
+	inputInterface := InputInterface with: self andMP: self.
+	
+	cartID := inputInterface createCartwithUser: testObjectsFactory validUser usingPassword: testObjectsFactory validPassword.
+	
+	inputInterface addToCart: cartID withAmount: 10 of: testObjectsFactory itemSellByTheStore.
+	
+	total := inputInterface checkoutFor: cartID usingCreditCardFrom: 'Juan' numbered: '1234567890123456' withExpiryDate: testObjectsFactory nonExpiringMonth .
+	
+	self assert: total = 10.
+	
+	! !
+
+
+!InputInterfaceTest methodsFor: 'setup' stamp: 'LK 11/9/2023 15:41:42'!
+debit: anAmount from: aCreditCard ! !
+
+!InputInterfaceTest methodsFor: 'setup' stamp: 'LK 11/6/2023 20:11:45'!
+inputFrom: aUser and: aPassword 
+
+	^inputBehavior value: aUser value: aPassword ! !
+
+!InputInterfaceTest methodsFor: 'setup' stamp: 'LK 11/6/2023 20:10:27'!
+setUp
+
+	testObjectsFactory := StoreTestObjectsFactory new.
+	inputBehavior := [ :anAmount :aCreditCard | ]! !
 
 
 !classDefinition: #Cart category: 'TusLibros'!
@@ -514,38 +589,94 @@ expiringOn: aMonth
 
 !classDefinition: #InputInterface category: 'TusLibros'!
 Object subclass: #InputInterface
-	instanceVariableNames: 'authenticator'
+	instanceVariableNames: 'authenticator cartsOfUsers catalog mp salesBook'
 	classVariableNames: ''
 	poolDictionaries: ''
 	category: 'TusLibros'!
 
 
-!InputInterface methodsFor: 'as yet unclassified' stamp: 'LK 11/6/2023 20:58:17'!
-addToCart: aCartId amount: aBookQuantity of: bookISBN
+!InputInterface methodsFor: 'as yet unclassified' stamp: 'LK 11/9/2023 14:09:41'!
+addToCart: aCartId withAmount: aBookQuantity of: bookISBN
 
-
-
-
+	(self validateCardID: aCartId).
+	
+	(cartsOfUsers at: aCartId) add: aBookQuantity of: bookISBN.
 ! !
 
-!InputInterface methodsFor: 'as yet unclassified' stamp: 'LK 11/6/2023 20:50:59'!
-createCartwithUser: aUser usingPassword: aPassword 
+!InputInterface methodsFor: 'as yet unclassified' stamp: 'LK 11/9/2023 15:41:30'!
+checkoutFor: aCartId usingCreditCardFrom: anOwner numbered: aCreditCardNumber withExpiryDate: aMonthOfYear
 
+	|cart cashier|
+	
+	(self validateCardID: aCartId).
+	
+	cart := cartsOfUsers at: aCartId.
+	
+	cashier := Cashier 
+		toCheckout: cart 
+		charging: (CreditCard expiringOn: aMonthOfYear)
+		throught: mp
+		on: self time
+		registeringOn: salesBook.
+		
+	cashier checkOut.! !
+
+!InputInterface methodsFor: 'as yet unclassified' stamp: 'LK 11/9/2023 13:50:18'!
+createCartwithUser: aUser usingPassword: aPassword 
+	
+	|cartID| 
 	authenticator inputFrom: aUser and: aPassword.
 	
-	^13! !
+	cartID := self generateNewCartID.
+	cartsOfUsers at: cartID put: (Cart acceptingItemsOf: catalog).
+	
+	^cartID! !
 
-!InputInterface methodsFor: 'as yet unclassified' stamp: 'LK 11/6/2023 20:52:25'!
-initializeFor: anAuthenticator
+!InputInterface methodsFor: 'as yet unclassified' stamp: 'LK 11/9/2023 13:48:48'!
+generateNewCartID
+
+	^ (100000 atRandom)! !
+
+!InputInterface methodsFor: 'as yet unclassified' stamp: 'LK 11/9/2023 15:36:46'!
+initializeFor: anAuthenticator andMP: merchantProcessor 
 
 	authenticator := anAuthenticator.
-
+	
+	mp := merchantProcessor.
+	
+	cartsOfUsers := Dictionary new.
+	
+	salesBook := Dictionary new.
+	
+	catalog := Dictionary new
+		at: 'validBook' put: 10;
+		yourself.
 ! !
 
-!InputInterface methodsFor: 'as yet unclassified' stamp: 'LK 11/6/2023 20:35:29'!
+!InputInterface methodsFor: 'as yet unclassified' stamp: 'LK 11/9/2023 14:31:59'!
 listCartWithID: cartID
 
-	^OrderedCollection new.! !
+	|list cart|
+	
+	(self validateCardID: cartID).
+	
+	list := '|'.
+	
+	cart := cartsOfUsers at: cartID.
+	
+	(catalog keys) do: [:aBook | ((cart occurrencesOf: aBook) > 0) ifTrue:[
+				list := list, ' ISBN: ', aBook, ' | Quantity: ', (cart occurrencesOf: aBook) asString, ' |']
+		].
+	^list.
+	! !
+
+!InputInterface methodsFor: 'as yet unclassified' stamp: 'LK 11/9/2023 15:03:35'!
+time! !
+
+!InputInterface methodsFor: 'as yet unclassified' stamp: 'LK 11/9/2023 13:44:40'!
+validateCardID: aCartId
+
+	((cartsOfUsers keys) includes: aCartId) ifFalse: [self error: InputInterface InvalidCartIDErrorDescription].! !
 
 "-- -- -- -- -- -- -- -- -- -- -- -- -- -- -- -- -- -- "!
 
@@ -554,15 +685,20 @@ InputInterface class
 	instanceVariableNames: ''!
 
 
-!InputInterface class methodsFor: 'as yet unclassified' stamp: 'LK 11/6/2023 20:06:22'!
+!InputInterface class methodsFor: 'as yet unclassified' stamp: 'LK 11/9/2023 13:41:34'!
+InvalidCartIDErrorDescription
+
+	^'The Cart ID given is invalid'! !
+
+!InputInterface class methodsFor: 'as yet unclassified' stamp: 'LK 11/9/2023 13:41:14'!
 invalidLoginCredentialsErrorMessage
 
-	^'Your login info is invalid'! !
+	^'Your login credentials are invalid'! !
 
-!InputInterface class methodsFor: 'as yet unclassified' stamp: 'LK 11/6/2023 20:52:41'!
-with: anAuthenticator
+!InputInterface class methodsFor: 'as yet unclassified' stamp: 'LK 11/9/2023 15:38:11'!
+with: anAuthenticator andMP: aMerchantProcessor 
 
-	^self new initializeFor: anAuthenticator.! !
+	^self new initializeFor: anAuthenticator andMP: aMerchantProcessor.! !
 
 
 !classDefinition: #Sale category: 'TusLibros'!
@@ -618,6 +754,10 @@ itemSellByTheStorePrice
 	
 	^10! !
 
+!StoreTestObjectsFactory methodsFor: 'items' stamp: 'LK 11/9/2023 15:45:48'!
+nonExpiringMonth
+	^(Month month: today monthIndex year: today yearNumber + 1)! !
+
 
 !StoreTestObjectsFactory methodsFor: 'cart' stamp: 'HernanWilkinson 6/17/2013 18:08'!
 createCart
@@ -648,6 +788,11 @@ initialize
 
 	today := DateAndTime now! !
 
+
+!StoreTestObjectsFactory methodsFor: 'database' stamp: 'LK 11/9/2023 13:31:33'!
+invalidCartID
+
+	^'nononononono'! !
 
 !StoreTestObjectsFactory methodsFor: 'database' stamp: 'LK 11/6/2023 20:19:33'!
 invalidPassword

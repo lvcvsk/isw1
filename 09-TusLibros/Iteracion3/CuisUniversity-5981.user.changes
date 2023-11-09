@@ -40584,3 +40584,1706 @@ test03
 	inputInterface addToCart:  cartID amount: 1 of: 23424.
 	
 	self assert: (inputInterface listCartWithID: cartID) = (OrderedCollection with: 23424)! !
+
+----QUIT----(6 November 2023 21:11:02) CuisUniversity-5981.image priorSource: 12341151!
+
+----STARTUP---- (6 November 2023 21:36:12) as C:\Users\lucas\OneDrive\Desktop\Facultad\isw1\windows64\CuisUniversity-5981.image!
+
+
+Object subclass: #InputInterface
+	instanceVariableNames: 'authenticator cartsOfUsers'
+	classVariableNames: ''
+	poolDictionaries: ''
+	category: 'TusLibros'!
+
+!classDefinition: #InputInterface category: 'TusLibros' stamp: 'LK 11/6/2023 21:37:22'!
+Object subclass: #InputInterface
+	instanceVariableNames: 'authenticator cartsOfUsers'
+	classVariableNames: ''
+	poolDictionaries: ''
+	category: 'TusLibros'!
+!InputInterfaceTest methodsFor: 'as yet unclassified' stamp: 'LK 11/6/2023 21:43:20' prior: 50719170!
+test01
+
+	|inputInterface|
+	
+	inputInterface := InputInterface with: self.
+	
+	inputBehavior := [:aUser :aPassword | self error: InputInterface invalidLoginCredentialsErrorMessage].
+	
+	self
+		should: [inputInterface createCartwithUser: testObjectsFactory invalidUser usingPassword: testObjectsFactory invalidPassword]
+		raise: Error 
+		withExceptionDo: [:anError |
+			self assert: anError messageText = InputInterface invalidLoginCredentialsErrorMessage.]
+		
+		! !
+!InputInterfaceTest methodsFor: 'as yet unclassified' stamp: 'LK 11/6/2023 21:43:24' prior: 50719310!
+test01
+
+	|inputInterface|
+	
+	inputInterface := InputInterface with: self.
+	
+	inputBehavior := [:aUser :aPassword | self error: InputInterface invalidLoginCredentialsErrorMessage].
+	
+	self
+		should: [inputInterface createCartwithUser: testObjectsFactory validUser usingPassword: testObjectsFactory invalidPassword]
+		raise: Error 
+		withExceptionDo: [:anError |
+			self assert: anError messageText = InputInterface invalidLoginCredentialsErrorMessage.]
+		
+		! !
+!InputInterfaceTest methodsFor: 'as yet unclassified' stamp: 'LK 11/6/2023 21:43:28'!
+test01b
+
+	|inputInterface|
+	
+	inputInterface := InputInterface with: self.
+	
+	inputBehavior := [:aUser :aPassword | self error: InputInterface invalidLoginCredentialsErrorMessage].
+	
+	self
+		should: [inputInterface createCartwithUser: testObjectsFactory validUser usingPassword: testObjectsFactory invalidPassword]
+		raise: Error 
+		withExceptionDo: [:anError |
+			self assert: anError messageText = InputInterface invalidLoginCredentialsErrorMessage.]
+		
+		! !
+
+!methodRemoval: InputInterfaceTest #test01b stamp: 'LK 11/6/2023 21:43:51'!
+test01b
+
+	|inputInterface|
+	
+	inputInterface := InputInterface with: self.
+	
+	inputBehavior := [:aUser :aPassword | self error: InputInterface invalidLoginCredentialsErrorMessage].
+	
+	self
+		should: [inputInterface createCartwithUser: testObjectsFactory validUser usingPassword: testObjectsFactory invalidPassword]
+		raise: Error 
+		withExceptionDo: [:anError |
+			self assert: anError messageText = InputInterface invalidLoginCredentialsErrorMessage.]
+		
+		!
+!InputInterfaceTest methodsFor: 'as yet unclassified' stamp: 'LK 11/6/2023 21:43:58' prior: 50719328!
+test01
+
+	|inputInterface|
+	
+	inputInterface := InputInterface with: self.
+	
+	inputBehavior := [:aUser :aPassword | self error: InputInterface invalidLoginCredentialsErrorMessage].
+	
+	self
+		should: [inputInterface createCartwithUser: testObjectsFactory invalidUser usingPassword: testObjectsFactory invalidPassword]
+		raise: Error 
+		withExceptionDo: [:anError |
+			self assert: anError messageText = InputInterface invalidLoginCredentialsErrorMessage.]
+		
+		! !
+
+----QUIT----(6 November 2023 21:53:29) CuisUniversity-5981.image priorSource: 12404453!
+
+----STARTUP---- (9 November 2023 12:31:42) as C:\Users\lucas\OneDrive\Desktop\Facultad\isw1\windows64\CuisUniversity-5981.image!
+
+!InputInterfaceTest methodsFor: 'as yet unclassified' stamp: 'LK 11/9/2023 13:24:22'!
+test01cannotCreateCardWithInvalidCredentials
+
+	|inputInterface|
+	
+	inputInterface := InputInterface with: self.
+	
+	inputBehavior := [:aUser :aPassword | self error: InputInterface invalidLoginCredentialsErrorMessage].
+	
+	self
+		should: [inputInterface createCartwithUser: testObjectsFactory invalidUser usingPassword: testObjectsFactory invalidPassword]
+		raise: Error 
+		withExceptionDo: [:anError |
+			self assert: anError messageText = InputInterface invalidLoginCredentialsErrorMessage.]
+		
+		! !
+
+!methodRemoval: InputInterfaceTest #test01 stamp: 'LK 11/9/2023 13:24:22'!
+test01
+
+	|inputInterface|
+	
+	inputInterface := InputInterface with: self.
+	
+	inputBehavior := [:aUser :aPassword | self error: InputInterface invalidLoginCredentialsErrorMessage].
+	
+	self
+		should: [inputInterface createCartwithUser: testObjectsFactory invalidUser usingPassword: testObjectsFactory invalidPassword]
+		raise: Error 
+		withExceptionDo: [:anError |
+			self assert: anError messageText = InputInterface invalidLoginCredentialsErrorMessage.]
+		
+		!
+!InputInterfaceTest methodsFor: 'as yet unclassified' stamp: 'LK 11/9/2023 13:24:41'!
+test02canCreateCartForValidUser
+
+	|inputInterface cartID|
+	
+	inputInterface := InputInterface with: self.
+	
+	cartID := inputInterface createCartwithUser: testObjectsFactory validUser usingPassword: testObjectsFactory validPassword.
+	
+	self shouldnt: [inputInterface listCartWithID: cartID] 
+	raise: Error! !
+
+!methodRemoval: InputInterfaceTest #test02 stamp: 'LK 11/9/2023 13:24:41'!
+test02
+
+	|inputInterface cartID|
+	
+	inputInterface := InputInterface with: self.
+	
+	cartID := inputInterface createCartwithUser: testObjectsFactory validUser usingPassword: testObjectsFactory validPassword.
+	
+	self shouldnt: [inputInterface listCartWithID: cartID] 
+	raise: Error!
+!InputInterface methodsFor: 'as yet unclassified' stamp: 'LK 11/9/2023 13:25:14' prior: 50719117!
+initializeFor: anAuthenticator
+
+	authenticator := anAuthenticator.
+	
+	cartsOfUsers := Dictionary new.
+
+! !
+!InputInterface methodsFor: 'as yet unclassified' stamp: 'LK 11/9/2023 13:26:04' prior: 50719022!
+listCartWithID: cartID
+
+	|list|
+	list := ''.
+	^list.! !
+!InputInterfaceTest methodsFor: 'as yet unclassified' stamp: 'LK 11/9/2023 13:28:24' prior: 50719276!
+test03
+
+	|inputInterface cartID|
+	
+	inputInterface := InputInterface with: self.
+	
+	inputInterface addToCart:  testObjectsFactory invalidCartID amount: 1 of: 23424.
+	
+	self assert: (inputInterface listCartWithID: cartID) = (OrderedCollection with: 23424)! !
+!InputInterfaceTest methodsFor: 'as yet unclassified' stamp: 'LK 11/9/2023 13:30:17' prior: 50719478!
+test03
+
+	|inputInterface |
+	
+	inputInterface := InputInterface with: self.
+	
+	self should: [inputInterface addToCart:  testObjectsFactory invalidCartID amount: 1 of: 23424.]
+		raise: Error
+		withExceptionDo: [:anError |
+			self assert: anError messageText = inputInterface AddItemToInvalidCartIDErrorDescription].
+	! !
+!InputInterfaceTest methodsFor: 'as yet unclassified' stamp: 'LK 11/9/2023 13:30:21' prior: 50719490!
+test03
+
+	|inputInterface|
+	
+	inputInterface := InputInterface with: self.
+	
+	self should: [inputInterface addToCart:  testObjectsFactory invalidCartID amount: 1 of: 23424.]
+		raise: Error
+		withExceptionDo: [:anError |
+			self assert: anError messageText = inputInterface AddItemToInvalidCartIDErrorDescription].
+	! !
+!InputInterface methodsFor: 'as yet unclassified' stamp: 'LK 11/9/2023 13:31:12'!
+addToCart: aCartId withAmount: aBookQuantity of: bookISBN
+
+
+
+
+! !
+!InputInterfaceTest methodsFor: 'as yet unclassified' stamp: 'LK 11/9/2023 13:31:12' prior: 50719504!
+test03
+
+	|inputInterface|
+	
+	inputInterface := InputInterface with: self.
+	
+	self should: [inputInterface addToCart:  testObjectsFactory invalidCartID withAmount: 1 of: 23424.]
+		raise: Error
+		withExceptionDo: [:anError |
+			self assert: anError messageText = inputInterface AddItemToInvalidCartIDErrorDescription].
+	! !
+
+!methodRemoval: InputInterface #addToCart:amount:of: stamp: 'LK 11/9/2023 13:31:12'!
+addToCart: aCartId amount: aBookQuantity of: bookISBN
+
+
+
+
+!
+!StoreTestObjectsFactory methodsFor: 'database' stamp: 'LK 11/9/2023 13:31:33'!
+invalidCartID
+
+	^'nononononono'! !
+!InputInterfaceTest methodsFor: 'as yet unclassified' stamp: 'LK 11/9/2023 13:32:14'!
+test03cannotAddValidItemWithInvalidCartID
+
+	|inputInterface|
+	
+	inputInterface := InputInterface with: self.
+	
+	self should: [inputInterface addToCart:  testObjectsFactory invalidCartID withAmount: 1 of: 23424.]
+		raise: Error
+		withExceptionDo: [:anError |
+			self assert: anError messageText = inputInterface AddItemToInvalidCartIDErrorDescription].
+	! !
+
+!methodRemoval: InputInterfaceTest #test03 stamp: 'LK 11/9/2023 13:32:14'!
+test03
+
+	|inputInterface|
+	
+	inputInterface := InputInterface with: self.
+	
+	self should: [inputInterface addToCart:  testObjectsFactory invalidCartID withAmount: 1 of: 23424.]
+		raise: Error
+		withExceptionDo: [:anError |
+			self assert: anError messageText = inputInterface AddItemToInvalidCartIDErrorDescription].
+	!
+!InputInterfaceTest methodsFor: 'as yet unclassified' stamp: 'LK 11/9/2023 13:40:55' prior: 50719545!
+test03cannotAddValidItemWithInvalidCartID
+
+	|inputInterface|
+	
+	inputInterface := InputInterface with: self.
+	
+	self should: [inputInterface addToCart:  testObjectsFactory invalidCartID withAmount: 1 of: 23424.]
+		raise: Error
+		withExceptionDo: [:anError |
+			self assert: anError messageText = InputInterface InvalidCartIDErrorDescription].
+	! !
+!InputInterface class methodsFor: 'as yet unclassified' stamp: 'LK 11/9/2023 13:41:03'!
+InvalidCartIDErrorDescription! !
+!InputInterface class methodsFor: 'as yet unclassified' stamp: 'LK 11/9/2023 13:41:14' prior: 50718722!
+invalidLoginCredentialsErrorMessage
+
+	^'Your login credentials are invalid'! !
+!InputInterface class methodsFor: 'as yet unclassified' stamp: 'LK 11/9/2023 13:41:34' prior: 50719586!
+InvalidCartIDErrorDescription
+
+	^'The Cart ID given is invalid'! !
+
+!testRun: #InputInterfaceTest #test03cannotAddValidItemWithInvalidCartID stamp: 'LK 11/9/2023 13:41:40'!
+FAILURE!
+!InputInterface methodsFor: 'as yet unclassified' stamp: 'LK 11/9/2023 13:42:24' prior: 50719517!
+addToCart: aCartId withAmount: aBookQuantity of: bookISBN
+
+	(self validateCartID: aCartId)
+
+
+
+
+! !
+!InputInterface methodsFor: 'as yet unclassified' stamp: 'LK 11/9/2023 13:44:24'!
+validateCardID: aCartId
+
+	((cartsOfUsers keys) includes: aCartId) ifFalse: [self error: InputInterface ]! !
+!InputInterface methodsFor: 'as yet unclassified' stamp: 'LK 11/9/2023 13:44:40' prior: 50719612!
+validateCardID: aCartId
+
+	((cartsOfUsers keys) includes: aCartId) ifFalse: [self error: InputInterface InvalidCartIDErrorDescription].! !
+
+!testRun: #InputInterfaceTest #test03cannotAddValidItemWithInvalidCartID stamp: 'LK 11/9/2023 13:44:49'!
+FAILURE!
+!InputInterface methodsFor: 'as yet unclassified' stamp: 'LK 11/9/2023 13:45:15' prior: 50719606!
+addToCart: aCartId withAmount: aBookQuantity of: bookISBN
+
+	(self validateCardID: aCartId)
+
+
+
+
+! !
+
+!testRun: #InputInterfaceTest #test03cannotAddValidItemWithInvalidCartID stamp: 'LK 11/9/2023 13:45:17'!
+PASSED!
+
+!classDefinition: #InputInterface category: 'TusLibros' stamp: 'LK 11/9/2023 13:47:24'!
+Object subclass: #InputInterface
+	instanceVariableNames: 'authenticator cartsOfUsers catalog'
+	classVariableNames: ''
+	poolDictionaries: ''
+	category: 'TusLibros'!
+!InputInterface methodsFor: 'as yet unclassified' stamp: 'LK 11/9/2023 13:47:20' prior: 50719101!
+createCartwithUser: aUser usingPassword: aPassword 
+	
+	|cartID| 
+	authenticator inputFrom: aUser and: aPassword.
+	
+	cartID := self generateNewCartID.
+	cartsOfUsers at: cartID put: (Cart acceptingItemsOf: catalog)
+	
+	^13! !
+!InputInterface methodsFor: 'as yet unclassified' stamp: 'LK 11/9/2023 13:47:37' prior: 50719648!
+createCartwithUser: aUser usingPassword: aPassword 
+	
+	|cartID| 
+	authenticator inputFrom: aUser and: aPassword.
+	
+	cartID := self generateNewCartID.
+	cartsOfUsers at: cartID put: (Cart acceptingItemsOf: catalog)
+	
+	^cartID! !
+!InputInterface methodsFor: 'as yet unclassified' stamp: 'LK 11/9/2023 13:48:48'!
+generateNewCartID
+
+	^ (100000 atRandom)! !
+
+!testRun: #InputInterfaceTest #test03cannotAddValidItemWithInvalidCartID stamp: 'LK 11/9/2023 13:49:06'!
+PASSED!
+
+!testRun: #InputInterfaceTest #test01cannotCreateCardWithInvalidCredentials stamp: 'LK 11/9/2023 13:49:06'!
+PASSED!
+
+!testRun: #InputInterfaceTest #test02canCreateCartForValidUser stamp: 'LK 11/9/2023 13:49:06'!
+ERROR!
+
+!testRun: #InputInterfaceTest #test03cannotAddValidItemWithInvalidCartID stamp: 'LK 11/9/2023 13:49:06'!
+PASSED!
+
+!testRun: #InputInterfaceTest #test02canCreateCartForValidUser stamp: 'LK 11/9/2023 13:49:06'!
+ERROR!
+
+!testRun: #InputInterfaceTest #test03cannotAddValidItemWithInvalidCartID stamp: 'LK 11/9/2023 13:49:14'!
+PASSED!
+
+!testRun: #InputInterfaceTest #test02canCreateCartForValidUser stamp: 'LK 11/9/2023 13:49:15'!
+ERROR!
+
+!testRun: #InputInterfaceTest #test02canCreateCartForValidUser stamp: 'LK 11/9/2023 13:49:15'!
+ERROR!
+
+!testRun: #InputInterfaceTest #test01cannotCreateCardWithInvalidCredentials stamp: 'LK 11/9/2023 13:49:32'!
+PASSED!
+!InputInterfaceTest methodsFor: 'as yet unclassified' stamp: 'LK 11/9/2023 13:49:54' prior: 50719442!
+test02canCreateCartForValidUser
+
+	|inputInterface cartID|
+	
+	inputInterface := InputInterface with: self.
+	
+	cartID := inputInterface createCartwithUser: testObjectsFactory validUser usingPassword: testObjectsFactory validPassword.
+	
+	self shouldnt: [inputInterface listCartWithID: cartID] 
+		raise: Error! !
+
+!testRun: #InputInterfaceTest #test02canCreateCartForValidUser stamp: 'LK 11/9/2023 13:49:59'!
+ERROR!
+!InputInterface methodsFor: 'as yet unclassified' stamp: 'LK 11/9/2023 13:50:18' prior: 50719659!
+createCartwithUser: aUser usingPassword: aPassword 
+	
+	|cartID| 
+	authenticator inputFrom: aUser and: aPassword.
+	
+	cartID := self generateNewCartID.
+	cartsOfUsers at: cartID put: (Cart acceptingItemsOf: catalog).
+	
+	^cartID! !
+
+!testRun: #InputInterfaceTest #test01cannotCreateCardWithInvalidCredentials stamp: 'LK 11/9/2023 13:50:21'!
+PASSED!
+
+!testRun: #InputInterfaceTest #test02canCreateCartForValidUser stamp: 'LK 11/9/2023 13:50:21'!
+PASSED!
+
+!testRun: #InputInterfaceTest #test03cannotAddValidItemWithInvalidCartID stamp: 'LK 11/9/2023 13:50:21'!
+PASSED!
+!InputInterfaceTest methodsFor: 'testing' stamp: 'LK 11/9/2023 13:51:14'!
+test04canAddValidItemWithValidCartID! !
+!InputInterfaceTest methodsFor: 'testing' stamp: 'LK 11/9/2023 13:51:34' prior: 50719741!
+test04canAddValidItemWithValidCartID
+
+	|inputInterface cartID|
+	
+	inputInterface := InputInterface with: self.
+	
+	cartID := inputInterface createCartwithUser: testObjectsFactory validUser usingPassword: testObjectsFactory validPassword.! !
+!InputInterfaceTest methodsFor: 'testing' stamp: 'LK 11/9/2023 13:52:12' prior: 50719746!
+test04canAddValidItemWithValidCartID
+
+	|inputInterface cartID|
+	
+	inputInterface := InputInterface with: self.
+	
+	cartID := inputInterface createCartwithUser: testObjectsFactory validUser usingPassword: testObjectsFactory validPassword.
+	
+	inputInterface addToCart:  testObjectsFactory invalidCartID withAmount: 1 of: testObjectsFactory itemSellByTheStore.! !
+!InputInterfaceTest methodsFor: 'testing' stamp: 'LK 11/9/2023 13:52:21' prior: 50719757!
+test04canAddValidItemWithValidCartID
+
+	|inputInterface cartID|
+	
+	inputInterface := InputInterface with: self.
+	
+	cartID := inputInterface createCartwithUser: testObjectsFactory validUser usingPassword: testObjectsFactory validPassword.
+	
+	inputInterface addToCart:  cartID withAmount: 1 of: testObjectsFactory itemSellByTheStore.! !
+!InputInterfaceTest methodsFor: 'testing' stamp: 'LK 11/9/2023 13:52:55' prior: 50719772!
+test04canAddValidItemWithValidCartID
+
+	|inputInterface cartID|
+	
+	inputInterface := InputInterface with: self.
+	
+	cartID := inputInterface createCartwithUser: testObjectsFactory validUser usingPassword: testObjectsFactory validPassword.
+	
+	inputInterface addToCart:  cartID withAmount: 1 of: testObjectsFactory itemSellByTheStore.
+	
+	self assert: ' ISBN: validBook | Quantity: 3 |' equals: (inputInterface listCart: cartID)! !
+!InputInterfaceTest methodsFor: 'testing' stamp: 'LK 11/9/2023 13:53:06' prior: 50719786!
+test04canAddValidItemWithValidCartID
+
+	|inputInterface cartID|
+	
+	inputInterface := InputInterface with: self.
+	
+	cartID := inputInterface createCartwithUser: testObjectsFactory validUser usingPassword: testObjectsFactory validPassword.
+	
+	inputInterface addToCart:  cartID withAmount: 1 of: testObjectsFactory itemSellByTheStore.
+	
+	self assert: ' ISBN: validBook | Quantity: 3 |' equals: (inputInterface listCartWithID: cartID)! !
+!InputInterface methodsFor: 'as yet unclassified' stamp: 'LK 11/9/2023 13:57:37' prior: 50719466!
+initializeFor: anAuthenticator
+
+	authenticator := anAuthenticator.
+	
+	cartsOfUsers := Dictionary new.
+	
+	catalog := 1.
+! !
+!InputInterface methodsFor: 'as yet unclassified' stamp: 'LK 11/9/2023 13:58:43' prior: 50719820!
+initializeFor: anAuthenticator
+
+	authenticator := anAuthenticator.
+	
+	cartsOfUsers := Dictionary new.
+	
+	catalog := Dictionary new
+		at: 'validBook' put: 10;
+		yourself.
+! !
+!InputInterfaceTest methodsFor: 'testing' stamp: 'LK 11/9/2023 13:59:54' prior: 50719803!
+test04canAddValidItemWithValidCartID
+
+	|inputInterface cartID|
+	
+	inputInterface := InputInterface with: self.
+	
+	cartID := inputInterface createCartwithUser: testObjectsFactory validUser usingPassword: testObjectsFactory validPassword.
+	
+	inputInterface addToCart:  cartID withAmount: 10 of: testObjectsFactory itemSellByTheStore.
+	
+	self assert: '| ISBN: validBook | Quantity: 10 |' equals: (inputInterface listCartWithID: cartID)! !
+
+!testRun: #InputInterfaceTest #test04canAddValidItemWithValidCartID stamp: 'LK 11/9/2023 13:59:56'!
+FAILURE!
+!InputInterfaceTest methodsFor: 'testing' stamp: 'LK 11/9/2023 14:00:05' prior: 50719836!
+test04canAddValidItemWithValidCartID
+
+	|inputInterface cartID|
+	
+	inputInterface := InputInterface with: self.
+	
+	cartID := inputInterface createCartwithUser: testObjectsFactory validUser usingPassword: testObjectsFactory validPassword.
+	
+	inputInterface addToCart:  cartID withAmount: 10 of: testObjectsFactory itemSellByTheStore.
+	
+	self assert: '| ISBN: validBook | Quantity: 10 |' = (inputInterface listCartWithID: cartID)! !
+
+!testRun: #InputInterfaceTest #test04canAddValidItemWithValidCartID stamp: 'LK 11/9/2023 14:00:06'!
+FAILURE!
+!InputInterface methodsFor: 'as yet unclassified' stamp: 'LK 11/9/2023 14:02:22' prior: 50719473!
+listCartWithID: cartID
+
+	|list|
+	list := '|'.
+	^list.! !
+!InputInterface methodsFor: 'as yet unclassified' stamp: 'LK 11/9/2023 14:05:43' prior: 50719876!
+listCartWithID: cartID
+
+	|list|
+	list := '|'.
+	
+	cartsOfUsers keysAndValuesDo: [:aKey :aValue | 
+			list := list, ' ISBN: ', aKey, ' | Quantity: ', aValue asString, ' |']. 
+	^list.
+	! !
+
+!testRun: #InputInterfaceTest #test04canAddValidItemWithValidCartID stamp: 'LK 11/9/2023 14:05:45'!
+ERROR!
+
+!testRun: #InputInterfaceTest #test04canAddValidItemWithValidCartID stamp: 'LK 11/9/2023 14:05:45'!
+ERROR!
+!InputInterface methodsFor: 'as yet unclassified' stamp: 'LK 11/9/2023 14:06:01' prior: 50719881!
+listCartWithID: cartID
+
+	|list|
+	list := '|'.
+	
+	cartsOfUsers keysAndValuesDo: [:aKey :aValue | 
+			list := list, ' ISBN: ', aKey, ' | Quantity: ', (aValue asString) , ' |']. 
+	^list.
+	! !
+
+!testRun: #InputInterfaceTest #test04canAddValidItemWithValidCartID stamp: 'LK 11/9/2023 14:06:04'!
+ERROR!
+
+!testRun: #InputInterfaceTest #test04canAddValidItemWithValidCartID stamp: 'LK 11/9/2023 14:06:04'!
+ERROR!
+!InputInterface methodsFor: 'as yet unclassified' stamp: 'LK 11/9/2023 14:06:33' prior: 50719897!
+listCartWithID: cartID
+
+	|list|
+	list := '|'.
+	
+	cartsOfUsers keysAndValuesDo: [:aKey :aValue | 
+			list := list, ' ISBN: ', (aKey asString), ' | Quantity: ', (aValue asString) , ' |']. 
+	^list.
+	! !
+
+!testRun: #InputInterfaceTest #test04canAddValidItemWithValidCartID stamp: 'LK 11/9/2023 14:06:35'!
+FAILURE!
+
+!testRun: #InputInterfaceTest #test04canAddValidItemWithValidCartID stamp: 'LK 11/9/2023 14:06:35'!
+FAILURE!
+!InputInterfaceTest methodsFor: 'testing' stamp: 'LK 11/9/2023 14:06:42' prior: 50719856!
+test04canAddValidItemWithValidCartID
+
+	|inputInterface cartID|
+	
+	inputInterface := InputInterface with: self.
+	
+	cartID := inputInterface createCartwithUser: testObjectsFactory validUser usingPassword: testObjectsFactory validPassword.
+	
+	inputInterface addToCart:  cartID withAmount: 10 of: testObjectsFactory itemSellByTheStore.
+	
+	self assert: '| ISBN: validBook | Quantity: 10 |' equals: (inputInterface listCartWithID: cartID)! !
+
+!testRun: #InputInterfaceTest #test04canAddValidItemWithValidCartID stamp: 'LK 11/9/2023 14:06:43'!
+FAILURE!
+
+!testRun: #InputInterfaceTest #test04canAddValidItemWithValidCartID stamp: 'LK 11/9/2023 14:06:43'!
+FAILURE!
+!InputInterface methodsFor: 'as yet unclassified' stamp: 'LK 11/9/2023 14:09:10' prior: 50719630!
+addToCart: aCartId withAmount: aBookQuantity of: bookISBN
+
+	(self validateCardID: aCartId).
+	
+	(cartsOfUsers at: aCartId).
+
+
+
+
+! !
+!InputInterface methodsFor: 'as yet unclassified' stamp: 'LK 11/9/2023 14:09:41' prior: 50719953!
+addToCart: aCartId withAmount: aBookQuantity of: bookISBN
+
+	(self validateCardID: aCartId).
+	
+	(cartsOfUsers at: aCartId) add: aBookQuantity of: bookISBN.
+! !
+
+!testRun: #InputInterfaceTest #test04canAddValidItemWithValidCartID stamp: 'LK 11/9/2023 14:09:43'!
+FAILURE!
+
+!testRun: #InputInterfaceTest #test04canAddValidItemWithValidCartID stamp: 'LK 11/9/2023 14:09:43'!
+FAILURE!
+!InputInterface methodsFor: 'as yet unclassified' stamp: 'LK 11/9/2023 14:13:06' prior: 50719913!
+listCartWithID: cartID
+
+	|list cart|
+	list := '|'.
+	
+	cart := cartsOfUsers at: cartID.
+	
+	
+	^list.
+	! !
+!InputInterface methodsFor: 'as yet unclassified' stamp: 'LK 11/9/2023 14:16:30' prior: 50719976!
+listCartWithID: cartID
+
+	|list cart|
+	list := '|'.
+	
+	cart := cartsOfUsers at: cartID.
+	
+	(catalog keys) do: [:aBook | (cart occurrencesOf: aBook > 0) ifTrue:[
+				list := list, ' ISBN: ', aBook, ' | Quantity: ', (cart occurrencesOf: aBook) asString]
+		]	
+	^list.
+	! !
+!InputInterfaceTest methodsFor: 'testing' stamp: 'LK 11/9/2023 14:16:59' prior: 50719929!
+test04canAddValidItemWithValidCartID
+
+	|inputInterface cartID|
+	
+	inputInterface := InputInterface with: self.
+	
+	cartID := inputInterface createCartwithUser: testObjectsFactory validUser usingPassword: testObjectsFactory validPassword.
+	
+	inputInterface addToCart:  cartID withAmount: 10 of: testObjectsFactory itemSellByTheStore.
+	
+	self assert: '| ISBN: validBook | Quantity: 10 |' equals: (inputInterface listCartWithID: cartID)! !
+!InputInterface methodsFor: 'as yet unclassified' stamp: 'LK 11/9/2023 14:17:10' prior: 50719983!
+listCartWithID: cartID
+
+	|list cart|
+	list := '|'.
+	
+	cart := cartsOfUsers at: cartID.
+	
+	(catalog keys) do: [:aBook | (cart occurrencesOf: aBook > 0) ifTrue:[
+				list := list, '| ISBN: ', aBook, ' | Quantity: ', (cart occurrencesOf: aBook) asString]
+		]	
+	^list.
+	! !
+!InputInterface methodsFor: 'as yet unclassified' stamp: 'LK 11/9/2023 14:17:21' prior: 50720012!
+listCartWithID: cartID
+
+	|list cart|
+	list := '|'.
+	
+	cart := cartsOfUsers at: cartID.
+	
+	(catalog keys) do: [:aBook | (cart occurrencesOf: aBook > 0) ifTrue:[
+				list := list, '| ISBN: ', aBook, ' | Quantity: ', (cart occurrencesOf: aBook) asString, ' |']
+		]	
+	^list.
+	! !
+
+!testRun: #InputInterfaceTest #test04canAddValidItemWithValidCartID stamp: 'LK 11/9/2023 14:17:23'!
+ERROR!
+
+!testRun: #InputInterfaceTest #test04canAddValidItemWithValidCartID stamp: 'LK 11/9/2023 14:17:23'!
+ERROR!
+!InputInterface methodsFor: 'as yet unclassified' stamp: 'LK 11/9/2023 14:17:37' prior: 50720024!
+listCartWithID: cartID
+
+	|list cart|
+	list := '|'.
+	
+	cart := cartsOfUsers at: cartID.
+	
+	(catalog keys) do: [:aBook | (cart occurrencesOf: aBook > 0) ifTrue:[
+				list := list, '| ISBN: ', aBook, ' | Quantity: ', (cart occurrencesOf: aBook) asString, ' |']
+		].
+	^list.
+	! !
+
+!testRun: #InputInterfaceTest #test04canAddValidItemWithValidCartID stamp: 'LK 11/9/2023 14:17:38'!
+ERROR!
+
+!testRun: #InputInterfaceTest #test04canAddValidItemWithValidCartID stamp: 'LK 11/9/2023 14:17:38'!
+ERROR!
+!InputInterface methodsFor: 'as yet unclassified' stamp: 'LK 11/9/2023 14:18:13' prior: 50720043!
+listCartWithID: cartID
+
+	|list cart|
+	list := '|'.
+	
+	cart := cartsOfUsers at: cartID.
+	
+	(catalog keys) do: [:aBook | ((cart occurrencesOf: aBook) > 0) ifTrue:[
+				list := list, '| ISBN: ', aBook, ' | Quantity: ', (cart occurrencesOf: aBook) asString, ' |']
+		].
+	^list.
+	! !
+
+!testRun: #InputInterfaceTest #test04canAddValidItemWithValidCartID stamp: 'LK 11/9/2023 14:18:15'!
+FAILURE!
+
+!testRun: #InputInterfaceTest #test04canAddValidItemWithValidCartID stamp: 'LK 11/9/2023 14:18:15'!
+FAILURE!
+
+!testRun: #InputInterfaceTest #test04canAddValidItemWithValidCartID stamp: 'LK 11/9/2023 14:18:25'!
+FAILURE!
+
+!testRun: #InputInterfaceTest #test04canAddValidItemWithValidCartID stamp: 'LK 11/9/2023 14:18:26'!
+FAILURE!
+!InputInterface methodsFor: 'as yet unclassified' stamp: 'LK 11/9/2023 14:18:40' prior: 50720062!
+listCartWithID: cartID
+
+	|list cart|
+	list := '|'.
+	
+	cart := cartsOfUsers at: cartID.
+	
+	(catalog keys) do: [:aBook | ((cart occurrencesOf: aBook) > 0) ifTrue:[
+				list := list, ' ISBN: ', aBook, ' | Quantity: ', (cart occurrencesOf: aBook) asString, ' |']
+		].
+	^list.
+	! !
+
+!testRun: #InputInterfaceTest #test04canAddValidItemWithValidCartID stamp: 'LK 11/9/2023 14:18:41'!
+PASSED!
+!InputInterfaceTest methodsFor: 'testing' stamp: 'LK 11/9/2023 14:20:36' prior: 50719995!
+test04canAddValidItemWithValidCartID
+
+	|inputInterface cartID|
+	
+	inputInterface := InputInterface with: self.
+	
+	cartID := inputInterface createCartwithUser: testObjectsFactory validUser usingPassword: testObjectsFactory validPassword.
+	
+	inputInterface addToCart:  cartID withAmount: 10 of: testObjectsFactory itemSellByTheStore.
+	
+	self assert: '| ISBN: validBook | Quantity: 10 |' equals: (inputInterface listCartWithID: cartID)! !
+!InputInterfaceTest methodsFor: 'testing' stamp: 'LK 11/9/2023 14:23:08' prior: 50720103!
+test04canAddValidItemWithValidCartID
+
+	|inputInterface cartID|
+	
+	inputInterface := InputInterface with: self.
+	
+	cartID := inputInterface createCartwithUser: testObjectsFactory validUser usingPassword: testObjectsFactory validPassword.
+	
+	self shouldnt: [inputInterface addToCart:  cartID withAmount: 10 of: testObjectsFactory itemSellByTheStore.]
+		raise: Error.
+	
+	self assert: '| ISBN: validBook | Quantity: 10 |' equals: (inputInterface listCartWithID: cartID)! !
+!InputInterfaceTest methodsFor: 'testing' stamp: 'LK 11/9/2023 14:25:22'!
+test05cannotAddValidItemToInvalidCartID
+
+	|inputInterface |
+	
+	inputInterface := InputInterface with: self.
+	
+	inputInterface createCartwithUser: testObjectsFactory validUser usingPassword: testObjectsFactory validPassword.
+	
+	self should: [inputInterface addToCart: testObjectsFactory invalidCartID withAmount: 10 of: testObjectsFactory itemSellByTheStore.]
+	raise: Error
+	withExceptionDo: [:anError | anError messageText = InputInterface InvalidCartIDErrorDescription].
+	
+	
+	self assert: '| ISBN: validBook | Quantity: 10 |' equals: (inputInterface listCartWithID: 1)! !
+
+!testRun: #InputInterfaceTest #test05cannotAddValidItemToInvalidCartID stamp: 'LK 11/9/2023 14:25:25'!
+ERROR!
+!InputInterfaceTest methodsFor: 'testing' stamp: 'LK 11/9/2023 14:28:47'!
+test05canListItemsOfValidCart
+
+	|inputInterface |
+	
+	inputInterface := InputInterface with: self.
+	
+	inputInterface createCartwithUser: testObjectsFactory validUser usingPassword: testObjectsFactory validPassword.
+	
+	self should: [inputInterface addToCart: testObjectsFactory invalidCartID withAmount: 10 of: testObjectsFactory itemSellByTheStore.]
+	raise: Error
+	withExceptionDo: [:anError | anError messageText = InputInterface InvalidCartIDErrorDescription].
+	
+	
+	self assert: '| ISBN: validBook | Quantity: 10 |' equals: (inputInterface listCartWithID: 1)! !
+!InputInterfaceTest methodsFor: 'testing' stamp: 'LK 11/9/2023 14:29:27' prior: 50720161!
+test05canListItemsOfValidCart
+
+	|inputInterface cartID|
+	
+	inputInterface := InputInterface with: self.
+	
+	cartID := inputInterface createCartwithUser: testObjectsFactory validUser usingPassword: testObjectsFactory validPassword.
+	
+	inputInterface addToCart: cartID withAmount: 10 of: testObjectsFactory itemSellByTheStore.
+	
+	
+	self assert: '| ISBN: validBook | Quantity: 10 |' equals: (inputInterface listCartWithID: cartID)! !
+
+!testRun: #InputInterfaceTest #test05canListItemsOfValidCart stamp: 'LK 11/9/2023 14:29:27'!
+PASSED!
+
+!testRun: #InputInterfaceTest #test01cannotCreateCardWithInvalidCredentials stamp: 'LK 11/9/2023 14:29:27'!
+PASSED!
+
+!testRun: #InputInterfaceTest #test02canCreateCartForValidUser stamp: 'LK 11/9/2023 14:29:27'!
+PASSED!
+
+!testRun: #InputInterfaceTest #test03cannotAddValidItemWithInvalidCartID stamp: 'LK 11/9/2023 14:29:27'!
+PASSED!
+
+!testRun: #InputInterfaceTest #test04canAddValidItemWithValidCartID stamp: 'LK 11/9/2023 14:29:27'!
+PASSED!
+
+!testRun: #InputInterfaceTest #test05canListItemsOfValidCart stamp: 'LK 11/9/2023 14:29:27'!
+PASSED!
+
+!testRun: #InputInterfaceTest #test05cannotAddValidItemToInvalidCartID stamp: 'LK 11/9/2023 14:29:27'!
+ERROR!
+
+!testRun: #InputInterfaceTest #test05cannotAddValidItemToInvalidCartID stamp: 'LK 11/9/2023 14:29:27'!
+ERROR!
+
+!methodRemoval: InputInterfaceTest #test05cannotAddValidItemToInvalidCartID stamp: 'LK 11/9/2023 14:29:40'!
+test05cannotAddValidItemToInvalidCartID
+
+	|inputInterface |
+	
+	inputInterface := InputInterface with: self.
+	
+	inputInterface createCartwithUser: testObjectsFactory validUser usingPassword: testObjectsFactory validPassword.
+	
+	self should: [inputInterface addToCart: testObjectsFactory invalidCartID withAmount: 10 of: testObjectsFactory itemSellByTheStore.]
+	raise: Error
+	withExceptionDo: [:anError | anError messageText = InputInterface InvalidCartIDErrorDescription].
+	
+	
+	self assert: '| ISBN: validBook | Quantity: 10 |' equals: (inputInterface listCartWithID: 1)!
+!InputInterfaceTest methodsFor: 'testing' stamp: 'LK 11/9/2023 14:30:02' prior: 50720182!
+test05canListItemsOfValidCart
+
+	|inputInterface cartID|
+	
+	inputInterface := InputInterface with: self.
+	
+	cartID := inputInterface createCartwithUser: testObjectsFactory validUser usingPassword: testObjectsFactory validPassword.
+	
+	inputInterface addToCart: cartID withAmount: 10 of: testObjectsFactory itemSellByTheStore.
+	
+	self assert: '| ISBN: validBook | Quantity: 10 |' equals: (inputInterface listCartWithID: cartID)! !
+
+!testRun: #InputInterfaceTest #test05canListItemsOfValidCart stamp: 'LK 11/9/2023 14:30:02'!
+PASSED!
+
+!testRun: #InputInterfaceTest #test01cannotCreateCardWithInvalidCredentials stamp: 'LK 11/9/2023 14:30:03'!
+PASSED!
+
+!testRun: #InputInterfaceTest #test02canCreateCartForValidUser stamp: 'LK 11/9/2023 14:30:03'!
+PASSED!
+
+!testRun: #InputInterfaceTest #test03cannotAddValidItemWithInvalidCartID stamp: 'LK 11/9/2023 14:30:03'!
+PASSED!
+
+!testRun: #InputInterfaceTest #test04canAddValidItemWithValidCartID stamp: 'LK 11/9/2023 14:30:03'!
+PASSED!
+
+!testRun: #InputInterfaceTest #test05canListItemsOfValidCart stamp: 'LK 11/9/2023 14:30:03'!
+PASSED!
+
+!testRun: #InputInterfaceTest #test05canListItemsOfValidCart stamp: 'LK 11/9/2023 14:30:05'!
+PASSED!
+
+!testRun: #InputInterfaceTest #test01cannotCreateCardWithInvalidCredentials stamp: 'LK 11/9/2023 14:30:05'!
+PASSED!
+
+!testRun: #InputInterfaceTest #test02canCreateCartForValidUser stamp: 'LK 11/9/2023 14:30:05'!
+PASSED!
+
+!testRun: #InputInterfaceTest #test03cannotAddValidItemWithInvalidCartID stamp: 'LK 11/9/2023 14:30:05'!
+PASSED!
+
+!testRun: #InputInterfaceTest #test04canAddValidItemWithValidCartID stamp: 'LK 11/9/2023 14:30:05'!
+PASSED!
+
+!testRun: #InputInterfaceTest #test05canListItemsOfValidCart stamp: 'LK 11/9/2023 14:30:05'!
+PASSED!
+!InputInterfaceTest methodsFor: 'testing' stamp: 'LK 11/9/2023 14:30:18'!
+test06cannotListItemsOfInalidCart
+
+	|inputInterface cartID|
+	
+	inputInterface := InputInterface with: self.
+	
+	cartID := inputInterface createCartwithUser: testObjectsFactory validUser usingPassword: testObjectsFactory validPassword.
+	
+	inputInterface addToCart: cartID withAmount: 10 of: testObjectsFactory itemSellByTheStore.
+	
+	self assert: '| ISBN: validBook | Quantity: 10 |' equals: (inputInterface listCartWithID: cartID)! !
+!InputInterfaceTest methodsFor: 'testing' stamp: 'LK 11/9/2023 14:30:28' prior: 50720120!
+test04canAddValidItemWithValidCartID
+
+	|inputInterface cartID|
+	
+	inputInterface := InputInterface with: self.
+	
+	cartID := inputInterface createCartwithUser: testObjectsFactory validUser usingPassword: testObjectsFactory validPassword.
+	
+	self shouldnt: [inputInterface addToCart:  cartID withAmount: 10 of: testObjectsFactory itemSellByTheStore.]
+		raise: Error.
+	! !
+!InputInterfaceTest methodsFor: 'testing' stamp: 'LK 11/9/2023 14:31:28' prior: 50720304!
+test06cannotListItemsOfInalidCart
+
+	|inputInterface |
+	
+	inputInterface := InputInterface with: self.
+	
+	inputInterface createCartwithUser: testObjectsFactory validUser usingPassword: testObjectsFactory validPassword.
+	
+	self should: [inputInterface listCartWithID: testObjectsFactory invalidCartID]
+		raise: Error
+		withExceptionDo: [:anError |
+			self assert: anError messageText = InputInterface InvalidCartIDErrorDescription].! !
+
+!testRun: #InputInterfaceTest #test06cannotListItemsOfInalidCart stamp: 'LK 11/9/2023 14:31:32'!
+FAILURE!
+!InputInterface methodsFor: 'as yet unclassified' stamp: 'LK 11/9/2023 14:31:57' prior: 50720088!
+listCartWithID: cartID
+
+	|list cart|
+	(self validateCardID: cartID).
+	
+	list := '|'.
+	
+	cart := cartsOfUsers at: cartID.
+	
+	(catalog keys) do: [:aBook | ((cart occurrencesOf: aBook) > 0) ifTrue:[
+				list := list, ' ISBN: ', aBook, ' | Quantity: ', (cart occurrencesOf: aBook) asString, ' |']
+		].
+	^list.
+	! !
+!InputInterface methodsFor: 'as yet unclassified' stamp: 'LK 11/9/2023 14:31:59' prior: 50720356!
+listCartWithID: cartID
+
+	|list cart|
+	
+	(self validateCardID: cartID).
+	
+	list := '|'.
+	
+	cart := cartsOfUsers at: cartID.
+	
+	(catalog keys) do: [:aBook | ((cart occurrencesOf: aBook) > 0) ifTrue:[
+				list := list, ' ISBN: ', aBook, ' | Quantity: ', (cart occurrencesOf: aBook) asString, ' |']
+		].
+	^list.
+	! !
+
+!testRun: #InputInterfaceTest #test06cannotListItemsOfInalidCart stamp: 'LK 11/9/2023 14:32:02'!
+PASSED!
+!InputInterfaceTest methodsFor: 'testing' stamp: 'LK 11/9/2023 14:32:15'!
+test06canCheckoutCart
+
+	|inputInterface |
+	
+	inputInterface := InputInterface with: self.
+	
+	inputInterface createCartwithUser: testObjectsFactory validUser usingPassword: testObjectsFactory validPassword.
+	
+	self should: [inputInterface listCartWithID: testObjectsFactory invalidCartID]
+		raise: Error
+		withExceptionDo: [:anError |
+			self assert: anError messageText = InputInterface InvalidCartIDErrorDescription].! !
+!InputInterfaceTest methodsFor: 'testing' stamp: 'LK 11/9/2023 14:33:39'!
+test07canCheckoutCart
+
+	|inputInterface |
+	
+	inputInterface := InputInterface with: self.
+	
+	inputInterface createCartwithUser: testObjectsFactory validUser usingPassword: testObjectsFactory validPassword.
+	
+	self should: [inputInterface listCartWithID: testObjectsFactory invalidCartID]
+		raise: Error
+		withExceptionDo: [:anError |
+			self assert: anError messageText = InputInterface InvalidCartIDErrorDescription].! !
+
+!methodRemoval: InputInterfaceTest #test06canCheckoutCart stamp: 'LK 11/9/2023 14:33:40'!
+test06canCheckoutCart
+
+	|inputInterface |
+	
+	inputInterface := InputInterface with: self.
+	
+	inputInterface createCartwithUser: testObjectsFactory validUser usingPassword: testObjectsFactory validPassword.
+	
+	self should: [inputInterface listCartWithID: testObjectsFactory invalidCartID]
+		raise: Error
+		withExceptionDo: [:anError |
+			self assert: anError messageText = InputInterface InvalidCartIDErrorDescription].!
+!InputInterface methodsFor: 'as yet unclassified' stamp: 'LK 11/9/2023 14:35:04'!
+checkout
+! !
+!InputInterface methodsFor: 'as yet unclassified' stamp: 'LK 11/9/2023 14:47:51'!
+checkoutFor: aCartId usingCreditCardFrom: anOwner numbered: aCreditCardNumber withExpiryDate: aMonthOfYear
+! !
+!InputInterface methodsFor: 'as yet unclassified' stamp: 'LK 11/9/2023 14:48:08' prior: 50720436!
+checkoutFor: aCartId usingCreditCardFrom: anOwner numbered: aCreditCardNumber withExpiryDate: aMonthOfYear
+
+	(self validateCardID: aCartId).! !
+!InputInterfaceTest methodsFor: 'testing' stamp: 'LK 11/9/2023 14:48:24'!
+test07cannotCheckoutCartWithInvalidCartID
+
+	|inputInterface |
+	
+	inputInterface := InputInterface with: self.
+	
+	inputInterface createCartwithUser: testObjectsFactory validUser usingPassword: testObjectsFactory validPassword.
+	
+	self should: [inputInterface listCartWithID: testObjectsFactory invalidCartID]
+		raise: Error
+		withExceptionDo: [:anError |
+			self assert: anError messageText = InputInterface InvalidCartIDErrorDescription].! !
+
+!methodRemoval: InputInterfaceTest #test07canCheckoutCart stamp: 'LK 11/9/2023 14:48:24'!
+test07canCheckoutCart
+
+	|inputInterface |
+	
+	inputInterface := InputInterface with: self.
+	
+	inputInterface createCartwithUser: testObjectsFactory validUser usingPassword: testObjectsFactory validPassword.
+	
+	self should: [inputInterface listCartWithID: testObjectsFactory invalidCartID]
+		raise: Error
+		withExceptionDo: [:anError |
+			self assert: anError messageText = InputInterface InvalidCartIDErrorDescription].!
+!InputInterfaceTest methodsFor: 'testing' stamp: 'LK 11/9/2023 14:49:15' prior: 50720450!
+test07cannotCheckoutCartWithInvalidCartID
+
+	|inputInterface |
+	
+	inputInterface := InputInterface with: self.
+	
+	inputInterface createCartwithUser: testObjectsFactory validUser usingPassword: testObjectsFactory validPassword.
+	
+	self should: [inputInterface checkoutFor: testObjectsFactory invalidCartID numbered: '33' withExpiryDate: 'ds' ]
+		raise: Error
+		withExceptionDo: [:anError |
+			self assert: anError messageText = InputInterface InvalidCartIDErrorDescription].! !
+!InputInterfaceTest methodsFor: 'testing' stamp: 'LK 11/9/2023 14:50:16' prior: 50720483!
+test07cannotCheckoutCartWithInvalidCartID
+
+	|inputInterface |
+	
+	inputInterface := InputInterface with: self.
+	
+	inputInterface createCartwithUser: testObjectsFactory validUser usingPassword: testObjectsFactory validPassword.
+	
+	self should: [inputInterface checkoutFor: testObjectsFactory invalidCartID usingCreditCardFrom: 'pepe' numbered: '33' withExpiryDate: 'ds']
+		raise: Error
+		withExceptionDo: [:anError |
+			self assert: anError messageText = InputInterface InvalidCartIDErrorDescription].! !
+
+!testRun: #InputInterfaceTest #test07cannotCheckoutCartWithInvalidCartID stamp: 'LK 11/9/2023 14:50:16'!
+PASSED!
+
+!testRun: #InputInterfaceTest #test01cannotCreateCardWithInvalidCredentials stamp: 'LK 11/9/2023 14:50:16'!
+PASSED!
+
+!testRun: #InputInterfaceTest #test02canCreateCartForValidUser stamp: 'LK 11/9/2023 14:50:16'!
+PASSED!
+
+!testRun: #InputInterfaceTest #test03cannotAddValidItemWithInvalidCartID stamp: 'LK 11/9/2023 14:50:16'!
+PASSED!
+
+!testRun: #InputInterfaceTest #test04canAddValidItemWithValidCartID stamp: 'LK 11/9/2023 14:50:16'!
+PASSED!
+
+!testRun: #InputInterfaceTest #test05canListItemsOfValidCart stamp: 'LK 11/9/2023 14:50:16'!
+PASSED!
+
+!testRun: #InputInterfaceTest #test06cannotListItemsOfInalidCart stamp: 'LK 11/9/2023 14:50:16'!
+PASSED!
+
+!testRun: #InputInterfaceTest #test07cannotCheckoutCartWithInvalidCartID stamp: 'LK 11/9/2023 14:50:16'!
+PASSED!
+!InputInterfaceTest methodsFor: 'testing' stamp: 'LK 11/9/2023 14:50:57' prior: 50720501!
+test07cannotCheckoutCartWithInvalidCartID
+
+	|inputInterface |
+	
+	inputInterface := InputInterface with: self.
+	
+	inputInterface createCartwithUser: testObjectsFactory validUser usingPassword: testObjectsFactory validPassword.
+	
+	self should: [inputInterface checkoutFor: testObjectsFactory invalidCartID usingCreditCardFrom: 'Pepe' numbered: '332138791237023' withExpiryDate: GregorianMonthOfYear current]
+		raise: Error
+		withExceptionDo: [:anError |
+			self assert: anError messageText = InputInterface InvalidCartIDErrorDescription].! !
+
+!testRun: #InputInterfaceTest #test07cannotCheckoutCartWithInvalidCartID stamp: 'LK 11/9/2023 14:50:59'!
+PASSED!
+
+!testRun: #InputInterfaceTest #test01cannotCreateCardWithInvalidCredentials stamp: 'LK 11/9/2023 14:50:59'!
+PASSED!
+
+!testRun: #InputInterfaceTest #test02canCreateCartForValidUser stamp: 'LK 11/9/2023 14:50:59'!
+PASSED!
+
+!testRun: #InputInterfaceTest #test03cannotAddValidItemWithInvalidCartID stamp: 'LK 11/9/2023 14:50:59'!
+PASSED!
+
+!testRun: #InputInterfaceTest #test04canAddValidItemWithValidCartID stamp: 'LK 11/9/2023 14:50:59'!
+PASSED!
+
+!testRun: #InputInterfaceTest #test05canListItemsOfValidCart stamp: 'LK 11/9/2023 14:50:59'!
+PASSED!
+
+!testRun: #InputInterfaceTest #test06cannotListItemsOfInalidCart stamp: 'LK 11/9/2023 14:50:59'!
+PASSED!
+
+!testRun: #InputInterfaceTest #test07cannotCheckoutCartWithInvalidCartID stamp: 'LK 11/9/2023 14:50:59'!
+PASSED!
+!InputInterfaceTest methodsFor: 'testing' stamp: 'LK 11/9/2023 14:55:09'!
+test08cannotCheckoutCartWithInvalidCartID
+
+	|inputInterface |
+	
+	inputInterface := InputInterface with: self.
+	
+	inputInterface createCartwithUser: testObjectsFactory validUser usingPassword: testObjectsFactory validPassword.
+	
+	self should: [inputInterface checkoutFor: testObjectsFactory invalidCartID usingCreditCardFrom: 'Pepe' numbered: '332138791237023' withExpiryDate: GregorianMonthOfYear current]
+		raise: Error
+		withExceptionDo: [:anError |
+			self assert: anError messageText = InputInterface InvalidCartIDErrorDescription].! !
+!InputInterfaceTest methodsFor: 'testing' stamp: 'LK 11/9/2023 14:57:41' prior: 50720595!
+test08cannotCheckoutCartWithInvalidCartID
+
+	|inputInterface |
+	
+	inputInterface := InputInterface with: self.
+	
+	inputInterface createCartwithUser: testObjectsFactory validUser usingPassword: testObjectsFactory validPassword.! !
+
+!methodRemoval: InputInterface #checkout stamp: 'LK 11/9/2023 14:57:55'!
+checkout
+!
+
+!classDefinition: #InputInterface category: 'TusLibros' stamp: 'LK 11/9/2023 15:00:21'!
+Object subclass: #InputInterface
+	instanceVariableNames: 'authenticator cartsOfUsers catalog mp'
+	classVariableNames: ''
+	poolDictionaries: ''
+	category: 'TusLibros'!
+
+!classDefinition: #InputInterface category: 'TusLibros' stamp: 'LK 11/9/2023 15:00:23'!
+Object subclass: #InputInterface
+	instanceVariableNames: 'authenticator cartsOfUsers catalog mp salesBook'
+	classVariableNames: ''
+	poolDictionaries: ''
+	category: 'TusLibros'!
+!InputInterface methodsFor: 'as yet unclassified' stamp: 'LK 11/9/2023 15:00:18' prior: 50720443!
+checkoutFor: aCartId usingCreditCardFrom: anOwner numbered: aCreditCardNumber withExpiryDate: aMonthOfYear
+
+	|cart|
+	
+	(self validateCardID: aCartId).
+	
+	cart := cartsOfUsers at: aCartId.
+	
+	Cashier 
+		toCheckout: cart 
+		charging: (CreditCard expiringOn: aMonthOfYear)
+		throught: mp
+		on: self today
+		registeringOn: salesBook.! !
+!InputInterface methodsFor: 'as yet unclassified' stamp: 'LK 11/9/2023 15:03:30' prior: 50720645!
+checkoutFor: aCartId usingCreditCardFrom: anOwner numbered: aCreditCardNumber withExpiryDate: aMonthOfYear
+
+	|cart|
+	
+	(self validateCardID: aCartId).
+	
+	cart := cartsOfUsers at: aCartId.
+	
+	Cashier 
+		toCheckout: cart 
+		charging: (CreditCard expiringOn: aMonthOfYear)
+		throught: mp
+		on: self time
+		registeringOn: salesBook.! !
+!InputInterface methodsFor: 'as yet unclassified' stamp: 'LK 11/9/2023 15:03:35'!
+time! !
+!InputInterfaceTest methodsFor: 'testing' stamp: 'LK 11/9/2023 15:04:59'!
+test08canCheckout
+
+	|inputInterface |
+	
+	inputInterface := InputInterface with: self.
+	
+	inputInterface createCartwithUser: testObjectsFactory validUser usingPassword: testObjectsFactory validPassword.! !
+
+!methodRemoval: InputInterfaceTest #test08cannotCheckoutCartWithInvalidCartID stamp: 'LK 11/9/2023 15:05:00'!
+test08cannotCheckoutCartWithInvalidCartID
+
+	|inputInterface |
+	
+	inputInterface := InputInterface with: self.
+	
+	inputInterface createCartwithUser: testObjectsFactory validUser usingPassword: testObjectsFactory validPassword.!
+!InputInterfaceTest methodsFor: 'testing' stamp: 'LK 11/9/2023 15:34:09' prior: 50720675!
+test08canCheckout
+
+	|inputInterface cartID|
+	
+	inputInterface := InputInterface with: self.
+	
+	cartID := inputInterface createCartwithUser: testObjectsFactory validUser usingPassword: testObjectsFactory validPassword.
+	! !
+!InputInterfaceTest methodsFor: 'testing' stamp: 'LK 11/9/2023 15:34:52' prior: 50720695!
+test08canCheckout
+
+	|inputInterface cartID|
+	
+	inputInterface := InputInterface with: self.
+	
+	cartID := inputInterface createCartwithUser: testObjectsFactory validUser usingPassword: testObjectsFactory validPassword.
+	
+	inputInterface addToCart: cartID withAmount: 10 of: testObjectsFactory itemSellByTheStore.
+	
+	! !
+!InputInterface methodsFor: 'as yet unclassified' stamp: 'LK 11/9/2023 15:35:57' prior: 50719827!
+initializeFor: anAuthenticator
+
+	authenticator := anAuthenticator.
+	
+	cartsOfUsers := Dictionary new.
+	
+	salesBook := Dictionary new.
+	
+	catalog := Dictionary new
+		at: 'validBook' put: 10;
+		yourself.
+! !
+!InputInterface methodsFor: 'as yet unclassified' stamp: 'LK 11/9/2023 15:36:35'!
+initializeFor: anAuthenticator andMP: merchantProcessor 
+
+	authenticator := anAuthenticator.
+	
+	cartsOfUsers := Dictionary new.
+	
+	salesBook := Dictionary new.
+	
+	catalog := Dictionary new
+		at: 'validBook' put: 10;
+		yourself.
+! !
+!InputInterface class methodsFor: 'as yet unclassified' stamp: 'LK 11/9/2023 15:36:35' prior: 50719129!
+with: anAuthenticator
+
+	^self new initializeFor: anAuthenticator andMP: aMerchantProcessor.! !
+
+!methodRemoval: InputInterface #initializeFor: stamp: 'LK 11/9/2023 15:36:35'!
+initializeFor: anAuthenticator
+
+	authenticator := anAuthenticator.
+	
+	cartsOfUsers := Dictionary new.
+	
+	salesBook := Dictionary new.
+	
+	catalog := Dictionary new
+		at: 'validBook' put: 10;
+		yourself.
+!
+!InputInterface methodsFor: 'as yet unclassified' stamp: 'LK 11/9/2023 15:36:46' prior: 50720728!
+initializeFor: anAuthenticator andMP: merchantProcessor 
+
+	authenticator := anAuthenticator.
+	
+	mp := merchantProcessor.
+	
+	cartsOfUsers := Dictionary new.
+	
+	salesBook := Dictionary new.
+	
+	catalog := Dictionary new
+		at: 'validBook' put: 10;
+		yourself.
+! !
+
+!testRun: #InputInterfaceTest #test01cannotCreateCardWithInvalidCredentials stamp: 'LK 11/9/2023 15:36:53'!
+PASSED!
+
+!testRun: #InputInterfaceTest #test02canCreateCartForValidUser stamp: 'LK 11/9/2023 15:36:53'!
+PASSED!
+
+!testRun: #InputInterfaceTest #test03cannotAddValidItemWithInvalidCartID stamp: 'LK 11/9/2023 15:36:53'!
+PASSED!
+
+!testRun: #InputInterfaceTest #test04canAddValidItemWithValidCartID stamp: 'LK 11/9/2023 15:36:53'!
+PASSED!
+
+!testRun: #InputInterfaceTest #test05canListItemsOfValidCart stamp: 'LK 11/9/2023 15:36:53'!
+PASSED!
+
+!testRun: #InputInterfaceTest #test06cannotListItemsOfInalidCart stamp: 'LK 11/9/2023 15:36:53'!
+PASSED!
+
+!testRun: #InputInterfaceTest #test07cannotCheckoutCartWithInvalidCartID stamp: 'LK 11/9/2023 15:36:53'!
+PASSED!
+
+!testRun: #InputInterfaceTest #test08canCheckout stamp: 'LK 11/9/2023 15:36:53'!
+PASSED!
+!InputInterface class methodsFor: 'as yet unclassified' stamp: 'LK 11/9/2023 15:37:51'!
+with: anAuthenticator andMP: merchantProcessor 
+
+	^self new initializeFor: anAuthenticator andMP: aMerchantProcessor.! !
+!InputInterfaceTest methodsFor: 'as yet unclassified' stamp: 'LK 11/9/2023 15:37:51' prior: 50720247!
+test05canListItemsOfValidCart
+
+	|inputInterface cartID|
+	
+	inputInterface := InputInterface with: self andMP: aMerchanProcessor.
+	
+	cartID := inputInterface createCartwithUser: testObjectsFactory validUser usingPassword: testObjectsFactory validPassword.
+	
+	inputInterface addToCart: cartID withAmount: 10 of: testObjectsFactory itemSellByTheStore.
+	
+	self assert: '| ISBN: validBook | Quantity: 10 |' equals: (inputInterface listCartWithID: cartID)! !
+!InputInterfaceTest methodsFor: 'as yet unclassified' stamp: 'LK 11/9/2023 15:37:51' prior: 50719705!
+test02canCreateCartForValidUser
+
+	|inputInterface cartID|
+	
+	inputInterface := InputInterface with: self andMP: aMerchanProcessor.
+	
+	cartID := inputInterface createCartwithUser: testObjectsFactory validUser usingPassword: testObjectsFactory validPassword.
+	
+	self shouldnt: [inputInterface listCartWithID: cartID] 
+		raise: Error! !
+!InputInterfaceTest methodsFor: 'as yet unclassified' stamp: 'LK 11/9/2023 15:37:51' prior: 50719406!
+test01cannotCreateCardWithInvalidCredentials
+
+	|inputInterface|
+	
+	inputInterface := InputInterface with: self andMP: aMerchanProcessor.
+	
+	inputBehavior := [:aUser :aPassword | self error: InputInterface invalidLoginCredentialsErrorMessage].
+	
+	self
+		should: [inputInterface createCartwithUser: testObjectsFactory invalidUser usingPassword: testObjectsFactory invalidPassword]
+		raise: Error 
+		withExceptionDo: [:anError |
+			self assert: anError messageText = InputInterface invalidLoginCredentialsErrorMessage.]
+		
+		! !
+!InputInterfaceTest methodsFor: 'as yet unclassified' stamp: 'LK 11/9/2023 15:37:51' prior: 50720336!
+test06cannotListItemsOfInalidCart
+
+	|inputInterface |
+	
+	inputInterface := InputInterface with: self andMP: aMerchanProcessor.
+	
+	inputInterface createCartwithUser: testObjectsFactory validUser usingPassword: testObjectsFactory validPassword.
+	
+	self should: [inputInterface listCartWithID: testObjectsFactory invalidCartID]
+		raise: Error
+		withExceptionDo: [:anError |
+			self assert: anError messageText = InputInterface InvalidCartIDErrorDescription].! !
+!InputInterfaceTest methodsFor: 'as yet unclassified' stamp: 'LK 11/9/2023 15:37:51' prior: 50719572!
+test03cannotAddValidItemWithInvalidCartID
+
+	|inputInterface|
+	
+	inputInterface := InputInterface with: self andMP: aMerchanProcessor.
+	
+	self should: [inputInterface addToCart:  testObjectsFactory invalidCartID withAmount: 1 of: 23424.]
+		raise: Error
+		withExceptionDo: [:anError |
+			self assert: anError messageText = InputInterface InvalidCartIDErrorDescription].
+	! !
+!InputInterfaceTest methodsFor: 'as yet unclassified' stamp: 'LK 11/9/2023 15:37:51' prior: 50720705!
+test08canCheckout
+
+	|inputInterface cartID|
+	
+	inputInterface := InputInterface with: self andMP: aMerchanProcessor.
+	
+	cartID := inputInterface createCartwithUser: testObjectsFactory validUser usingPassword: testObjectsFactory validPassword.
+	
+	inputInterface addToCart: cartID withAmount: 10 of: testObjectsFactory itemSellByTheStore.
+	
+	! !
+!InputInterfaceTest methodsFor: 'as yet unclassified' stamp: 'LK 11/9/2023 15:37:51' prior: 50720548!
+test07cannotCheckoutCartWithInvalidCartID
+
+	|inputInterface |
+	
+	inputInterface := InputInterface with: self andMP: aMerchanProcessor.
+	
+	inputInterface createCartwithUser: testObjectsFactory validUser usingPassword: testObjectsFactory validPassword.
+	
+	self should: [inputInterface checkoutFor: testObjectsFactory invalidCartID usingCreditCardFrom: 'Pepe' numbered: '332138791237023' withExpiryDate: GregorianMonthOfYear current]
+		raise: Error
+		withExceptionDo: [:anError |
+			self assert: anError messageText = InputInterface InvalidCartIDErrorDescription].! !
+!InputInterfaceTest methodsFor: 'as yet unclassified' stamp: 'LK 11/9/2023 15:37:51' prior: 50720321!
+test04canAddValidItemWithValidCartID
+
+	|inputInterface cartID|
+	
+	inputInterface := InputInterface with: self andMP: aMerchanProcessor.
+	
+	cartID := inputInterface createCartwithUser: testObjectsFactory validUser usingPassword: testObjectsFactory validPassword.
+	
+	self shouldnt: [inputInterface addToCart:  cartID withAmount: 10 of: testObjectsFactory itemSellByTheStore.]
+		raise: Error.
+	! !
+
+!methodRemoval: InputInterface class #with: stamp: 'LK 11/9/2023 15:37:51'!
+with: anAuthenticator
+
+	^self new initializeFor: anAuthenticator andMP: aMerchantProcessor.!
+!InputInterface class methodsFor: 'as yet unclassified' stamp: 'LK 11/9/2023 15:38:11' prior: 50720792!
+with: anAuthenticator andMP: aMerchantProcessor 
+
+	^self new initializeFor: anAuthenticator andMP: aMerchantProcessor.! !
+
+!testRun: #InputInterfaceTest #test01cannotCreateCardWithInvalidCredentials stamp: 'LK 11/9/2023 15:38:21'!
+PASSED!
+
+!testRun: #InputInterfaceTest #test02canCreateCartForValidUser stamp: 'LK 11/9/2023 15:38:21'!
+PASSED!
+
+!testRun: #InputInterfaceTest #test03cannotAddValidItemWithInvalidCartID stamp: 'LK 11/9/2023 15:38:21'!
+PASSED!
+
+!testRun: #InputInterfaceTest #test04canAddValidItemWithValidCartID stamp: 'LK 11/9/2023 15:38:21'!
+PASSED!
+
+!testRun: #InputInterfaceTest #test05canListItemsOfValidCart stamp: 'LK 11/9/2023 15:38:21'!
+PASSED!
+
+!testRun: #InputInterfaceTest #test06cannotListItemsOfInalidCart stamp: 'LK 11/9/2023 15:38:21'!
+PASSED!
+
+!testRun: #InputInterfaceTest #test07cannotCheckoutCartWithInvalidCartID stamp: 'LK 11/9/2023 15:38:21'!
+PASSED!
+
+!testRun: #InputInterfaceTest #test08canCheckout stamp: 'LK 11/9/2023 15:38:21'!
+PASSED!
+
+!testRun: #InputInterfaceTest #test01cannotCreateCardWithInvalidCredentials stamp: 'LK 11/9/2023 15:39:13'!
+PASSED!
+
+!testRun: #InputInterfaceTest #test01cannotCreateCardWithInvalidCredentials stamp: 'LK 11/9/2023 15:39:14'!
+PASSED!
+
+!testRun: #InputInterfaceTest #test02canCreateCartForValidUser stamp: 'LK 11/9/2023 15:39:14'!
+PASSED!
+
+!testRun: #InputInterfaceTest #test03cannotAddValidItemWithInvalidCartID stamp: 'LK 11/9/2023 15:39:14'!
+PASSED!
+
+!testRun: #InputInterfaceTest #test04canAddValidItemWithValidCartID stamp: 'LK 11/9/2023 15:39:14'!
+PASSED!
+
+!testRun: #InputInterfaceTest #test05canListItemsOfValidCart stamp: 'LK 11/9/2023 15:39:14'!
+PASSED!
+
+!testRun: #InputInterfaceTest #test06cannotListItemsOfInalidCart stamp: 'LK 11/9/2023 15:39:14'!
+PASSED!
+
+!testRun: #InputInterfaceTest #test07cannotCheckoutCartWithInvalidCartID stamp: 'LK 11/9/2023 15:39:14'!
+PASSED!
+
+!testRun: #InputInterfaceTest #test08canCheckout stamp: 'LK 11/9/2023 15:39:14'!
+PASSED!
+!InputInterfaceTest methodsFor: 'testing' stamp: 'LK 11/9/2023 15:39:28' prior: 50720831!
+test01cannotCreateCardWithInvalidCredentials
+
+	|inputInterface|
+	
+	inputInterface := InputInterface with: self andMP: self.
+	
+	inputBehavior := [:aUser :aPassword | self error: InputInterface invalidLoginCredentialsErrorMessage].
+	
+	self
+		should: [inputInterface createCartwithUser: testObjectsFactory invalidUser usingPassword: testObjectsFactory invalidPassword]
+		raise: Error 
+		withExceptionDo: [:anError |
+			self assert: anError messageText = InputInterface invalidLoginCredentialsErrorMessage.]
+		
+		! !
+!InputInterfaceTest methodsFor: 'testing' stamp: 'LK 11/9/2023 15:39:31' prior: 50720817!
+test02canCreateCartForValidUser
+
+	|inputInterface cartID|
+	
+	inputInterface := InputInterface with: self andMP: self.
+	
+	cartID := inputInterface createCartwithUser: testObjectsFactory validUser usingPassword: testObjectsFactory validPassword.
+	
+	self shouldnt: [inputInterface listCartWithID: cartID] 
+		raise: Error! !
+!InputInterfaceTest methodsFor: 'testing' stamp: 'LK 11/9/2023 15:39:37' prior: 50720869!
+test03cannotAddValidItemWithInvalidCartID
+
+	|inputInterface|
+	
+	inputInterface := InputInterface with: self andMP: self.
+	
+	self should: [inputInterface addToCart:  testObjectsFactory invalidCartID withAmount: 1 of: 23424.]
+		raise: Error
+		withExceptionDo: [:anError |
+			self assert: anError messageText = InputInterface InvalidCartIDErrorDescription].
+	! !
+!InputInterfaceTest methodsFor: 'testing' stamp: 'LK 11/9/2023 15:39:39' prior: 50720919!
+test04canAddValidItemWithValidCartID
+
+	|inputInterface cartID|
+	
+	inputInterface := InputInterface with: self andMP: self.
+	
+	cartID := inputInterface createCartwithUser: testObjectsFactory validUser usingPassword: testObjectsFactory validPassword.
+	
+	self shouldnt: [inputInterface addToCart:  cartID withAmount: 10 of: testObjectsFactory itemSellByTheStore.]
+		raise: Error.
+	! !
+!InputInterfaceTest methodsFor: 'testing' stamp: 'LK 11/9/2023 15:39:42' prior: 50720799!
+test05canListItemsOfValidCart
+
+	|inputInterface cartID|
+	
+	inputInterface := InputInterface with: self andMP: self.
+	
+	cartID := inputInterface createCartwithUser: testObjectsFactory validUser usingPassword: testObjectsFactory validPassword.
+	
+	inputInterface addToCart: cartID withAmount: 10 of: testObjectsFactory itemSellByTheStore.
+	
+	self assert: '| ISBN: validBook | Quantity: 10 |' equals: (inputInterface listCartWithID: cartID)! !
+!InputInterfaceTest methodsFor: 'testing' stamp: 'LK 11/9/2023 15:39:44' prior: 50720851!
+test06cannotListItemsOfInalidCart
+
+	|inputInterface |
+	
+	inputInterface := InputInterface with: self andMP: self.
+	
+	inputInterface createCartwithUser: testObjectsFactory validUser usingPassword: testObjectsFactory validPassword.
+	
+	self should: [inputInterface listCartWithID: testObjectsFactory invalidCartID]
+		raise: Error
+		withExceptionDo: [:anError |
+			self assert: anError messageText = InputInterface InvalidCartIDErrorDescription].! !
+!InputInterfaceTest methodsFor: 'testing' stamp: 'LK 11/9/2023 15:39:46' prior: 50720898!
+test07cannotCheckoutCartWithInvalidCartID
+
+	|inputInterface |
+	
+	inputInterface := InputInterface with: self andMP: self.
+	
+	inputInterface createCartwithUser: testObjectsFactory validUser usingPassword: testObjectsFactory validPassword.
+	
+	self should: [inputInterface checkoutFor: testObjectsFactory invalidCartID usingCreditCardFrom: 'Pepe' numbered: '332138791237023' withExpiryDate: GregorianMonthOfYear current]
+		raise: Error
+		withExceptionDo: [:anError |
+			self assert: anError messageText = InputInterface InvalidCartIDErrorDescription].! !
+!InputInterfaceTest methodsFor: 'testing' stamp: 'LK 11/9/2023 15:39:48' prior: 50720884!
+test08canCheckout
+
+	|inputInterface cartID|
+	
+	inputInterface := InputInterface with: self andMP: self.
+	
+	cartID := inputInterface createCartwithUser: testObjectsFactory validUser usingPassword: testObjectsFactory validPassword.
+	
+	inputInterface addToCart: cartID withAmount: 10 of: testObjectsFactory itemSellByTheStore.
+	
+	! !
+
+!testRun: #InputInterfaceTest #test01cannotCreateCardWithInvalidCredentials stamp: 'LK 11/9/2023 15:40:34'!
+PASSED!
+
+!testRun: #InputInterfaceTest #test02canCreateCartForValidUser stamp: 'LK 11/9/2023 15:40:34'!
+PASSED!
+
+!testRun: #InputInterfaceTest #test03cannotAddValidItemWithInvalidCartID stamp: 'LK 11/9/2023 15:40:34'!
+PASSED!
+
+!testRun: #InputInterfaceTest #test04canAddValidItemWithValidCartID stamp: 'LK 11/9/2023 15:40:34'!
+PASSED!
+
+!testRun: #InputInterfaceTest #test05canListItemsOfValidCart stamp: 'LK 11/9/2023 15:40:34'!
+PASSED!
+
+!testRun: #InputInterfaceTest #test06cannotListItemsOfInalidCart stamp: 'LK 11/9/2023 15:40:34'!
+PASSED!
+
+!testRun: #InputInterfaceTest #test07cannotCheckoutCartWithInvalidCartID stamp: 'LK 11/9/2023 15:40:34'!
+PASSED!
+
+!testRun: #InputInterfaceTest #test08canCheckout stamp: 'LK 11/9/2023 15:40:34'!
+PASSED!
+!InputInterface methodsFor: 'as yet unclassified' stamp: 'LK 11/9/2023 15:41:11' prior: 50720659!
+checkoutFor: aCartId usingCreditCardFrom: anOwner numbered: aCreditCardNumber withExpiryDate: aMonthOfYear
+
+	|cart cashier|
+	
+	(self validateCardID: aCartId).
+	
+	cart := cartsOfUsers at: aCartId.
+	
+	cashier := Cashier 
+		toCheckout: cart 
+		charging: (CreditCard expiringOn: aMonthOfYear)
+		throught: mp
+		on: self time
+		registeringOn: salesBook.
+		
+	cashier checkout.! !
+!InputInterface methodsFor: 'as yet unclassified' stamp: 'LK 11/9/2023 15:41:30' prior: 50721162!
+checkoutFor: aCartId usingCreditCardFrom: anOwner numbered: aCreditCardNumber withExpiryDate: aMonthOfYear
+
+	|cart cashier|
+	
+	(self validateCardID: aCartId).
+	
+	cart := cartsOfUsers at: aCartId.
+	
+	cashier := Cashier 
+		toCheckout: cart 
+		charging: (CreditCard expiringOn: aMonthOfYear)
+		throught: mp
+		on: self time
+		registeringOn: salesBook.
+		
+	cashier checkOut.! !
+!InputInterfaceTest methodsFor: 'setup' stamp: 'LK 11/9/2023 15:41:42'!
+debit: anAmount from: aCreditCard ! !
+!InputInterfaceTest methodsFor: 'testing' stamp: 'LK 11/9/2023 15:42:51' prior: 50721121!
+test08canCheckout
+
+	|inputInterface cartID total|
+	
+	inputInterface := InputInterface with: self andMP: self.
+	
+	cartID := inputInterface createCartwithUser: testObjectsFactory validUser usingPassword: testObjectsFactory validPassword.
+	
+	inputInterface addToCart: cartID withAmount: 10 of: testObjectsFactory itemSellByTheStore.
+	
+	total := inputInterface checkoutFor: cartID usingCreditCardFrom: 'Juan' numbered: '1234567890123456' withExpiryDate: GregorianMonthOfYear current .
+	
+	self assert: total = 10.
+	
+	! !
+
+!testRun: #InputInterfaceTest #test08canCheckout stamp: 'LK 11/9/2023 15:42:52'!
+ERROR!
+!StoreTestObjectsFactory methodsFor: 'items' stamp: 'LK 11/9/2023 15:45:48'!
+nonExpiringMonth
+	^(Month month: today monthIndex year: today yearNumber + 1)! !
+!InputInterfaceTest methodsFor: 'testing' stamp: 'LK 11/9/2023 15:46:02' prior: 50721195!
+test08canCheckout
+
+	|inputInterface cartID total|
+	
+	inputInterface := InputInterface with: self andMP: self.
+	
+	cartID := inputInterface createCartwithUser: testObjectsFactory validUser usingPassword: testObjectsFactory validPassword.
+	
+	inputInterface addToCart: cartID withAmount: 10 of: testObjectsFactory itemSellByTheStore.
+	
+	total := inputInterface checkoutFor: cartID usingCreditCardFrom: 'Juan' numbered: '1234567890123456' withExpiryDate: testObjectsFactory nonExpiringMonth .
+	
+	self assert: total = 10.
+	
+	! !
+
+!testRun: #InputInterfaceTest #test08canCheckout stamp: 'LK 11/9/2023 15:46:03'!
+ERROR!
+
+----QUIT----(9 November 2023 15:46:26) CuisUniversity-5981.image priorSource: 12407918!
+
+----STARTUP---- (9 November 2023 15:47:02) as C:\Users\lucas\OneDrive\Desktop\Facultad\isw1\windows64\CuisUniversity-5981.image!
+
+
+----QUIT----(9 November 2023 15:47:20) CuisUniversity-5981.image priorSource: 12467011!
